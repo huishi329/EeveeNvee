@@ -33,13 +33,22 @@ const validateSignup = [
 
 router.post('/', validateSignup, async (req, res) => {
   const { email, password, username, firstName, lastName } = req.body;
-  const user = await User.signup({ email, username, password, firstName, lastName });
 
-  setTokenCookie(res, user);
+  try {
+    const user = await User.signup({ email, username, password, firstName, lastName });
+    setTokenCookie(res, user);
 
-  return res.json({
-    user
-  });
+    return res.json({
+      user
+    });
+
+  } catch (e) {
+    const err = new Error('Invalid Input')
+    err.title = 'Invalid Input';
+    err.errors = e.errors[0].message;
+    return res.status(403).json(err);
+  }
+
 });
 
 module.exports = router;
