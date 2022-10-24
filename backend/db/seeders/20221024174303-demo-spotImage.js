@@ -15,17 +15,17 @@ module.exports = {
      await queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url:'https://www.airbnb.ca/rooms/24372539?adults=1&category_tag=Tag%3A7769&children=0&infants=0&search_mode=flex_destinations_search&check_in=2022-11-26&check_out=2022-12-02&federated_search_id=0b56d44c-ce0b-4c35-8001-53b3950d734e&source_impression_id=p3_1666559125_siwLB6jhJi4rsG%2Fm&modal=PHOTO_TOUR_SCROLLABLE&modalItem=1380297615',
+        url:'https://a0.muscache.com/im/pictures/miso/Hosting-24372539/original/1ac7e1c6-e80b-4b74-9377-245c55c208d3.jpeg?im_w=1200',
         preview: true
       },
       {
         spotId: 1,
-        url:'https://www.airbnb.ca/rooms/24372539?adults=1&category_tag=Tag%3A7769&children=0&infants=0&search_mode=flex_destinations_search&check_in=2022-11-26&check_out=2022-12-02&federated_search_id=0b56d44c-ce0b-4c35-8001-53b3950d734e&source_impression_id=p3_1666559125_siwLB6jhJi4rsG%2Fm&modal=PHOTO_TOUR_SCROLLABLE&modalItem=1380296926',
+        url:'https://a0.muscache.com/im/pictures/miso/Hosting-24372539/original/7a42e674-0637-4634-9465-e5707815e6d6.jpeg?im_w=1440',
         preview: false
       },
       {
         spotId: 3,
-        url:'https://www.airbnb.ca/rooms/41432531?adults=1&category_tag=Tag%3A7769&children=0&infants=0&search_mode=flex_destinations_search&check_in=2022-11-01&check_out=2022-11-06&federated_search_id=0b56d44c-ce0b-4c35-8001-53b3950d734e&source_impression_id=p3_1666558896_tfQqMxVCesz2X5%2Bu&modal=PHOTO_TOUR_SCROLLABLE',
+        url:'https://a0.muscache.com/im/pictures/869cf08a-51f9-4c14-8e00-fae63a5fcd08.jpg?im_w=1200',
         preview: true
       },
      ])
@@ -38,5 +38,10 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+     await queryInterface.bulkDelete('SpotImages', {
+      id: {
+        [Op.in]: [1, 2, 3]
+      }
+     });
   }
 };

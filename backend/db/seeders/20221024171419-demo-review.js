@@ -42,9 +42,9 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
      await queryInterface.bulkDelete('Reviews', {
-      where: {id: {
+      id: {
         [Op.in]: [1, 2, 3]
-      }}
-     })
+      }
+     });
   }
 };
