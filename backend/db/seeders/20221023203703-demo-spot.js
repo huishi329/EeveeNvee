@@ -27,6 +27,18 @@ module.exports = {
         price: 278
       },
       {
+        ownerId: 1,
+        address: "Nelson St",
+        city: "Vancouver",
+        state: "British Comlumbia",
+        country: "Canada",
+        lat: 49.2827,
+        lng: 123.1207,
+        name: "CENTRAL MID-CENTURY LOFT",
+        description: "Just renovated! Updated in 2022 with brand new furniture throughout! This is the most central location to downtown and steps away to EVERYTHING.",
+        price: 202
+      },
+      {
         ownerId: 2,
         address: "Songhees Rd",
         city: "Victoria",
@@ -62,7 +74,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete('Spots', {
       name: {
-        [Op.in]: ["Modern Coal Harbour Suite", "Victoria Downtown Suite", "Oceanfront Denman Island Suite"]
+        [Op.in]: ["Modern Coal Harbour Suite", "Victoria Downtown Suite", "Oceanfront Denman Island Suite", "CENTRAL MID-CENTURY LOFT"]
       }
     });
   }

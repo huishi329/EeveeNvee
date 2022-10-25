@@ -23,7 +23,8 @@ router.get('/', async (req, res, next) => {
                 required: false
             },
         ],
-        group: 'Reviews.spotId'
+        // Add [sequelize.col('SpotImages.url'), 'previewImage'] as the second attribute to pass Postgres's constraint
+        group: ['Spot.id', [sequelize.col('SpotImages.url'), 'previewImage']]
     });
     res.json({ Spots: spots });
 })
