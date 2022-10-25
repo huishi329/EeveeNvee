@@ -87,7 +87,7 @@ router.get('/:spotId', async (req, res, next) => {
 
             }
         ],
-        group: ['Spot.id', [sequelize.col('SpotImages.url'), 'previewImage']]
+        group: ['Spot.id']
     });
 
     if (!spot) {
