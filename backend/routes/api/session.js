@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { requireAuth } = require('../../utils/auth')
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
@@ -45,11 +46,16 @@ router.delete('/', (_req, res) => {
 });
 
 // Restore session user
-router.get('/', restoreUser, (req, res) => {
+router.get('/', restoreUser, requireAuth, (req, res) => {
     const { user } = req;
     if (user) {
+        const { id, firstName, lastName, email, username } = user.toSafeObject()
         return res.json({
-            user: user.toSafeObject()
+            id,
+            firstName,
+            lastName,
+            email,
+            username
         });
     } else return res.json({});
 });
