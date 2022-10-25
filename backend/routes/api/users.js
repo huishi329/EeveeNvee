@@ -36,17 +36,26 @@ router.post('/', validateSignup, async (req, res) => {
 
   try {
     const user = await User.signup({ email, username, password, firstName, lastName });
+
     setTokenCookie(res, user);
 
     return res.json({
-      user
+      firstName,
+      lastName,
+      email,
+      username
     });
 
   } catch (e) {
-    const err = new Error('Invalid Input')
-    err.title = 'Invalid Input';
-    err.errors = e.errors[0].message;
-    return res.status(403).json(err);
+    const errors = e.errors.reduce((errors, errObj) => {
+      errors[errObj.path] = errObj.message;
+      return errors
+    }, {});
+    return res.status(403).json({
+      message: "User already exists",
+      statusCode: 403,
+      errors
+    });
   }
 
 });
