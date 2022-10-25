@@ -2,6 +2,55 @@ const express = require('express')
 const router = express.Router();
 const { Spot, SpotImage, Review, User, sequelize } = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+
+const validateCreateSpot = [
+    check('address')
+        .exists({ checkFalsy: true })
+        .withMessage('Street address is required'),
+    check('city')
+        .exists({ checkFalsy: true })
+        .withMessage('City is required'),
+    check('state')
+        .exists({ checkFalsy: true })
+        .withMessage('State is required'),
+    check('country')
+        .exists({ checkFalsy: true })
+        .withMessage('Country is required'),
+    check('lat')
+        .exists({ checkFalsy: true })
+        .isFloat({ min: -90, max: 90 })
+        .withMessage('Latitude is not valid'),
+    check('lng')
+        .exists({ checkFalsy: true })
+        .isFloat({ min: -180, max: 180 })
+        .withMessage('Longitude is not valid'),
+    check('name')
+        .exists({ checkFalsy: true })
+        .isLength({ max: 50 })
+        .withMessage('Name must be less than 50 characters'),
+    check('description')
+        .exists({ checkFalsy: true })
+        .withMessage('Description is required'),
+    check('price')
+        .exists({ checkFalsy: true })
+        .withMessage('Price per day is required'),
+    handleValidationErrors
+];
+
+router.post('/', restoreUser, requireAuth, validateCreateSpot,
+    async (req, res) => {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        const { user } = req;
+
+        const spot = await Spot.create({
+            ownerId: user.id,
+            address, city, state, country, lat, lng, name, description, price
+        });
+        res.json(spot);
+    })
+
 
 router.get('/', async (req, res, next) => {
     const spots = await Spot.findAll({
@@ -69,26 +118,14 @@ router.get('/:spotId', async (req, res, next) => {
                 [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']]
         },
         include: [
-            // {
-            //     model: SpotImage,
-            //     where: { preview: true },
-            //     attributes: ['id', 'url', 'preview'],
-            //     required: false
-            // },
             {
                 model: Review,
                 attributes: [],
                 required: false
-            },
-            // {
-            //     model: User,
-            //     as: 'Owner',
-            //     attributes: ['id','firstName', 'lastName']
-
-            // }
+            }
         ],
         group: ['Spot.id'],
-        // raw: true
+
     });
 
     if (!spot) {
@@ -102,7 +139,7 @@ router.get('/:spotId', async (req, res, next) => {
     });
 
     const owners = await spot.getUser({
-        attributes: ['id','firstName', 'lastName']
+        attributes: ['id', 'firstName', 'lastName']
     })
 
     spot = spot.toJSON();

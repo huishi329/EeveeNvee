@@ -15,13 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         models.User,
         { foreignKey: 'ownerId' }
       );
-      // Spot.belongsTo(
-      //   models.User,
-      //   {
-      //     foreignKey: 'ownerId',
-      //     as: 'Owner'
-      //   }
-      // );
       Spot.hasMany(
         models.Booking,
         { foreignKey: 'spotId' }
@@ -73,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lat: {
       type: DataTypes.DECIMAL,
-      // allowNull: false,
+      allowNull: false,
       validate: {
         min: -90,
         max: 90
@@ -81,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lng: {
       type: DataTypes.DECIMAL,
-      // allowNull: false,
+      allowNull: false,
       validate: {
         min: -180,
         max: 180
