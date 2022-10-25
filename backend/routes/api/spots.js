@@ -62,32 +62,33 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 router.get('/:spotId', async (req, res, next) => {
     const { spotId } = req.params;
 
-    const spot = await Spot.findByPk(spotId, {
+    let spot = await Spot.findByPk(spotId, {
         attributes: {
             include: [
                 [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'],
                 [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']]
         },
         include: [
-            {
-                model: SpotImage,
-                where: { preview: true },
-                attributes: ['id', 'url', 'preview'],
-                required: false
-            },
+            // {
+            //     model: SpotImage,
+            //     where: { preview: true },
+            //     attributes: ['id', 'url', 'preview'],
+            //     required: false
+            // },
             {
                 model: Review,
                 attributes: [],
                 required: false
             },
-            {
-                model: User,
-                as: 'Owner',
-                attributes: ['id','firstName', 'lastName']
+            // {
+            //     model: User,
+            //     as: 'Owner',
+            //     attributes: ['id','firstName', 'lastName']
 
-            }
+            // }
         ],
-        group: ['Spot.id']
+        group: ['Spot.id'],
+        // raw: true
     });
 
     if (!spot) {
@@ -96,8 +97,18 @@ router.get('/:spotId', async (req, res, next) => {
             statusCode: 404
         })
     }
+    const spotImages = await spot.getSpotImages({
+        attributes: ['id', 'url', 'preview']
+    });
 
-    res.json({ spot });
+    const owners = await spot.getUser({
+        attributes: ['id','firstName', 'lastName']
+    })
+
+    spot = spot.toJSON();
+    spot.SpotImages = spotImages;
+    spot.Owners = owners;
+    res.json(spot);
 
 })
 
