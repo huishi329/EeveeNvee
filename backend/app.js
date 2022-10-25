@@ -75,19 +75,18 @@ app.use((err, _req, res, _next) => {
     console.error(err);
     if (err.status === 401) {
         return res.json({
-              message: err.message,
-              statusCode: err.status,
-            });
-    } else {
-        return res.json({
-        //   title: err.title || 'Server Error',
-          message: err.message,
-          statusCode: err.status,
-          errors: err.errors,
-        //   stack: isProduction ? null : err.stack
+            message: err.message,
+            statusCode: err.status,
         });
-
     }
-  });
+
+    res.json({
+        title: err.title || 'Server Error',
+        message: err.message,
+        errors: err.errors,
+        stack: isProduction ? null : err.stack
+    });
+
+});
 
 module.exports = app;
