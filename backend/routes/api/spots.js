@@ -69,26 +69,14 @@ router.get('/:spotId', async (req, res, next) => {
                 [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']]
         },
         include: [
-            // {
-            //     model: SpotImage,
-            //     where: { preview: true },
-            //     attributes: ['id', 'url', 'preview'],
-            //     required: false
-            // },
             {
                 model: Review,
                 attributes: [],
                 required: false
-            },
-            // {
-            //     model: User,
-            //     as: 'Owner',
-            //     attributes: ['id','firstName', 'lastName']
-
-            // }
+            }
         ],
         group: ['Spot.id'],
-        // raw: true
+
     });
 
     if (!spot) {
