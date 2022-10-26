@@ -17,6 +17,43 @@ const validateReview = [
     handleValidationErrors
 ];
 
+router.post('/:reviewId/images', restoreUser, requireAuth,
+    async (req, res) => {
+        const { reviewId } = req.params;
+        const { user } = req;
+        const { url } = req.body;
+
+        const review = await Review.findByPk(reviewId);
+        if (!review) {
+            return res.status(404).json({
+                message: "Review couldn't be found",
+                statusCode: 404
+            })
+        }
+
+        if (review.userId !== user.id) {
+            return res.status(403).json({
+                message: "Forbidden",
+                statusCode: 403
+              });
+        }
+
+        const reviewImages = await review.getReviewImages();
+        if (reviewImages.length >= 10) {
+            return res.status(403).json({
+                message: "Maximum number of images for this resource was reached",
+                statusCode: 403
+            })
+        };
+
+        const newReview = await review.createReviewImage({
+            reviewId,
+            url
+        });
+
+        res.json(newReview);
+    }
+)
 
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const { user } = req;
