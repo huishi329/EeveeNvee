@@ -46,12 +46,15 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
             })
         };
 
-        const newReview = await review.createReviewImage({
+        const newReviewImage = await review.createReviewImage({
             reviewId,
             url
         });
 
-        res.json(newReview);
+        res.json({
+            id: newReviewImage.id,
+            url: newReviewImage.url
+        });
     }
 )
 
