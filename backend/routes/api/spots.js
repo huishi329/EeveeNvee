@@ -239,7 +239,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, validateReview,
         const spot = await Spot.findByPk(spotId);
 
         if (!spot) {
-            res.status(404).json({
+            return res.status(404).json({
                 message: "Spot couldn't be found",
                 statusCode: 404
             })
@@ -249,8 +249,8 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, validateReview,
             where: { userId: user.id }
         });
 
-        if (userReview) {
-            res.status(403).json({
+        if (userReview.length) {
+            return res.status(403).json({
                 message: "User already has a review for this spot",
                 statusCode: 403
             });
