@@ -5,7 +5,7 @@ const { restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-const validateCreateSpot = [
+const validateSpot = [
     check('address')
         .exists({ checkFalsy: true })
         .withMessage('Street address is required'),
@@ -39,7 +39,7 @@ const validateCreateSpot = [
     handleValidationErrors
 ];
 
-router.post('/', restoreUser, requireAuth, validateCreateSpot,
+router.post('/', restoreUser, requireAuth, validateSpot,
     async (req, res) => {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
         const { user } = req;
@@ -48,6 +48,36 @@ router.post('/', restoreUser, requireAuth, validateCreateSpot,
             ownerId: user.id,
             address, city, state, country, lat, lng, name, description, price
         });
+        res.json(spot);
+    })
+
+router.put('/:spotId', restoreUser, requireAuth, validateSpot,
+    async (req, res) => {
+        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        const { user } = req;
+        const { spotId } = req.params;
+
+        const spot = await Spot.findByPk(spotId);
+
+        if (!spot) {
+            res.status(404).json({
+                message: "Spot couldn't be found",
+                statusCode: 404
+            })
+        }
+
+        if (spot.ownerId !== user.id) {
+            res.status(403).json({
+                message: "Forbidden",
+                statusCode: 403
+            })
+        }
+        spot.set({
+            address, city, state, country, lat, lng, name, description, price
+        });
+
+        await spot.save;
+
         res.json(spot);
     })
 
@@ -64,8 +94,7 @@ router.post('/:spotId/images', restoreUser, requireAuth,
                 statusCode: 404
             })
         }
-        console.log(user.id);
-        console.log(spot.ownerId );
+
         if (spot.ownerId !== user.id) {
             res.status(403).json({
                 message: "Forbidden",
