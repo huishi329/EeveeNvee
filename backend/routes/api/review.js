@@ -39,7 +39,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const results = reviews.map(review => {
         review = review.toJSON();
         // Add if statement so that data still loads when there are no SpotImages
-        if (!review.Spot.SpotImages) {
+        if (review.Spot.SpotImages[0]) {
             review.Spot.previewImage = review.Spot.SpotImages[0].url;
         } else {
             review.Spot.previewImage = null;
