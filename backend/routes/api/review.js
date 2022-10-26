@@ -14,14 +14,14 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
             {
                 model: User,
                 attributes: ['id', 'firstName', 'lastName'],
-                required: false
             },
             {
                 model: Spot,
                 include: {
                     model: SpotImage,
                     attributes: ['url'],
-                    where: { preview: true }
+                    where: { preview: true },
+                    required: false
                 },
             },
             {
@@ -38,7 +38,12 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
 
     const results = reviews.map(review => {
         review = review.toJSON();
-        review.Spot.previewImage = review.Spot.SpotImages[0].url;
+        // Add if statement so that data still loads when there are no SpotImages
+        if (!review.Spot.SpotImages) {
+            review.Spot.previewImage = review.Spot.SpotImages[0].url;
+        } else {
+            review.Spot.previewImage = null;
+        }
         delete review.Spot.SpotImages;
         return review;
     });
