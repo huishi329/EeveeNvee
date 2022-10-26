@@ -14,8 +14,12 @@ module.exports = {
     */
      await queryInterface.bulkInsert('ReviewImages', [
       {
-        reviewId: 3,
+        reviewId: 4,
         url: 'https://a0.muscache.com/im/pictures/06fc60ab-04c7-4903-950c-5992cbc40674.jpg?im_w=1440'
+      },
+      {
+        reviewId: 2,
+        url: 'https://a0.muscache.com/im/pictures/802d5224-5cbc-4ec3-b163-4e608d319527.jpg?im_w=1200'
       },
       {
         reviewId: 1,
