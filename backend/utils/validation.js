@@ -27,7 +27,7 @@ const handleValidationErrors = (req, res, next) => {
       errors[errObj.param] = errObj.msg;
       return errors;
     }, {})
-    res.status(400).json({
+    return res.status(400).json({
       message:"Validation error",
       statusCode: 400,
       errors

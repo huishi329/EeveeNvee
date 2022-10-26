@@ -4,6 +4,7 @@ const { Spot, SpotImage, Review, ReviewImage, User, sequelize } = require('../..
 const { restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { validateReview } = require('./review')
 
 const validateSpot = [
     check('address')
@@ -48,7 +49,7 @@ router.post('/', restoreUser, requireAuth, validateSpot,
             ownerId: user.id,
             address, city, state, country, lat, lng, name, description, price
         });
-        res.json(spot);
+        res.status(201).json(spot);
     })
 
 router.put('/:spotId', restoreUser, requireAuth, validateSpot,
@@ -168,7 +169,6 @@ router.get('/', async (req, res, next) => {
     res.json({ Spots: spots });
 })
 
-
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const { user } = req;
     const spots = await Spot.findAll({
@@ -197,8 +197,6 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     });
     res.json({ Spots: spots });
 });
-
-
 
 router.get('/:spotId/reviews', async (req, res) => {
     const { spotId } = req.params;
@@ -231,9 +229,43 @@ router.get('/:spotId/reviews', async (req, res) => {
         ],
     });
 
-
     res.json({ Reviews: reviews });
 });
+
+router.post('/:spotId/reviews', restoreUser, requireAuth, validateReview,
+    async (req, res) => {
+        const { user } = req;
+        const { spotId } = req.params;
+        const spot = await Spot.findByPk(spotId);
+
+        if (!spot) {
+            res.status(404).json({
+                message: "Spot couldn't be found",
+                statusCode: 404
+            })
+        }
+
+        const userReview = await spot.getReviews({
+            where: { userId: user.id }
+        });
+
+        if (userReview) {
+            res.status(403).json({
+                message: "User already has a review for this spot",
+                statusCode: 403
+            });
+        }
+
+        const { review, stars } = req.body;
+        const newReview = await spot.createReview({
+            userId: user.id,
+            review,
+            stars
+        });
+
+        res.status(201).json(newReview);
+    }
+)
 
 router.get('/:spotId', async (req, res, next) => {
     const { spotId } = req.params;
