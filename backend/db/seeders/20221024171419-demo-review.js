@@ -20,6 +20,12 @@ module.exports = {
         stars: 5
       },
       {
+        spotId: 4,
+        userId: 1,
+        review: 'The house was incredible clean with a lovely atmosphere perfect for a couples getaway. Would absolutely recommend to a friend :)',
+        stars: 5
+      },
+      {
         spotId: 3,
         userId: 4,
         review: 'It was everything we were looking for - beautiful, peaceful, and clean. The private sauna was delightful and the view from the backyard, picturesque.',
