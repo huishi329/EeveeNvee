@@ -6,6 +6,18 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { raw } = require('express');
 
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .isInt({ min: 1, max: 5 })
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+];
+
+
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const { user } = req;
     let reviews = await Review.findAll({
@@ -51,4 +63,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     res.json({ Reviews: results });
 });
 
-module.exports = router;
+module.exports = {
+    router,
+    validateReview
+};
