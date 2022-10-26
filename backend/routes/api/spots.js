@@ -76,7 +76,7 @@ router.put('/:spotId', restoreUser, requireAuth, validateSpot,
             address, city, state, country, lat, lng, name, description, price
         });
 
-        await spot.save;
+        await spot.save();
 
         res.json(spot);
     })
