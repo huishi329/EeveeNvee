@@ -58,6 +58,38 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
     }
 )
 
+
+router.put('/:reviewId', restoreUser, requireAuth, validateReview,
+    async (req, res) => {
+        const { reviewId } = req.params;
+        const { user } = req;
+        const { review, stars } = req.body;
+
+        const targetReview = await Review.findByPk(reviewId);
+        if (!targetReview) {
+            return res.status(404).json({
+                message: "Review couldn't be found",
+                statusCode: 404
+            })
+        }
+
+        if (targetReview.userId !== user.id) {
+            return res.status(403).json({
+                message: "Forbidden",
+                statusCode: 403
+              });
+        }
+
+       targetReview.set({
+            review,
+            stars
+        })
+        await targetReview.save();
+
+        res.json(targetReview);
+    }
+)
+
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const { user } = req;
     let reviews = await Review.findAll({
