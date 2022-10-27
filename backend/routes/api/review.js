@@ -4,7 +4,6 @@ const { Spot, SpotImage, Review, User, ReviewImage, sequelize } = require('../..
 const { restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { raw } = require('express');
 
 const validateReview = [
     check('review')
@@ -58,7 +57,6 @@ router.post('/:reviewId/images', restoreUser, requireAuth,
     }
 )
 
-
 router.put('/:reviewId', restoreUser, requireAuth, validateReview,
     async (req, res) => {
         const { reviewId } = req.params;
@@ -87,6 +85,35 @@ router.put('/:reviewId', restoreUser, requireAuth, validateReview,
         await targetReview.save();
 
         res.json(targetReview);
+    }
+)
+
+router.delete('/:reviewId', restoreUser, requireAuth,
+    async (req, res) => {
+        const { reviewId } = req.params;
+        const { user } = req;
+
+        const targetReview = await Review.findByPk(reviewId);
+        if (!targetReview) {
+            return res.status(404).json({
+                message: "Review couldn't be found",
+                statusCode: 404
+            })
+        }
+
+        if (targetReview.userId !== user.id) {
+            return res.status(403).json({
+                message: "Forbidden",
+                statusCode: 403
+              });
+        }
+
+        await targetReview.destroy();
+
+        res.json({
+            message: "Successfully deleted",
+            statusCode: 200
+          })
     }
 )
 
