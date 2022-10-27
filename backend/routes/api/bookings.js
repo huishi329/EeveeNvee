@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const { user } = req;
-    let reviews = await Booking.findAll({
+    let bookings = await Booking.findAll({
 
         include: {
             model: Spot,
@@ -26,7 +26,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
         },
     });
 
-    const results = reviews.map(review => {
+    const results = bookings.map(review => {
         review = review.toJSON();
         // Add if statement so that data still loads when there are no SpotImages
         if (review.Spot.SpotImages[0]) {
@@ -38,7 +38,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
         return review;
     });
 
-    res.json({ Reviews: results });
+    res.json({ Bookings: results });
 });
 
 module.exports = router;
