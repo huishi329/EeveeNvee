@@ -60,34 +60,8 @@ const validateDate = async (req, res, next) => {
     next();
 }
 
-const isNotOwner= (req, res, next) => {
-    const { spot, user } = req;
-
-    if (spot.ownerId === user.id) {
-        return res.status(403).json({
-            message: "Forbidden",
-            statusCode: 403
-        });
-    };
-    next();
-}
-
-const isOwner = (req, res, next) => {
-    const { spot, user } = req;
-
-    if (spot.ownerId !== user.id) {
-        return res.status(403).json({
-            message: "Forbidden",
-            statusCode: 403
-        });
-    };
-    next();
-}
-
 module.exports = {
     validateBooking,
-    isNotOwner,
-    isOwner,
     isSpotExisting,
     validateDate,
   };
