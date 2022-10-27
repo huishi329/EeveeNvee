@@ -247,12 +247,15 @@ router.get('/:spotId/bookings', restoreUser, requireAuth,
         let bookings;
         if (spot.ownerId === user.id) {
             bookings = await spot.getBookings({
-                include: User
-            })
+                include: {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            });
         } else {
             bookings = await spot.getBookings({
                 attributes: ['spotId', 'startDate', 'endDate']
-            })
+            });
         }
 
         res.json({ Bookings: bookings });
