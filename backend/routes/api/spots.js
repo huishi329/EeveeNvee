@@ -232,6 +232,32 @@ router.get('/:spotId/reviews', async (req, res) => {
     res.json({ Reviews: reviews });
 });
 
+router.get('/:spotId/bookings', restoreUser, requireAuth,
+    async (req, res) => {
+        const { spotId } = req.params;
+        const { user } = req;
+        const spot = await Spot.findByPk(spotId);
+
+        if (!spot) {
+            res.status(404).json({
+                message: "Spot couldn't be found",
+                statusCode: 404
+            })
+        }
+        let bookings;
+        if (spot.ownerId === user.id) {
+            bookings = await spot.getBookings({
+                include: User
+            })
+        } else {
+            bookings = await spot.getBookings({
+                attributes: ['spotId', 'startDate', 'endDate']
+            })
+        }
+
+        res.json({ Bookings: bookings });
+    });
+
 router.post('/:spotId/reviews', restoreUser, requireAuth, validateReview,
     async (req, res) => {
         const { user } = req;
