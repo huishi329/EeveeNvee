@@ -46,8 +46,29 @@ router.put('/:bookingId', restoreUser, requireAuth, isBookingExisting, isBooking
             startDate,
             endDate
         })
-        booking.save();
+        await booking.save();
+
         res.json(booking);
+    });
+
+router.delete('/:bookingId', restoreUser, requireAuth, isBookingExisting, isBookingOwner,
+    async (req, res) => {
+        const { booking } = req;
+
+
+        if (new Date(booking.startDate) <= new Date()) {
+            return res.status(403).json({
+                message: "Bookings that have been started can't be deleted",
+                statusCode: 403
+            })
+        }
+
+        await booking.destroy();
+
+        res.json({
+            message: "Successfully deleted",
+            statusCode: 200
+          });
     });
 
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
