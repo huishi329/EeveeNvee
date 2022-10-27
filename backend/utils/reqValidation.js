@@ -1,12 +1,12 @@
 const { check } = require('express-validator');
-const { Spot, SpotImage, Review, ReviewImage, User, sequelize } = require('../db/models');
+const { Spot, Booking, SpotImage, Review, ReviewImage, User, sequelize } = require('../db/models');
 const { handleValidationErrors } = require('./validation');
 
 
 const validateBooking = [
     check('endDate')
         .exists({ checkFalsy: true })
-        .custom((value, {req}) => {
+        .custom((value, { req }) => {
             if (new Date(value) <= new Date(req.body.startDate)) {
                 throw new Error('endDate cannot be on or before startDate')
             }
@@ -33,8 +33,17 @@ const isSpotExisting = async (req, res, next) => {
 
 const validateDate = async (req, res, next) => {
     const { startDate, endDate } = req.body;
-    const { spot } = req;
-    const bookings = await spot.getBookings();
+    let spotId;
+    if (req.spot) {
+        spotId = req.spot.id;
+    }
+    if (req.booking) {
+        spotId = req.booking.spotId
+    }
+
+    const bookings = await Booking.findAll({
+        where: { spotId: spotId }
+    });
     const currStartDateObj = new Date(startDate);
     const currEndDateObj = new Date(endDate);
     for (const booking of bookings) {
@@ -60,8 +69,9 @@ const validateDate = async (req, res, next) => {
     next();
 }
 
+
 module.exports = {
     validateBooking,
     isSpotExisting,
     validateDate,
-  };
+};

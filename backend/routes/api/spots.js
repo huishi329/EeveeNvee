@@ -5,7 +5,7 @@ const { restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { isSpotExisting, validateBooking, validateDate } = require('../../utils/reqValidation');
-const {  isSpotOwner, isNotSpotOwner } = require('../../utils/authorization')
+const { isSpotOwner, isNotSpotOwner } = require('../../utils/authorization')
 const { validateReview } = require('./review')
 
 const validateSpot = [
@@ -263,7 +263,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth,
         res.json({ Bookings: bookings });
     });
 
-router.post('/:spotId/bookings', restoreUser, requireAuth, validateBooking, isSpotExisting, isNotSpotOwner, validateDate,
+router.post('/:spotId/bookings', restoreUser, requireAuth, isSpotExisting, isNotSpotOwner, validateBooking, validateDate,
     async (req, res) => {
         const { spot, user } = req;
         const { startDate, endDate } = req.body;

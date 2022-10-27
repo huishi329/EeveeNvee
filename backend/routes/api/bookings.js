@@ -2,8 +2,53 @@ const express = require('express')
 const router = express.Router();
 const { Spot, SpotImage, Booking, User, sequelize } = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { isSpotExisting, validateBooking, validateDate } = require('../../utils/reqValidation');
+
+const isBookingExisting = async (req, res, next) => {
+    const { bookingId } = req.params;
+    const booking = await Booking.findByPk(bookingId);
+
+    if (!booking) {
+        return res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        })
+    }
+    req.booking = booking;
+    next();
+};
+
+const isBookingOwner = (req, res, next) => {
+    const { booking, user } = req;
+
+    if (booking.userId !== user.id) {
+        return res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
+        });
+    };
+    next();
+};
+
+router.put('/:bookingId', restoreUser, requireAuth, isBookingExisting, isBookingOwner, validateBooking, validateDate,
+    async (req, res) => {
+        const { booking } = req;
+        const { startDate, endDate } = req.body;
+
+        if (new Date(booking.endDate) <= new Date()) {
+            return res.status(403).json({
+                message: "Past bookings can't be modified",
+                statusCode: 403
+            })
+        }
+
+        booking.set({
+            startDate,
+            endDate
+        })
+        booking.save();
+        res.json(booking);
+    });
 
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
     const { user } = req;
