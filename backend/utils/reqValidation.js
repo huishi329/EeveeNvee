@@ -2,6 +2,16 @@ const { check } = require('express-validator');
 const { Spot, Booking, SpotImage, Review, ReviewImage, User, sequelize } = require('../db/models');
 const { handleValidationErrors } = require('./validation');
 
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .isInt({ min: 1, max: 5 })
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+];
 
 const validateBooking = [
     check('endDate')
@@ -16,20 +26,6 @@ const validateBooking = [
 ];
 
 
-const isSpotExisting = async (req, res, next) => {
-    const { spotId } = req.params;
-    const spot = await Spot.findByPk(spotId);
-
-    if (!spot) {
-        return res.status(404).json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        })
-    }
-
-    req.spot = spot;
-    next();
-}
 
 const validateDate = async (req, res, next) => {
     const { startDate, endDate } = req.body;
@@ -71,6 +67,7 @@ const validateDate = async (req, res, next) => {
 
 
 module.exports = {
+    validateReview,
     validateBooking,
     isSpotExisting,
     validateDate,

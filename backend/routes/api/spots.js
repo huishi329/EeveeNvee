@@ -4,9 +4,7 @@ const { Spot, SpotImage, Review, ReviewImage, User, sequelize } = require('../..
 const { restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { isSpotExisting, validateBooking, validateDate } = require('../../utils/reqValidation');
-const { isSpotOwner, isNotSpotOwner } = require('../../utils/authorization');
-const { validateReview } = require('./reviews');
+const { validateBooking, validateDate, validateReview } = require('../../utils/reqValidation');
 const { Op } = require('sequelize');
 
 const validateSpot = [
@@ -71,6 +69,46 @@ const ValidateSpotQuery = [
     handleValidationErrors
 ];
 
+const isSpotExisting = async (req, res, next) => {
+    const { spotId } = req.params;
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+    req.spot = spot;
+    next();
+}
+
+const isNotSpotOwner= (req, res, next) => {
+    const { spot, user } = req;
+
+    if (spot.ownerId === user.id) {
+        return res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
+        });
+    };
+    next();
+}
+
+const isSpotOwner = (req, res, next) => {
+    const { spot, user } = req;
+
+    if (spot.ownerId !== user.id) {
+        return res.status(403).json({
+            message: "Forbidden",
+            statusCode: 403
+        });
+    };
+    next();
+}
+
+
 router.post('/', restoreUser, requireAuth, validateSpot,
     async (req, res) => {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -83,10 +121,10 @@ router.post('/', restoreUser, requireAuth, validateSpot,
         res.status(201).json(spot);
     })
 
-router.put('/:spotId', restoreUser, requireAuth, validateSpot,
+router.put('/:spotId', restoreUser, requireAuth, isSpotExisting, isSpotOwner,validateSpot,
     async (req, res) => {
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
-        const { user } = req;
+        const { user, spot } = req;
         const { spotId } = req.params;
 
         const spot = await Spot.findByPk(spotId);
