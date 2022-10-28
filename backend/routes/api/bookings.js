@@ -92,16 +92,16 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
         },
     });
 
-    const results = bookings.map(review => {
-        review = review.toJSON();
+    const results = bookings.map(booking => {
+        booking = booking.toJSON();
         // Add if statement so that data still loads when there are no SpotImages
-        if (review.Spot.SpotImages[0]) {
-            review.Spot.previewImage = review.Spot.SpotImages[0].url;
+        if (booking.Spot.SpotImages[0]) {
+            booking.Spot.previewImage = booking.Spot.SpotImages[0].url;
         } else {
-            review.Spot.previewImage = null;
+            booking.Spot.previewImage = null;
         }
-        delete review.Spot.SpotImages;
-        return review;
+        delete booking.Spot.SpotImages;
+        return booking;
     });
 
     res.json({ Bookings: results });
