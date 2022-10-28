@@ -20,17 +20,18 @@ const isImageExisting = async (req, res, next) => {
 
 router.delete('/:imageId', restoreUser, requireAuth, isImageExisting,
     async (req, res) => {
-        const { spotImage, user } = req;
-        const spot = await spotImage.getSpot();
+        const { reviewImage, user } = req;
+        const review = await reviewImage.getReview();
+        // console.log(reviewImage)
 
-        if (spot.ownerId !== user.id) {
+        if (review.userId !== user.id) {
             return res.status(403).json({
                 message: "Forbidden",
                 statusCode: 403
             });
         };
 
-        await spotImage.destroy();
+        await reviewImage.destroy();
 
         res.json({
             message: "Successfully deleted",
