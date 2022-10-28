@@ -219,7 +219,7 @@ router.get('/', ValidateSpotQuery, async (req, res, next) => {
         if (spot.SpotImages.length) {
             spot.previewImage = spot.SpotImages[0].url;
         } else {
-            spot.previewImage = [];
+            spot.previewImage = null;
         };
         delete spot.SpotImages;
 
@@ -414,13 +414,13 @@ router.get('/:spotId', async (req, res, next) => {
         attributes: ['id', 'url', 'preview']
     });
 
-    const owners = await spot.getUser({
+    const owner = await spot.getUser({
         attributes: ['id', 'firstName', 'lastName']
     })
 
     spot = spot.toJSON();
     spot.SpotImages = spotImages;
-    spot.Owners = owners;
+    spot.Owner = owner;
     res.json(spot);
 
 })

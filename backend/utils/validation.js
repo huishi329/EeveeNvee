@@ -36,6 +36,25 @@ const handleValidationErrors = (req, res, next) => {
   next();
 };
 
+
+const handleAuthorizationErrors = (req, res, next) => {
+  const validationErrors = validationResult(req);
+
+  if (!validationErrors.isEmpty()) {
+    const errors = validationErrors.array().reduce((errors, errObj) => {
+      errors[errObj.param] = errObj.msg;
+      return errors;
+    }, {})
+    return res.status(403).json({
+      message:"User already exists",
+      statusCode: 403,
+      errors
+    });
+  }
+  next();
+};
+
 module.exports = {
-  handleValidationErrors
+  handleValidationErrors,
+  handleAuthorizationErrors
 };

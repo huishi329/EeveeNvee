@@ -10,7 +10,7 @@ const isImageExisting = async (req, res, next) => {
 
     if (!spotImage) {
         return res.status(404).json({
-            message: "Spot image couldn't be found",
+            message: "Spot Image couldn't be found",
             statusCode: 404
         })
     }
