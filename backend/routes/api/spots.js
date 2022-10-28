@@ -212,9 +212,10 @@ router.get('/', ValidateSpotQuery, async (req, res, next) => {
         offset
     });
 
-    const results = [];
-    for (let spot of spots) {
-        spot = spot.toJSON();
+    for (let i = 1; i < spots.length; i++) {
+        const spot = spots[i].toJSON();
+        spots[i] = spot;
+
         // Get previewImage
         if (spot.SpotImages.length) {
             spot.previewImage = spot.SpotImages[0].url;
@@ -231,18 +232,13 @@ router.get('/', ValidateSpotQuery, async (req, res, next) => {
             spot.avgRating = ratingsSum / spot.Reviews.length;
         } else spot.avgRating = 0;
         delete spot.Reviews;
-        results.push(spot)
     }
 
     res.json({
-        Spots: results,
+        Spots: spots,
         page,
         size
      });
-
-    // res.json(spots)
-
-
 })
 
 router.get('/current', restoreUser, requireAuth, async (req, res) => {
