@@ -6,7 +6,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { isSpotExisting, validateBooking, validateDate } = require('../../utils/reqValidation');
 const { isSpotOwner, isNotSpotOwner } = require('../../utils/authorization')
-const { validateReview } = require('./review')
+const { validateReview } = require('./reviews')
 
 const validateSpot = [
     check('address')
