@@ -10,7 +10,7 @@ const isImageExisting = async (req, res, next) => {
 
     if (!reviewImage) {
         return res.status(404).json({
-            message: "review image couldn't be found",
+            message: "Review Image couldn't be found",
             statusCode: 404
         })
     }
