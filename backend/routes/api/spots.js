@@ -299,7 +299,7 @@ router.get('/:spotId/bookings', requireAuth, isSpotExisting,
         res.json({ Bookings: bookings });
     });
 
-router.post('/:spotId/bookings', restoreUser, requireAuth, isSpotExisting, isNotSpotOwner, validateBooking, validateDate,
+router.post('/:spotId/bookings', requireAuth, isSpotExisting, isNotSpotOwner, validateBooking, validateDate,
     async (req, res) => {
         const { spot, user } = req;
         const { startDate, endDate } = req.body;
@@ -311,7 +311,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, isSpotExisting, isNot
         res.json(booking);
     });
 
-router.post('/:spotId/reviews', restoreUser, requireAuth, isSpotExisting, validateReview, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, isSpotExisting, validateReview, async (req, res) => {
     const { user, spot } = req;
 
     const userReview = await spot.getReviews({
@@ -339,20 +339,22 @@ router.get('/:spotId', async (req, res, next) => {
     const { spotId } = req.params;
 
     let spot = await Spot.findByPk(spotId, {
-        attributes: {
-            include: [
-                [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'],
-                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('stars')), 1), 'avgRating']]
-        },
         include: [
             {
                 model: Review,
-                attributes: [],
                 required: false
-            }
+            },
+            {
+                model: SpotImage,
+                attributes: ['id', 'url', 'preview'],
+                required: false
+            },
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName'],
+                required: false
+            },
         ],
-        group: ['Spot.id'],
-
     });
 
     if (!spot) {
@@ -361,19 +363,24 @@ router.get('/:spotId', async (req, res, next) => {
             statusCode: 404
         })
     }
-    const spotImages = await spot.getSpotImages({
-        attributes: ['id', 'url', 'preview']
-    });
-
-    const owner = await spot.getUser({
-        attributes: ['id', 'firstName', 'lastName']
-    })
 
     spot = spot.toJSON();
-    spot.SpotImages = spotImages;
-    spot.Owner = owner;
-    res.json(spot);
 
+    // Add avgRating and numReviews
+    spot.numReviews = spot.Reviews.length
+    if (spot.numReviews) {
+        const ratingsSum = spot.Reviews.reduce((sum, review) => {
+            return sum += review.stars;
+        }, 0);
+        spot.avgStarRating = ratingsSum / spot.numReviews;
+    } else spot.avgStarRating = 0;
+    delete spot.Reviews;
+
+    // Rename User to Owner
+    spot.Owner = spot.User;
+    delete spot.User;
+
+    res.json(spot);
 })
 
 module.exports = router;
