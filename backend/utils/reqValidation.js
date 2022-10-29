@@ -69,6 +69,5 @@ const validateDate = async (req, res, next) => {
 module.exports = {
     validateReview,
     validateBooking,
-    isSpotExisting,
     validateDate,
 };
