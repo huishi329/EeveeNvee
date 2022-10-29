@@ -58,17 +58,17 @@ const validateUniqueConstraint = [
 router.post('/', validateSignup, validateUniqueConstraint, async (req, res) => {
   const { email, password, username, firstName, lastName } = req.body;
 
-    const user = await User.signup({ email, username, password, firstName, lastName });
+  const user = await User.signup({ email, username, password, firstName, lastName });
 
-    setTokenCookie(res, user);
+  setTokenCookie(res, user);
 
-    return res.json({
-      id: user.id,
-      firstName,
-      lastName,
-      email,
-      username
-    });
+  return res.json({
+    id: user.id,
+    firstName,
+    lastName,
+    email,
+    username
+  });
 
 });
 

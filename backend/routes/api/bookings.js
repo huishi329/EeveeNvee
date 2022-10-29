@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router();
-const { Spot, SpotImage, Booking, User, sequelize } = require('../../db/models');
+const { Spot, SpotImage, Booking, } = require('../../db/models');
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { isSpotExisting, validateBooking, validateDate } = require('../../utils/reqValidation');
+const { validateBooking, validateDate } = require('../../utils/reqValidation');
 
 const isBookingExisting = async (req, res, next) => {
     const { bookingId } = req.params;
