@@ -165,9 +165,10 @@ router.post('/:spotId/images', requireAuth, isSpotExisting, isSpotOwner,
 router.get('/', ValidateSpotQuery, async (req, res, next) => {
     const where = {};
     const { maxLat, minLat, maxLng, minLng, maxPrice, minPrice } = req.query;
+    let { page, size } = req.query;
 
-    const page = req.query.page === undefined ? 1 : parseInt(req.query.page);
-    const size = req.query.size === undefined ? 20 : parseInt(req.query.size);
+    page = page === undefined ? 1 : parseInt(page);
+    size = size === undefined ? 20 : parseInt(size);
 
     let limit, offset;
     if (page >= 1 && size >= 1) {
