@@ -1,6 +1,7 @@
 const { check } = require('express-validator');
 const { Booking } = require('../db/models');
 const { handleValidationErrors } = require('./validation');
+const { Op } = require('sequelize');
 
 const validateReview = [
     check('review')
@@ -36,10 +37,21 @@ const validateDate = async (req, res, next) => {
     }
 
     const bookings = await Booking.findAll({
-        where: { spotId: spotId }
+        where: {
+            spotId: spotId,
+            endDate: {
+                [Op.gte]: startDate
+            },
+            startDate: {
+                [Op.lte]: endDate
+            }
+        },
+        attributes: ['startDate', 'endDate']
     });
+
     const pendingStartDateObj = new Date(startDate);
     const pendingEndDateObj = new Date(endDate);
+
     for (const booking of bookings) {
         const errors = {};
         const bookingStartDateObj = new Date(booking.startDate);
