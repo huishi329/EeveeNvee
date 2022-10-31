@@ -1,5 +1,5 @@
 const { check } = require('express-validator');
-const { Spot, Booking, SpotImage, Review, ReviewImage, User, sequelize } = require('../db/models');
+const { Booking } = require('../db/models');
 const { handleValidationErrors } = require('./validation');
 
 const validateReview = [
@@ -25,8 +25,6 @@ const validateBooking = [
     handleValidationErrors
 ];
 
-
-
 const validateDate = async (req, res, next) => {
     const { startDate, endDate } = req.body;
     let spotId;
@@ -40,18 +38,18 @@ const validateDate = async (req, res, next) => {
     const bookings = await Booking.findAll({
         where: { spotId: spotId }
     });
-    const currStartDateObj = new Date(startDate);
-    const currEndDateObj = new Date(endDate);
+    const pendingStartDateObj = new Date(startDate);
+    const pendingEndDateObj = new Date(endDate);
     for (const booking of bookings) {
         const errors = {};
         const bookingStartDateObj = new Date(booking.startDate);
         const bookingEndDateObj = new Date(booking.endDate)
-        if (currStartDateObj >= bookingStartDateObj
-            && currStartDateObj <= bookingEndDateObj) {
+        if (pendingStartDateObj >= bookingStartDateObj
+            && pendingStartDateObj <= bookingEndDateObj) {
             errors.startDate = 'Start date conflicts with an existing booking'
         }
-        if (currEndDateObj >= bookingStartDateObj
-            && currEndDateObj <= bookingEndDateObj) {
+        if (pendingEndDateObj >= bookingStartDateObj
+            && pendingEndDateObj <= bookingEndDateObj) {
             errors.endDate = 'End date conflicts with an existing booking'
         }
         if (errors.startDate || errors.endDate) {
@@ -64,7 +62,6 @@ const validateDate = async (req, res, next) => {
     };
     next();
 }
-
 
 module.exports = {
     validateReview,
