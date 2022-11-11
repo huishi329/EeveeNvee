@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router();
-const { Spot, SpotImage, Booking, User, sequelize } = require('../../db/models');
-const { restoreUser, requireAuth } = require('../../utils/auth');
-const { isSpotExisting, validateBooking, validateDate } = require('../../utils/reqValidation');
+const { Spot, SpotImage, Booking, } = require('../../db/models');
+const { requireAuth } = require('../../utils/auth');
+const { validateBooking, validateDate } = require('../../utils/reqValidation');
 
 const isBookingExisting = async (req, res, next) => {
     const { bookingId } = req.params;
@@ -30,7 +30,7 @@ const isBookingOwner = (req, res, next) => {
     next();
 };
 
-router.put('/:bookingId', restoreUser, requireAuth, isBookingExisting, isBookingOwner, validateBooking, validateDate,
+router.put('/:bookingId', requireAuth, isBookingExisting, isBookingOwner, validateBooking, validateDate,
     async (req, res) => {
         const { booking } = req;
         const { startDate, endDate } = req.body;
@@ -51,7 +51,7 @@ router.put('/:bookingId', restoreUser, requireAuth, isBookingExisting, isBooking
         res.json(booking);
     });
 
-router.delete('/:bookingId', restoreUser, requireAuth, isBookingExisting, isBookingOwner,
+router.delete('/:bookingId', requireAuth, isBookingExisting, isBookingOwner,
     async (req, res) => {
         const { booking } = req;
 
@@ -68,10 +68,10 @@ router.delete('/:bookingId', restoreUser, requireAuth, isBookingExisting, isBook
         res.json({
             message: "Successfully deleted",
             statusCode: 200
-          });
+        });
     });
 
-router.get('/current', restoreUser, requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res) => {
     const { user } = req;
     let bookings = await Booking.findAll({
 
