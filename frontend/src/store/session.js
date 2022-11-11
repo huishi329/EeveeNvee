@@ -27,6 +27,8 @@ export const loginUser = (user) => async dispatch => {
         dispatch(setUser(user));
         return user;
     }
+    const errors = response.json();
+    console.log(errors);
 }
 
 const sessionReducer = (state = { user: null }, action) => {
