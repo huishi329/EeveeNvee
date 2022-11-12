@@ -22,7 +22,6 @@ router.delete('/:imageId', restoreUser, requireAuth, isImageExisting,
     async (req, res) => {
         const { reviewImage, user } = req;
         const review = await reviewImage.getReview();
-        // console.log(reviewImage)
 
         if (review.userId !== user.id) {
             return res.status(403).json({

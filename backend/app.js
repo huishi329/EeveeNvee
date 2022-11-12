@@ -72,13 +72,13 @@ app.use((err, _req, _res, next) => {
 // Error formatter
 app.use((err, _req, res, _next) => {
     res.status(err.status || 500);
-    console.error(err);
-    if (err.status === 401) {
-        return res.json({
-            message: err.message,
-            statusCode: err.status,
-        });
-    }
+    // console.error(err);
+    // if (err.status === 401) {
+    //     return res.json({
+    //         message: err.message,
+    //         statusCode: err.status,
+    //     });
+    // }
 
     res.json({
         title: err.title || 'Server Error',
