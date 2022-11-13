@@ -7,11 +7,18 @@ import './Navigation.css';
 
 export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    const hostingSpots = useSelector(state => state.spots.hostSpots);
+    const isHost = Object.values(hostingSpots).length > 0;
 
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <ProfileButton user={sessionUser} />
+            <div>
+                {isHost ?
+                    <NavLink to='/spotlist'>Switch to hosting</NavLink> :
+                    <NavLink to='/spotform'>Become host</NavLink>}
+                <ProfileButton user={sessionUser} />
+            </div>
         );
     } else {
         sessionLinks = (

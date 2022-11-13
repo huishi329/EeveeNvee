@@ -1,14 +1,26 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    margin: 0px 5%;
+    margin: 2% 5%;
 }
 
-.navbar-right {
-    display: flex;
-    justify-content: flex-end;
+a {
+    text-decoration: none;
+    color: black;
 }
+
+.navbar_right {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-end;
+}
+
+.navbar_right button {
+    max-width: fit-content;
+}
+
 
 .navbar a {
-    margin: 0 10px;
+    margin: 0 20px;
 }
