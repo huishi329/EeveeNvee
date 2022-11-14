@@ -61,7 +61,7 @@ export const getHostingSpots = (spotData) => async dispatch => {
             return spotsObj;
         }, {});
         dispatch(loadHostingSpots(spots));
-        // return data.Spots;
+        return spots;
     }
 };
 

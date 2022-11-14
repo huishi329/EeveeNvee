@@ -3,29 +3,39 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 220px;
-    width: 220px;
+    height: 275px;
+    width: 275px;
     padding: 15px 15px;
 }
 
 .spot_image {
-    max-width: 220px;
-    max-height: 220px;
+    max-width: 275px;
+    max-height: 275px;
     padding: 10px 0px;
 }
 
 .spot_tile img {
-    max-width: 220px;
-    min-height: 220px;
+    max-width: 275px;
+    min-height: 275px;
     object-fit: cover;
     border-radius: 16px;
 }
 
-.spot_title {
-    min-width: 220px;
+.spot_intro {
+
     display: flex;
-    /* text-align: left; */
+    flex-direction: column;
     align-items: flex-start;
+}
+
+.spot_title {
+    display: flex;
+    justify-content: space-between;
+    min-width: 275px;
+}
+
+.spot_title span {
+    font-weight: 400;
 }
 
 .title_bold {

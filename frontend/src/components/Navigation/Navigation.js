@@ -8,7 +8,6 @@ import './Navigation.css';
 export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const hostingSpots = useSelector(state => state.spots.hostSpots);
-    // const isHost = Object.values(hostingSpots).length > 0;
 
     let sessionLinks;
     if (sessionUser) {
@@ -22,10 +21,10 @@ export default function Navigation({ isLoaded }) {
         );
     } else {
         sessionLinks = (
-            <>
+            <div className='before_login'>
                 <LoginFormModal />
                 <NavLink to="/signup">Sign Up</NavLink>
-            </>
+            </div>
         );
     }
 
