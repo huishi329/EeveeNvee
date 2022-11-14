@@ -38,6 +38,11 @@ module.exports = {
         url:'https://a0.muscache.com/im/pictures/802d5224-5cbc-4ec3-b163-4e608d319527.jpg?im_w=1200',
         preview: true
       },
+      {
+        spotId: 5,
+        url:'https://a0.muscache.com/im/pictures/e28d45ab-175b-45e4-9e22-9f2fc12b30df.jpg?im_w=720',
+        preview: true
+      },
      ])
   },
 

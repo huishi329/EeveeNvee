@@ -7,6 +7,7 @@
     display: flex;
     justify-content: space-between;
     margin: 2% 5%;
+    position: static;
 }
 
 a {
@@ -17,7 +18,6 @@ a {
 .navbar_right {
     display: flex;
     flex-direction: column;
-    /* flex-wrap: nowrap; */
     align-items: flex-end;
     /* min-width: 200px; */
 }
@@ -30,6 +30,9 @@ a {
     max-width: fit-content;
 }
 
+.before_login {
+    min-width: 180px;
+}
 
 .navbar a {
     margin: 0 15px;
