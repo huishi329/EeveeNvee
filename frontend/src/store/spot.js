@@ -89,9 +89,9 @@ export const createSpot = (spotData) => async dispatch => {
 //     }
 // };
 const initialState = {
-    allSpots: {},
-    hostSpots: {},
-    singleSpot: {}
+    allSpots: null,
+    hostSpots: null,
+    singleSpot: null
 };
 
 const spotReducer = (state = initialState, action) => {
