@@ -17,8 +17,13 @@ a {
 .navbar_right {
     display: flex;
     flex-direction: column;
-
+    /* flex-wrap: nowrap; */
     align-items: flex-end;
+    /* min-width: 200px; */
+}
+
+.before_login {
+    min-width: 150px;
 }
 
 .navbar_right button {
@@ -27,5 +32,5 @@ a {
 
 
 .navbar a {
-    margin: 0 20px;
+    margin: 0 15px;
 }

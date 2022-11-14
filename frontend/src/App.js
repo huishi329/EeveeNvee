@@ -25,14 +25,14 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
+      <Switch>
+        {isLoaded && (
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-        </Switch>
-      )}
-      {allSpots && <SpotList spots={Object.values(allSpots)}></SpotList>}
+        )}
+        {allSpots && <SpotList spots={Object.values(allSpots)}></SpotList>}
+      </Switch>
 
     </>
   );

@@ -22,10 +22,10 @@ export default function Navigation({ isLoaded }) {
         );
     } else {
         sessionLinks = (
-            <>
+            <div className='before_login'>
                 <LoginFormModal />
                 <NavLink to="/signup">Sign Up</NavLink>
-            </>
+            </div>
         );
     }
 
