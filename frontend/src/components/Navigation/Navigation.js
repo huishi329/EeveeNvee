@@ -9,7 +9,6 @@ import './Navigation.css';
 
 export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-    const hostingSpots = useSelector(state => state.spots.hostSpots);
     const [showModal, setShowModal] = useState(false);
     const [login, setLogin] = useState(true);
 

@@ -28,6 +28,7 @@ a {
     background-color: white;
     border: none;
     color: black;
+    cursor: pointer;
 }
 
 .navbar a {
@@ -36,19 +37,24 @@ a {
 
 .profile-dropdown {
     position: absolute;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    top: 60px;
-    width: 150px;
+    top: 55px;
+    right: 80px;
+    width: 180px;
     background-color: white;
+
 }
 
 .profile-dropdown button {
     background-color: white;
     border: none;
     color: black;
-    padding: 15px 0px;
     text-align: left;
+}
+
+.profile-dropdown div {
+    padding: 15px 10px;
 }
 
 hr {
