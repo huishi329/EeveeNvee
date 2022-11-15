@@ -13,7 +13,7 @@ function SpotForm({ setShowModal }) {
     const [lng, setLng] = useState('');
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('')
+    const [price, setPrice] = useState('');
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
