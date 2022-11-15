@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
-import * as spotActions from '../../store/session';
+import { createSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
 
 
-function SpotForm() {
+function SpotForm({ setShowModal }) {
     const dispatch = useDispatch();
-    const [credential, setCredential] = useState('');
-    const [password, setPassword] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('')
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.createSpot({ credential, password }))
+        return dispatch(createSpot({ address, city, state, country, lat, lng, name, description, price }))
+            .then(() => setShowModal(false))
             .catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) setErrors(Object.values(data.errors));
             });
     }
 
@@ -25,24 +33,87 @@ function SpotForm() {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label>
-                Username or Email
+                Address
                 <input
                     type="text"
-                    value={credential}
-                    onChange={(e) => setCredential(e.target.value)}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     required
                 />
             </label>
             <label>
-                Password
+                City
                 <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
                     required
                 />
             </label>
-            <button type="submit">Log In</button>
+            <label>
+                State
+                <input
+                    type="text"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Country
+                <input
+                    type="text"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Latitude
+                <input
+                    type="number"
+                    value={lat}
+                    onChange={(e) => setLat(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Longitude
+                <input
+                    type="number"
+                    value={lng}
+                    onChange={(e) => setLng(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Name
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Description
+                <input
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Price
+                <input
+                    type="number"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    required
+                />
+            </label>
+            <button type="submit">Submit</button>
         </form>
     );
 }

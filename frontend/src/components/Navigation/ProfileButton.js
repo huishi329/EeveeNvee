@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
-function ProfileButton({ user, setLogin, setShowModal }) {
+function ProfileButton({ user, setLogin, setSignup, setCreateSpot,setShowModal }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -43,14 +43,18 @@ function ProfileButton({ user, setLogin, setShowModal }) {
         </div>) :
         <div className="profile-dropdown">
           <div onClick={() => {
-            setLogin(true)
             setShowModal(true)
+            setLogin(true)
+            setSignup(false)
+            setCreateSpot(false)
           }}>
             <button>Log in</button>
           </div>
           <div onClick={() => {
-            setLogin(false)
             setShowModal(true)
+            setSignup(true)
+            setLogin(false)
+            setCreateSpot(false)
           }}>
             <button>Sign up</button>
           </div>

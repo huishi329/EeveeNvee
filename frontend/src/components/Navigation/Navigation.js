@@ -5,12 +5,15 @@ import ProfileButton from './ProfileButton';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginForm/LoginForm';
 import SignupForm from '../SignupForm/SignupForm';
+import SpotForm from '../SpotForm/SpotForm';
 import './Navigation.css';
 
 export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
-    const [login, setLogin] = useState(true);
+    const [login, setLogin] = useState(false);
+    const [signup, setSignup] = useState(false);
+    const [createSpot, setCreateSpot] = useState(false);
 
     return (
         <>
@@ -21,12 +24,18 @@ export default function Navigation({ isLoaded }) {
                 <div className='navbar_right'>
                     {isLoaded &&
                         <>
-                            {sessionUser ?
-                                <button>Switch to hosting</button> :
-                                <button>Become a host</button>}
+                            {sessionUser &&
+                                <button onClick={() => {
+                                    setShowModal(true)
+                                    setCreateSpot(true)
+                                    setLogin(false)
+                                    setSignup(false)
+                                }}>Create a spot</button>}
                             <ProfileButton
                                 user={sessionUser}
+                                setCreateSpot={setCreateSpot}
                                 setLogin={setLogin}
+                                setSignup={setSignup}
                                 setShowModal={setShowModal}
                             />
                         </>
@@ -34,10 +43,9 @@ export default function Navigation({ isLoaded }) {
                 </div>
                 {showModal &&
                     <Modal onClose={() => setShowModal(false)}>
-                        {login ?
-                            <LoginForm setShowModal={setShowModal} />
-                            : <SignupForm setShowModal={setShowModal} />
-                        }
+                        {login && <LoginForm setShowModal={setShowModal} />}
+                        {signup && <SignupForm setShowModal={setShowModal} />}
+                        {createSpot && <SpotForm setShowModal={setShowModal} />}
                     </Modal>
                 }
             </nav>

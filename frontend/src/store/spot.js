@@ -76,7 +76,7 @@ export const createSpot = (spotData) => async dispatch => {
         dispatch(addSpot(spot));
         return spot;
     }
-}
+};
 
 // export const deleteSpot = () => async dispatch => {
 //     const response = await csrfFetch('/api/spots', {
@@ -99,6 +99,7 @@ const spotReducer = (state = initialState, action) => {
         case ADD_SPOT:
             return {
                 ...state,
+                hostSpots: {...state.hostSpots, [action.spot.id]: action.spot},
                 allSpots: { ...state.allSpots, [action.spot.id]: action.spot }
             };
         case LOAD_ALL_SPOTS:
