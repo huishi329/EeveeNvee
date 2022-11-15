@@ -1,13 +1,14 @@
 * {
     font-weight: 500;
-    font-size:14px;
+    font-size: 14px;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
-    margin: 2% 5%;
+
     position: static;
+    padding: 20px 80px;
 }
 
 a {
@@ -17,23 +18,39 @@ a {
 
 .navbar_right {
     display: flex;
-    flex-direction: column;
     align-items: flex-end;
-    /* min-width: 200px; */
 }
 
-.before_login {
-    min-width: 150px;
-}
 
 .navbar_right button {
-    max-width: fit-content;
-}
-
-.before_login {
-    min-width: 180px;
+    min-width: fit-content;
+    margin: 0 5px;
+    background-color: white;
+    border: none;
+    color: black;
 }
 
 .navbar a {
     margin: 0 15px;
+}
+
+.profile-dropdown {
+    position: absolute;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    top: 60px;
+    width: 150px;
+    background-color: white;
+}
+
+.profile-dropdown button {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 15px 0px;
+    text-align: left;
+}
+
+hr {
+    margin-bottom: 20px;
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
 import { restoreUser } from "./store/session";
 import { getAllSpots, getHostingSpots } from "./store/spot";
 import Navigation from "./components/Navigation";
@@ -26,11 +25,6 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       <Switch>
-        {isLoaded && (
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        )}
         {allSpots && <SpotList spots={Object.values(allSpots)}></SpotList>}
       </Switch>
 

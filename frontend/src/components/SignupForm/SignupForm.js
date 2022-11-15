@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 
-function SignupFormPage() {
+function SignupForm({setShowModal}) {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -15,13 +13,12 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(sessionActions.signupUser({ email, username, password, firstName, lastName }))
+        .then(setShowModal(false))
         .catch(async (res) => {
           const data = await res.json();
           console.log(data)
@@ -33,6 +30,7 @@ function SignupFormPage() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Welcome to Airbnb</h2>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -95,4 +93,4 @@ function SignupFormPage() {
   );
 }
 
-export default SignupFormPage;
+export default SignupForm;
