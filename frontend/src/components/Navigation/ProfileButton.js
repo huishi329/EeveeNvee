@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import './Navigation.css'
 
-function ProfileButton({ user, setLogin, setSignup, setCreateSpot,setShowModal }) {
+function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal }) {
   const dispatch = useDispatch();
+  const navbarStyle = useSelector(state => state.style.navbar);
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -30,25 +32,29 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot,setShowModal }
 
   return (
     <>
-      <button className="fa" onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="fa-icon" onClick={openMenu}>
+        <i className="fa-solid fa-bars"></i>
+        <i className="fa-regular fa-user"></i>
       </button>
       {showMenu && (user ?
-        (<div className="profile-dropdown">
+        (<div className="profile-dropdown" style={navbarStyle}>
           <div>{user.username}</div>
           <div>{user.email}</div>
           <div>
-            <button onClick={logout}>Log Out</button>
+            <button
+              className="transparent-button"
+              onClick={logout}
+            >Log Out</button>
           </div>
         </div>) :
-        <div className="profile-dropdown">
+        <div className="profile-dropdown" style={navbarStyle}>
           <div onClick={() => {
             setShowModal(true)
             setLogin(true)
             setSignup(false)
             setCreateSpot(false)
           }}>
-            <button>Log in</button>
+            <button className="transparent-button">Log in</button>
           </div>
           <div onClick={() => {
             setShowModal(true)
@@ -56,7 +62,7 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot,setShowModal }
             setLogin(false)
             setCreateSpot(false)
           }}>
-            <button>Sign up</button>
+            <button className="transparent-button">Sign up</button>
           </div>
         </div>
       )}

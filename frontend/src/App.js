@@ -5,12 +5,14 @@ import { restoreUser } from "./store/session";
 import { getAllSpots, getHostingSpots } from "./store/spot";
 import Navigation from "./components/Navigation";
 import SpotList from "./components/SpotList";
+import SpotDetail from "./components/SpotDetail";
 
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const allSpots = useSelector(state => state.spots.allSpots);
+
   useEffect(() => {
     dispatch(getAllSpots());
     // check if backend has attempted to restore the user
@@ -25,7 +27,12 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       <Switch>
-        {allSpots && <SpotList spots={Object.values(allSpots)}></SpotList>}
+        <Route path='/spots/:spotId'>
+            <SpotDetail />
+        </Route>
+        <Route exact path='/'>
+          {allSpots && <SpotList spots={allSpots}></SpotList>}
+        </Route>
       </Switch>
 
     </>

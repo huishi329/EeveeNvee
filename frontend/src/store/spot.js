@@ -2,16 +2,9 @@ import { csrfFetch } from "./crsf";
 
 const LOAD_ALL_SPOTS = 'spot/LOAD_ALL_SPOTS';
 const LOAD_HOSTING_SPOTS = 'spot/LOAD_HOSTING_SPOTS';
-// const LOAD_SINGLE_SPOT = 'spot/LOAD_SINGLE_SPOT';
+const LOAD_SINGLE_SPOT = 'spot/LOAD_SINGLE_SPOT';
 const ADD_SPOT = 'spot/ADD_SPOT';
 // const REMOVE_SPOT = 'spot/REMOVE_SPOT';
-
-const loadHostingSpots = (spots) => {
-    return {
-        type: LOAD_HOSTING_SPOTS,
-        spots
-    };
-};
 
 const loadAllSpots = (spots) => {
     return {
@@ -19,20 +12,6 @@ const loadAllSpots = (spots) => {
         spots
     };
 };
-
-const addSpot = (spot) => {
-    return {
-        type: ADD_SPOT,
-        spot
-    };
-};
-
-// const removeSpot = (spot) => {
-//     return {
-//         type: REMOVE_SPOT,
-//         spot
-//     }
-// };
 
 export const getAllSpots = (spotData) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
@@ -47,8 +26,15 @@ export const getAllSpots = (spotData) => async dispatch => {
         dispatch(loadAllSpots(spots));
         // return data.Spots;
     }
-}
+};
 
+
+const loadHostingSpots = (spots) => {
+    return {
+        type: LOAD_HOSTING_SPOTS,
+        spots
+    };
+};
 
 export const getHostingSpots = (spotData) => async dispatch => {
     const response = await csrfFetch('/api/spots/current', {
@@ -65,6 +51,13 @@ export const getHostingSpots = (spotData) => async dispatch => {
     }
 };
 
+const addSpot = (spot) => {
+    return {
+        type: ADD_SPOT,
+        spot
+    };
+};
+
 export const createSpot = (spotData) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
@@ -78,6 +71,32 @@ export const createSpot = (spotData) => async dispatch => {
     }
 };
 
+const loadSingleSpot = (spot) => {
+    return {
+        type: LOAD_SINGLE_SPOT,
+        spot
+    };
+};
+
+export const getSpotDetail = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`)
+
+    if (response.ok) {
+        const spot = await response.json();
+        dispatch(loadSingleSpot(spot))
+        return spot;
+    }
+
+};
+
+// const removeSpot = (spot) => {
+//     return {
+//         type: REMOVE_SPOT,
+//         spot
+//     }
+// };
+
+
 // export const deleteSpot = () => async dispatch => {
 //     const response = await csrfFetch('/api/spots', {
 //         method: 'DELETE'
@@ -88,6 +107,7 @@ export const createSpot = (spotData) => async dispatch => {
 //         return response;
 //     }
 // };
+
 const initialState = {
     allSpots: null,
     hostSpots: null,
@@ -96,12 +116,6 @@ const initialState = {
 
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_SPOT:
-            return {
-                ...state,
-                hostSpots: {...state.hostSpots, [action.spot.id]: action.spot},
-                allSpots: { ...state.allSpots, [action.spot.id]: action.spot }
-            };
         case LOAD_ALL_SPOTS:
             return {
                 ...state,
@@ -112,6 +126,17 @@ const spotReducer = (state = initialState, action) => {
                 ...state,
                 hostSpots: action.spots
             }
+        case LOAD_SINGLE_SPOT:
+            return {
+                ...state,
+                singleSpot: action.spot
+            }
+        case ADD_SPOT:
+            return {
+                ...state,
+                hostSpots: { ...state.hostSpots, [action.spot.id]: action.spot },
+                allSpots: { ...state.allSpots, [action.spot.id]: action.spot }
+            };
         default:
             return state;
     }

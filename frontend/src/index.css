@@ -3,6 +3,7 @@
 * {
     font-family: 'Montserrat', sans-serif;
     list-style: none;
+    box-sizing: border-box;
 }
 
 
@@ -10,6 +11,16 @@ form {
     min-width: 400px;
     padding: 20px 20px;
     border-radius: 8px;
+}
+
+form button {
+    background-color: #9C425B;
+}
+
+
+h1 {
+    font-size: 25px;
+    font-weight: 00;
 }
 
 button {

@@ -1,0 +1,53 @@
+.spot-main {
+    display: flex;
+}
+
+.spot-description {
+    flex: 2;
+    margin-right: 1rem;
+}
+
+.edit-spot {
+    flex: 1;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    min-height: 15rem;
+}
+
+.edit-spot > div {
+    margin: 0 1.2rem;
+}
+
+.spot-price {
+    display: flex;
+    text-align: center;
+}
+
+.spot-info {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+}
+
+.spot-info-left {
+    display: flex;
+    align-items: flex-end;
+}
+
+.price-bold {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-right: 0.3rem;
+}
+
+.spot-info-right {
+    display: flex;
+    align-items: flex-end;
+}
+
+.spot-info-right >span {
+    text-decoration: underline;
+    font-weight: 600;
+    margin: 0 0.2rem;
+}

@@ -10,6 +10,7 @@ import './Navigation.css';
 
 export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    const navbarStyle = useSelector(state=> state.style.navbar);
     const [showModal, setShowModal] = useState(false);
     const [login, setLogin] = useState(false);
     const [signup, setSignup] = useState(false);
@@ -17,11 +18,13 @@ export default function Navigation({ isLoaded }) {
 
     return (
         <>
-            <nav className='navbar'>
-                <div className='navbar_left'>
-                    <NavLink exact to="/">Home</NavLink>
+            <nav className='navbar' style={navbarStyle}>
+                <div className='navbar-left'>
+                    <NavLink exact to="/">
+                        <button>EeveeNvee</button>
+                    </NavLink>
                 </div>
-                <div className='navbar_right'>
+                <div className='navbar-right'>
                     {isLoaded &&
                         <>
                             {sessionUser &&
