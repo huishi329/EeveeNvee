@@ -4,7 +4,7 @@ const LOAD_ALL_SPOTS = 'spot/LOAD_ALL_SPOTS';
 const LOAD_HOSTING_SPOTS = 'spot/LOAD_HOSTING_SPOTS';
 const LOAD_SINGLE_SPOT = 'spot/LOAD_SINGLE_SPOT';
 const ADD_SPOT = 'spot/ADD_SPOT';
-// const REMOVE_SPOT = 'spot/REMOVE_SPOT';
+const REMOVE_SPOT = 'spot/REMOVE_SPOT';
 
 const loadAllSpots = (spots) => {
     return {
@@ -89,24 +89,24 @@ export const getSpotDetail = (spotId) => async dispatch => {
 
 };
 
-// const removeSpot = (spot) => {
-//     return {
-//         type: REMOVE_SPOT,
-//         spot
-//     }
-// };
+const removeSpot = (spotId) => {
+    return {
+        type: REMOVE_SPOT,
+        spotId
+    }
+};
 
 
-// export const deleteSpot = () => async dispatch => {
-//     const response = await csrfFetch('/api/spots', {
-//         method: 'DELETE'
-//     });
+export const deleteSpot = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    });
 
-//     if(response.ok) {
-//         dispatch(removeSpot());
-//         return response;
-//     }
-// };
+    if(response.ok) {
+        dispatch(removeSpot(spotId));
+        return response;
+    }
+};
 
 const initialState = {
     allSpots: null,
@@ -137,6 +137,16 @@ const spotReducer = (state = initialState, action) => {
                 hostSpots: { ...state.hostSpots, [action.spot.id]: action.spot },
                 allSpots: { ...state.allSpots, [action.spot.id]: action.spot }
             };
+        case REMOVE_SPOT:
+            const newAllSpots = {...state.allSpots};
+            delete newAllSpots[action.spotId];
+            const newHostSpots = {...state.hostSpots};
+            delete newHostSpots[action.spotId];
+            return {
+                ...state,
+                hostSpots: newHostSpots,
+                allSpots: newAllSpots
+            }
         default:
             return state;
     }

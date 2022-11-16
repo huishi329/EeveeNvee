@@ -1,6 +1,27 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './EditSpot.css';
+import { deleteSpot } from '../../store/spot';
+import { useHistory } from 'react-router-dom';
 
-function EditSpot( {spot}) {
+function EditSpot({ spot }) {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const sessionUser = useSelector(state => state.session.user);
+    const [isHost, setIsHost] = useState(false);
+
+    useEffect(() => {
+        if (sessionUser) {
+            if (sessionUser.id === spot.ownerId) setIsHost(true)
+        }
+
+    }, [dispatch, sessionUser])
+
+    const deleteHostSpot = () => {
+
+        dispatch(deleteSpot(spot.id)).then(() => history.push('/'))
+    }
+
     return (
 
         <div className="edit-spot">
@@ -19,8 +40,24 @@ function EditSpot( {spot}) {
                         {`${spot.numReviews} reviews`}
                     </span>
                 </div>
-
             </div>
+
+            {isHost &&
+                <div className='edit-button'>
+                    <div>
+                        <button
+                        onClick={()=> {
+
+                        }}
+                        >Edit my spot</button>
+                    </div>
+                    <div>
+                        <button
+                            onClick={deleteHostSpot}
+                        >Delete my spot</button>
+                    </div>
+                </div>
+            }
         </div>
 
     )

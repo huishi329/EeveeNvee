@@ -31,7 +31,7 @@ function App() {
             <SpotDetail />
         </Route>
         <Route exact path='/'>
-          {allSpots && <SpotList spots={allSpots}></SpotList>}
+          {allSpots && <SpotList spots={allSpots} />}
         </Route>
       </Switch>
 
