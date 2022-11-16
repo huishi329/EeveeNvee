@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { createSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 function SpotForm({ setShowModal }) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
-    const [lat, setLat] = useState('');
-    const [lng, setLng] = useState('');
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [imgURL, setImgURL] = useState('');
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
@@ -28,9 +29,11 @@ function SpotForm({ setShowModal }) {
             lng: 120,
             name,
             description,
-            price
+            price,
+            imgURL
         }))
             .then(() => setShowModal(false))
+            .then(() => history.push('/'))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(Object.values(data.errors));
@@ -101,6 +104,15 @@ function SpotForm({ setShowModal }) {
                     type="number"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Preview Image
+                <input
+                    type="text"
+                    value={imgURL}
+                    onChange={(e) => setImgURL(e.target.value)}
                     required
                 />
             </label>

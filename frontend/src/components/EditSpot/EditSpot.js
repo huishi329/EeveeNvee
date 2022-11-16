@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './EditSpot.css';
-import { deleteSpot } from '../../store/spot';
 import { useHistory } from 'react-router-dom';
+
+import './EditSpot.css';
 import EditSpotForm from './EditSpotForm';
+import { deleteSpot } from '../../store/spot';
 import { Modal } from '../../context/Modal';
 
 function EditSpot({ spot }) {
@@ -21,7 +22,6 @@ function EditSpot({ spot }) {
     }, [dispatch, sessionUser, spot.ownerId])
 
     const deleteHostSpot = () => {
-
         dispatch(deleteSpot(spot.id)).then(() => history.push('/'))
     }
 
