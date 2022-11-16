@@ -19,7 +19,17 @@ function SpotForm({ setShowModal }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(createSpot({ address, city, state, country, lat, lng, name, description, price }))
+        return dispatch(createSpot({
+            address,
+            city,
+            state,
+            country,
+            lat: 48,
+            lng: 120,
+            name,
+            description,
+            price
+        }))
             .then(() => setShowModal(false))
             .catch(async (res) => {
                 const data = await res.json();
@@ -69,24 +79,6 @@ function SpotForm({ setShowModal }) {
                 />
             </label>
             <label>
-                Latitude
-                <input
-                    type="number"
-                    value={lat}
-                    onChange={(e) => setLat(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Longitude
-                <input
-                    type="number"
-                    value={lng}
-                    onChange={(e) => setLng(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
                 Name
                 <input
                     type="text"
@@ -97,12 +89,11 @@ function SpotForm({ setShowModal }) {
             </label>
             <label>
                 Description
-                <input
-                    type="text"
+                <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
-                />
+                ></textarea>
             </label>
             <label>
                 Price

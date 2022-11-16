@@ -15,6 +15,9 @@ form {
 
 form button {
     background-color: #9C425B;
+    border-radius: 0.5rem;
+    border: none;
+    height: 2.5rem;
 }
 
 

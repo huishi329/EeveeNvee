@@ -15,7 +15,6 @@ function EditSpot({ spot }) {
 
     useEffect(() => {
         if (sessionUser) {
-            console.log(sessionUser.id, 'xxxxxxxxx', spot.ownerId)
             if (sessionUser.id === spot.ownerId) setIsHost(true)
         }
         return () => setIsHost(false);

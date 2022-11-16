@@ -19,7 +19,7 @@ function SpotTile({ spot }) {
                         </div>
                     </div>
                     <div className='spot_rating'>
-                        <i class="fa-sharp fa-solid fa-star"></i>
+                        <i className="fa-sharp fa-solid fa-star"></i>
                         {`${Number(spot.avgRating).toFixed(2)}`}
                     </div>
                 </div>

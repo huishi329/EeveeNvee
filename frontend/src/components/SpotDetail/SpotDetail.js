@@ -42,7 +42,7 @@ function SpotDetail({ spots }) {
                             </div>) : (<h2>No image found</h2>)}
                         <div className="spot-main">
                             <div className="spot-description">
-                                <h2>{`${spot.name} hosted by`}</h2>
+                                <h2>{`${spot.name} hosted by SUPERHOST`}</h2>
                                 <hr />
                                 <p>{spot.description}</p>
                             </div>

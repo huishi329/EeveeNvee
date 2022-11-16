@@ -11,7 +11,7 @@ const loadAllSpots = (spots) => {
     };
 };
 
-export const getAllSpots = (spotData) => async dispatch => {
+export const getAllSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots', {
     });
 

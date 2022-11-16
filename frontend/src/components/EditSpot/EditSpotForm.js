@@ -9,8 +9,6 @@ function EditSpotForm({ setShowModal, spot }) {
     const [city, setCity] = useState(spot.city);
     const [state, setState] = useState(spot.state);
     const [country, setCountry] = useState(spot.country);
-    const [lat, setLat] = useState(spot.lat);
-    const [lng, setLng] = useState(spot.lng);
     const [name, setName] = useState(spot.name)
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
@@ -21,7 +19,15 @@ function EditSpotForm({ setShowModal, spot }) {
         setErrors([]);
         return dispatch(updateSpot({
             id: spot.id,
-            address, city, state, country, lat, lng, name, description, price
+            address,
+            city,
+            state,
+            country,
+            lat: 48,
+            lng: 120,
+            name,
+            description,
+            price
         }))
             .then(() => setShowModal(false))
             .catch(async (res) => {
@@ -68,24 +74,6 @@ function EditSpotForm({ setShowModal, spot }) {
                     type="text"
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Latitude
-                <input
-                    type="number"
-                    value={lat}
-                    onChange={(e) => setLat(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Longitude
-                <input
-                    type="number"
-                    value={lng}
-                    onChange={(e) => setLng(e.target.value)}
                     required
                 />
             </label>
