@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { restoreUser } from "./store/session";
 import Navigation from "./components/Navigation";
-import SpotList from "./components/SpotList";
+import SpotView from "./components/SpotView";
 import SpotDetail from "./components/SpotDetail";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <SpotDetail />
         </Route>
         <Route exact path='/'>
-          <SpotList />
+          <SpotView />
         </Route>
       </Switch>
 

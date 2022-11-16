@@ -8,9 +8,9 @@
 
 
 form {
-    min-width: 400px;
-    padding: 20px 20px;
-    border-radius: 8px;
+    min-width: 40rem;
+    padding: 2rem 2rem;
+    border-radius: 1rem;
 }
 
 form button {
@@ -18,11 +18,12 @@ form button {
     border-radius: 0.5rem;
     border: none;
     height: 2.5rem;
+    color: white;
 }
 
 
 h1 {
-    font-size: 25px;
+    font-size: 2rem;
     font-weight: 00;
 }
 
