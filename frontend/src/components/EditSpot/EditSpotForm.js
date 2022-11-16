@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getSpotDetail, getAllSpots, updateSpot } from '../../store/spot';
+import { updateSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
 
 
@@ -24,8 +24,6 @@ function EditSpotForm({ setShowModal, spot }) {
             address, city, state, country, lat, lng, name, description, price
         }))
             .then(() => setShowModal(false))
-            .then(()=> dispatch(getSpotDetail(spot.id)))
-            .then(()=> dispatch(getAllSpots()))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(Object.values(data.errors));

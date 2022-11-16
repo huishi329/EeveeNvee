@@ -36,9 +36,10 @@ function SpotDetail({ spots }) {
                         <span>
                             {`${spot.city}, ${spot.state},${spot.country}`}
                         </span>
-                        <div className="spot-image">
-                            <img src={spot.SpotImages[0].url} alt={spot.name}></img>
-                        </div>
+                        {(spot.SpotImages).length > 0 ?
+                            (<div className="spot-image">
+                                <img src={spot.SpotImages[0].url} alt={spot.name}></img>
+                            </div>) : (<h2>No image found</h2>)}
                         <div className="spot-main">
                             <div className="spot-description">
                                 <h2>{`${spot.name} hosted by`}</h2>
