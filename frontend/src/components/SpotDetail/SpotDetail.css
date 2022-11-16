@@ -1,0 +1,36 @@
+h1 {
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.spot-detail {
+    margin: 0 15%;
+}
+
+
+.spot-detail i {
+    color: #9C425B;
+}
+
+.spot-summary>span {
+    text-decoration: underline;
+    font-weight: 600;
+    margin: 0 5px;
+}
+
+.spot-image {
+    max-width: 50%;
+    padding: 20px 0px;
+    max-height: 60%
+}
+
+.spot-image img {
+    min-width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+}

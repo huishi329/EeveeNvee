@@ -61,6 +61,18 @@ module.exports = {
         name: "Oceanfront Denman Island Suite",
         description: "Experience luxury while in a rustic gulf island ocean front setting. Find absolute tranquility and calm in your finely hand crafted suite. With sumptuous king bed, spa-like bathroom, and your very own private infrared sauna with an ocean view, you will be able to unplug and unwind.",
         price: 219
+      },
+      {
+        ownerId: 4,
+        address: "Horton Bay Rd",
+        city: "Mayne Island",
+        state: "British Comlumbia",
+        country: "Canada",
+        lat: 48.8380,
+        lng: 123.2877,
+        name: "Cob Cottage",
+        description: "Channel the pursuit of pause in this one-of-a-kind earth house. The cozy retreat was hand-sculpted using local and sustainable natural materials, and features a central living space with cantilevered slab stairs leading to the loft bedroom.",
+        price: 200
       }
     ], {});
   },

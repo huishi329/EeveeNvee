@@ -37,6 +37,25 @@ module.exports = {
         review: 'Easy to get to and centrally located. The apartment is clean and on a quiet floor which made relaxing easy. A great place to stay!',
         stars: 4
       },
+      {
+        spotId: 1,
+        userId: 3,
+        review: 'Great place to stay in Coal Harbour! Persia is thoughtful and communicative. We had a great visit!',
+        stars: 5
+      },
+      {
+        spotId: 2,
+        userId: 4,
+        review: 'Overall good. The location is amazing. The room looks smaller and older than the picture. But it got everything you needed. Noise from the street could be another factor to consider.',
+        stars: 4
+      },
+      {
+        spotId: 5,
+        userId: 3,
+        review: 'Absolutely loved our stay at the cob cottage. Such a great place to unplug and be surrounded by nature. Alexis was a great host, prompt replies and made sure we were well taken care of after a power outage from the storm! Can’t wait to come back in the future!',
+        stars: 5
+      },
+
      ], {})
   },
 

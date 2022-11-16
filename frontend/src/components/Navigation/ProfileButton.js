@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import './Navigation.css'
 
-function ProfileButton({ user }) {
+function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal }) {
   const dispatch = useDispatch();
+  const navbarStyle = useSelector(state => state.style.navbar);
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -17,7 +19,7 @@ function ProfileButton({ user }) {
     const closeMenu = () => {
       setShowMenu(false);
     };
-
+    // click anywhere on the window, close the profile menu
     document.addEventListener('click', closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
@@ -30,17 +32,39 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="fa-icon" onClick={openMenu}>
+        <i className="fa-solid fa-bars"></i>
+        <i className="fa-regular fa-user"></i>
       </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
+      {showMenu && (user ?
+        (<div className="profile-dropdown" style={navbarStyle}>
+          <div>{user.username}</div>
+          <div>{user.email}</div>
+          <div>
+            <button
+              className="transparent-button"
+              onClick={logout}
+            >Log Out</button>
+          </div>
+        </div>) :
+        <div className="profile-dropdown" style={navbarStyle}>
+          <div onClick={() => {
+            setShowModal(true)
+            setLogin(true)
+            setSignup(false)
+            setCreateSpot(false)
+          }}>
+            <button className="transparent-button">Log in</button>
+          </div>
+          <div onClick={() => {
+            setShowModal(true)
+            setSignup(true)
+            setLogin(false)
+            setCreateSpot(false)
+          }}>
+            <button className="transparent-button">Sign up</button>
+          </div>
+        </div>
       )}
     </>
   );

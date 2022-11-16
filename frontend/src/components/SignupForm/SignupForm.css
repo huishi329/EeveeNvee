@@ -3,7 +3,7 @@ form {
     flex-direction: column;
     width: fit-content;
     gap: 10px;
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 form ul {
