@@ -3,19 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import './EditSpot.css';
 import { deleteSpot } from '../../store/spot';
 import { useHistory } from 'react-router-dom';
+import EditSpotForm from './EditSpotForm';
+import { Modal } from '../../context/Modal';
 
 function EditSpot({ spot }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const [isHost, setIsHost] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (sessionUser) {
+            console.log(sessionUser.id, 'xxxxxxxxx', spot.ownerId)
             if (sessionUser.id === spot.ownerId) setIsHost(true)
         }
-
-    }, [dispatch, sessionUser])
+        return () => setIsHost(false);
+    }, [dispatch, sessionUser, spot.ownerId])
 
     const deleteHostSpot = () => {
 
@@ -46,9 +50,7 @@ function EditSpot({ spot }) {
                 <div className='edit-button'>
                     <div>
                         <button
-                        onClick={()=> {
-
-                        }}
+                            onClick={() => setShowModal(true)}
                         >Edit my spot</button>
                     </div>
                     <div>
@@ -57,6 +59,11 @@ function EditSpot({ spot }) {
                         >Delete my spot</button>
                     </div>
                 </div>
+            }
+            {showModal &&
+                <Modal onClose={() => setShowModal(false)}>
+                    <EditSpotForm setShowModal={setShowModal} spot={spot} />
+                </Modal>
             }
         </div>
 

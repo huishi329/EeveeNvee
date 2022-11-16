@@ -1,4 +1,5 @@
 import { csrfFetch } from "./crsf";
+import { useDispatch } from "react-redux";
 
 const LOAD_ALL_SPOTS = 'spot/LOAD_ALL_SPOTS';
 const LOAD_HOSTING_SPOTS = 'spot/LOAD_HOSTING_SPOTS';
@@ -24,7 +25,7 @@ export const getAllSpots = (spotData) => async dispatch => {
             return spotsObj;
         }, {});
         dispatch(loadAllSpots(spots));
-        // return data.Spots;
+        return spots;
     }
 };
 
@@ -71,6 +72,16 @@ export const createSpot = (spotData) => async dispatch => {
     }
 };
 
+export const updateSpot = (spotData) => async dispatch => {
+    const {id, address, city, state, country, lat, lng, name, description, price } = spotData;
+    const response = await csrfFetch(`/api/spots/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({address, city, state, country, lat, lng, name, description, price})
+    });
+
+    return response;
+};
+
 const loadSingleSpot = (spot) => {
     return {
         type: LOAD_SINGLE_SPOT,
@@ -102,7 +113,7 @@ export const deleteSpot = (spotId) => async dispatch => {
         method: 'DELETE'
     });
 
-    if(response.ok) {
+    if (response.ok) {
         dispatch(removeSpot(spotId));
         return response;
     }
@@ -138,9 +149,9 @@ const spotReducer = (state = initialState, action) => {
                 allSpots: { ...state.allSpots, [action.spot.id]: action.spot }
             };
         case REMOVE_SPOT:
-            const newAllSpots = {...state.allSpots};
+            const newAllSpots = { ...state.allSpots };
             delete newAllSpots[action.spotId];
-            const newHostSpots = {...state.hostSpots};
+            const newHostSpots = { ...state.hostSpots };
             delete newHostSpots[action.spotId];
             return {
                 ...state,
