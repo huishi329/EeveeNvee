@@ -1,5 +1,10 @@
 .outer-panel {
-    margin: 0 15%;
+    margin: 2rem 15rem;
+}
+
+.reviews-overview {
+    display: flex;
+    justify-content: space-between;
 }
 
 .reviews-overview i {
@@ -7,8 +12,8 @@
 }
 
 .reviews-overview span {
-    margin: 0.5rem;
-    font-size: 1.5em;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
     font-weight: 600;
 }
 
@@ -16,10 +21,9 @@
     margin-top: 1rem;
     line-height: 1.5rem;
     display: grid;
-
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 0.5rem 0.5rem;
+    gap: 1rem 1.5rem;
     grid-template-areas:
         ". ."
         ". ."

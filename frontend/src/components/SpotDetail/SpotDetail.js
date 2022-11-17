@@ -3,22 +3,24 @@ import './SpotDetail.css';
 
 
 function SpotDetail({ spot }) {
-
+    console.log(typeof spot.numReviews);
     return (
         <div className="spot-detail">
             {spot &&
                 <>
                     <h1>{spot.name}</h1>
                     <div className="spot-summary">
-                        <span>
+                        <span style={{ textDecoration: 'none' }}>
                             <i className="fa-sharp fa-solid fa-star"></i>
-                            {`${Number(spot.avgStarRating).toFixed(2)}`}
+                            {spot.avgStarRating ?
+                                <span style={{ fontWeight: 600 }}>{`${Number(spot.avgStarRating).toFixed(1)}`}</span> :
+                                <span style={{ fontWeight: 400 }}>New</span>
+                            }
                         </span>
                         ·
-                        <span>
-                            {`${spot.numReviews} reviews`}
-                        </span>
-                        ·
+                        {spot.numReviews ?
+                            <span>{`${spot.numReviews} reviews`}</span> : ' '}
+
                         <i className="fa-regular fa-heart"></i>
                         Superhost ·
                         <span>

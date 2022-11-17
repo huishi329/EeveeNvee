@@ -10,17 +10,17 @@ function SpotTile({ spot }) {
                 </div>
                 <div className='spot_title'>
                     <div className='spot_intro'>
-                        <div className='title-bold'>
+                        <div className='title_bold'>
                             {`${spot.city}, ${spot.country}`}
                         </div>
-                        <div className='title-bold'>
+                        <div className='title_bold'>
                             {`$${spot.price} CAD`}
                             <span> night</span>
                         </div>
                     </div>
                     <div className='spot_rating'>
                         <i className="fa-sharp fa-solid fa-star"></i>
-                        {`${Number(spot.avgRating).toFixed(2)}`}
+                        {spot.avgRating ? `${Number(spot.avgRating).toFixed(1)}` : 'New'}
                     </div>
                 </div>
             </div>

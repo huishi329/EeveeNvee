@@ -1,23 +1,24 @@
 h1 {
+    font-size: 1.8rem;
     font-weight: 600;
 }
 
 h2 {
     font-size: 1.5em;
     font-weight: 600;
+    line-height: 2rem;
 }
 
 .spot-detail {
-    margin: 0 15%;
+    margin: 0 15rem;
     line-height: 1.5rem;
-
 }
-
-
 
 .spot-detail i {
     color: #9C425B;
 }
+
+
 
 .spot-summary>span {
     text-decoration: underline;
@@ -36,4 +37,10 @@ h2 {
     max-width: 100%;
     object-fit: cover;
     border-radius: 1rem;
+}
+
+
+.spot-description p {
+    font-size: 1.1rem;
+    font-weight: 400;
 }

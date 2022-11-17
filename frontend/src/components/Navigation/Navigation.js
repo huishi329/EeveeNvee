@@ -10,7 +10,7 @@ import './Navigation.css';
 
 export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-    const navbarStyle = useSelector(state=> state.style.navbar);
+    const navbarStyle = useSelector(state => state.style.navbar);
     const [showModal, setShowModal] = useState(false);
     const [login, setLogin] = useState(false);
     const [signup, setSignup] = useState(false);
@@ -21,6 +21,7 @@ export default function Navigation({ isLoaded }) {
             <nav className='navbar' style={navbarStyle}>
                 <div className='navbar-left'>
                     <NavLink exact to="/">
+                        <img src='../../../eveeNvee.png' alt='logo'></img>
                         <button>EeveeNvee</button>
                     </NavLink>
                 </div>

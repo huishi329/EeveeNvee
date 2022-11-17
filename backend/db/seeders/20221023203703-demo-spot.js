@@ -51,7 +51,7 @@ module.exports = {
         price: 278
       },
       {
-        ownerId: 3,
+        ownerId: 2,
         address: "Lacon Rd",
         city: "Denman Island",
         state: "British Comlumbia",
@@ -63,7 +63,7 @@ module.exports = {
         price: 219
       },
       {
-        ownerId: 4,
+        ownerId: 3,
         address: "Horton Bay Rd",
         city: "Mayne Island",
         state: "British Comlumbia",
@@ -73,6 +73,42 @@ module.exports = {
         name: "Cob Cottage",
         description: "Channel the pursuit of pause in this one-of-a-kind earth house. The cozy retreat was hand-sculpted using local and sustainable natural materials, and features a central living space with cantilevered slab stairs leading to the loft bedroom.",
         price: 200
+      },
+      {
+        ownerId: 3,
+        address: "Stevens Canyon Rd",
+        city: "Leavenworth",
+        state: "Washington",
+        country: "United States",
+        lat: 47.5962,
+        lng: 120.6615,
+        name: "Peak Haus",
+        description: "'Peak Haus' is brand new, luxurious modern mountain home nestled in the middle of 3.5 acres of woodland valley. You'll gaze upon stunning snow capped mountains through the numerous over-sized view windows or from the large hot tub.",
+        price: 1043
+      },
+      {
+        ownerId: 4,
+        address: "Ferry Rd",
+        city: "Lopez Island",
+        state: "Washington",
+        country: "United States",
+        lat: 48.4869,
+        lng: 122.8955,
+        name: "Stylish waterfront oasis with hot tub, stunning views, outdoor bar, WiFi & deck",
+        description: "Absolutely gorgeous inside and out, this modern, wooded sanctuary is a luxury home on Lopez Island, set in a secluded forest on a dramatic waterfront bluff, offering plenty of privacy just walking distance from the ferry.",
+        price: 501
+      },
+      {
+        ownerId: 4,
+        address: "Redrooffs Rd",
+        city: "Halfmoon Bay",
+        state: "British Comlumbia",
+        country: "Canada",
+        lat: 37.4636,
+        lng: 122.4286,
+        name: "Spectacular Oceanfront B&B - Beachcomber Suite",
+        description: "Nestled into the granite of a sunny point surrounded by sea, the location of this boutique B&B is rated extreme oceanfront. You’d have to be sailing to be any closer.",
+        price: 419
       }
     ], {});
   },
@@ -85,8 +121,8 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Spots', {
-      name: {
-        [Op.in]: ["Modern Coal Harbour Suite", "Victoria Downtown Suite", "Oceanfront Denman Island Suite", "CENTRAL MID-CENTURY LOFT"]
+      id: {
+        [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8]
       }
     });
   }
