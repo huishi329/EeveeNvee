@@ -2,8 +2,8 @@ const NARROW_NAVBAR = 'style/NARROW_NARBAR';
 const RESTORE_NAVBAR = 'style_RESTORE_NAVBAR';
 
 const narrowNavbar = {
-    marginLeft: '10%',
-    marginRight: '10%'
+    marginLeft: '10rem',
+    marginRight: '10rem'
 };
 
 export const setNavbar = () => {

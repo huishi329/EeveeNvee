@@ -20,7 +20,7 @@ i {
     display: flex;
     justify-content: space-between;
     position: static;
-    padding: 20px 80px;
+    padding: 1.5rem 5rem;
 }
 
 .navbar-right {
@@ -30,7 +30,7 @@ i {
 
 .navbar-right button {
     min-width: fit-content;
-    margin: 0 5px;
+    margin-left: 1rem;
     background-color: white;
     border: none;
     color: black;
@@ -39,7 +39,7 @@ i {
 
 .navbar-left button {
     min-width: fit-content;
-    margin: 0 5px;
+    margin-right: 1rem;
     background-color: white;
     border: none;
     color: #9C425B;

@@ -2,7 +2,7 @@
 const { Op } = require('sequelize');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     await queryInterface.bulkInsert('Reviews', [
+    await queryInterface.bulkInsert('Reviews', [
       {
         spotId: 3,
         userId: 1,
@@ -51,25 +51,25 @@ module.exports = {
       },
       {
         spotId: 5,
-        userId: 3,
+        userId: 5,
         review: 'Absolutely loved our stay at the cob cottage. Such a great place to unplug and be surrounded by nature. Alexis was a great host, prompt replies and made sure we were well taken care of after a power outage from the storm! Can’t wait to come back in the future!',
         stars: 5
       },
 
-     ], {})
+    ], {})
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('Reviews', {
+    await queryInterface.bulkDelete('Reviews', {
       id: {
-        [Op.in]: [1, 2, 3, 4]
+        [Op.in]: [1, 2, 3, 4, 5, 6, 7]
       }
-     });
+    });
   }
 };

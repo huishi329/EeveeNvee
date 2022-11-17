@@ -12,7 +12,7 @@ function SpotDetail({ spot }) {
                     <div className="spot-summary">
                         <span>
                             <i className="fa-sharp fa-solid fa-star"></i>
-                            {`${Number(spot.avgStarRating).toFixed(2)}`}
+                            {`${Number(spot.avgStarRating).toFixed(1)}`}
                         </span>
                         ·
                         <span>

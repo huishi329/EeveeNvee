@@ -1,4 +1,5 @@
 import { csrfFetch } from "./crsf";
+import { getSpotDetail } from "./spot";
 
 const LOAD_SPOT_REVIEWS = 'review/LOAD_SPOT_REVIEWS'
 
@@ -22,6 +23,16 @@ export const getSpotReviews = (spotId) => async dispatch => {
     dispatch(loadSpotReviews(reviews));
     return reviews;
 };
+
+export const createReview = (spotId, review) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        body: JSON.stringify(review)
+    });
+    await dispatch(getSpotDetail(spotId));
+    await dispatch(getSpotReviews(spotId));
+    return response.json();
+}
 
 const initialState = {
     spot: null,

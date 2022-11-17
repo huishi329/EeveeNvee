@@ -3,18 +3,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 20rem;
+    max-width: 22.5rem;
     margin: 1rem 0.8rem;
 }
 
 .spot_image {
-    max-width: 20rem;
-    max-height: 20rem;
+    max-width: 22.5rem;
+    max-height: 22.5rem;
 }
 
 .spot_tile img {
-    max-width: 20rem;
-    min-height: 20rem;
+    max-width: 22.5rem;
+    min-height: 22.5rem;
     object-fit: cover;
     border-radius: 16px;
 }
@@ -28,7 +28,7 @@
 .spot_title {
     display: flex;
     justify-content: space-between;
-    min-width: 20rem;
+    min-width: 22.5rem;
     margin-top: 0.5rem;
 }
 

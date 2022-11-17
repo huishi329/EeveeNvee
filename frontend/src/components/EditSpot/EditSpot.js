@@ -36,7 +36,7 @@ function EditSpot({ spot }) {
                 <div className="spot-info-right">
                     <span>
                         <i className="fa-sharp fa-solid fa-star"></i>
-                        {`${Number(spot.avgStarRating).toFixed(2)}`}
+                        {`${Number(spot.avgStarRating).toFixed(1)}`}
                     </span>
                     ·
                     <span style={{ color: '#6B7070' }}>
