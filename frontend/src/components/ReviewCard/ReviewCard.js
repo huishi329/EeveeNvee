@@ -24,11 +24,16 @@ function ReviewCard({ review }) {
         <div className='review-card'>
             <div className='review-info'>
                 <div className='user-info'>
-                    <div style={{ fontWeight: 600 }}>
-                        {review.User.firstName}
+                    <div className='profile-image'>
+                        <img src='https://github.com/huishi329/EeveeNvee/blob/main/eeveeNvee-logo.png?raw=true' alt={review.User.firstName}></img>
                     </div>
-                    <div style={{ fontWeight: 400, color: 'gray' }}>
-                        {`${month[(new Date(review.updatedAt)).getMonth()]} ${(new Date(review.updatedAt)).getUTCFullYear()}`}
+                    <div>
+                        <div style={{ fontWeight: 600 }}>
+                            {review.User.firstName}
+                        </div>
+                        <div style={{ fontWeight: 400, color: 'gray' }}>
+                            {`${month[(new Date(review.updatedAt)).getMonth()]} ${(new Date(review.updatedAt)).getUTCFullYear()}`}
+                        </div>
                     </div>
                 </div>
                 <div>

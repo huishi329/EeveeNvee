@@ -21,6 +21,15 @@ i {
     justify-content: space-between;
     position: static;
     padding: 1.5rem 5rem;
+    align-items: flex-end;
+}
+
+.logo {
+    display: flex;
+}
+
+.logo img {
+    max-width: 2rem;
 }
 
 .navbar-right {
@@ -36,6 +45,8 @@ i {
     color: black;
 
 }
+
+.navbar-left {}
 
 .navbar-left button {
     min-width: fit-content;

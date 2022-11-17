@@ -21,8 +21,15 @@ export default function Navigation({ isLoaded }) {
             <nav className='navbar' style={navbarStyle}>
                 <div className='navbar-left'>
                     <NavLink exact to="/">
-                        <img src='../../../eveeNvee.png' alt='logo'></img>
-                        <button>EeveeNvee</button>
+                        <div className='logo'>
+                            <img src='https://github.com/huishi329/EeveeNvee/blob/main/eeveeNvee-logo.png?raw=true' alt='logo'>
+                            </img>
+                            <div>
+                                <button>
+                                    EeveeNvee
+                                </button>
+                            </div>
+                        </div>
                     </NavLink>
                 </div>
                 <div className='navbar-right'>
