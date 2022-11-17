@@ -8,6 +8,14 @@
     justify-content: space-between;
 }
 
+.review-info button {
+    background-color: white;
+    border: none;
+    color: black;
+    text-align: left;
+    text-decoration: underline;
+}
+
 .user-info {
     display: flex;
     align-items: center;

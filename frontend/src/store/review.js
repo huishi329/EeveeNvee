@@ -39,7 +39,7 @@ export const deleteReview = (review) => async dispatch => {
         method: 'DELETE'
     });
     console.log(response.json());
-
+    await dispatch(getSpotDetail(review.spotId));
     await dispatch(getSpotReviews(review.spotId));
 };
 

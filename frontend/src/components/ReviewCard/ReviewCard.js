@@ -39,7 +39,7 @@ function ReviewCard({ review }) {
                 <div>
                     {isReviewWriter && <button
                         onClick={() => deleteHandler()}
-                    >Delete review</button>}
+                    >Delete my review</button>}
                 </div>
 
             </div>
