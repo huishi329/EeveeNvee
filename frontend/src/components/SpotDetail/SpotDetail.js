@@ -1,21 +1,9 @@
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getSpotDetail } from "../../store/spot";
-import { setNavbar, restoreNavbar } from "../../store/style";
 import EditSpot from "../EditSpot";
 import './SpotDetail.css';
 
 
-function SpotDetail({ spots }) {
-    const { spotId } = useParams();
-    const dispatch = useDispatch();
-    const spot = useSelector(state => state.spots.singleSpot)
-    useEffect(() => {
-        dispatch(setNavbar());
-        dispatch(getSpotDetail(spotId));
-        return () => dispatch(restoreNavbar());
-    }, [dispatch, spotId])
+function SpotDetail({ spot }) {
+
     return (
         <div className="spot-detail">
             {spot &&
@@ -42,7 +30,7 @@ function SpotDetail({ spots }) {
                             </div>) : (<h2>No image found</h2>)}
                         <div className="spot-main">
                             <div className="spot-description">
-                                <h2>{`${spot.name} hosted by SUPERHOST`}</h2>
+                                <h2>{`${spot.name} hosted by ${spot.Owner.firstName}`}</h2>
                                 <hr />
                                 <p>{spot.description}</p>
                             </div>

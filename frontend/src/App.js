@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { restoreUser } from "./store/session";
 import Navigation from "./components/Navigation";
 import SpotView from "./components/SpotView";
-import SpotDetail from "./components/SpotDetail";
+import SpotPage from "./components/SpotPage/SpotPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       <Switch>
         <Route path='/spots/:spotId'>
-          <SpotDetail />
+          <SpotPage />
         </Route>
         <Route exact path='/'>
           <SpotView />

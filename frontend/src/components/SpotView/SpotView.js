@@ -1,4 +1,3 @@
-import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SpotTile from "../SpotTile";
