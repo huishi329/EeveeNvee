@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './Navigation.css'
+import { loginUser } from "../../store/session";
 
 function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal }) {
   const dispatch = useDispatch();
   const navbarStyle = useSelector(state => state.style.navbar);
   const [showMenu, setShowMenu] = useState(false);
+
+  const demoUserLogin = () => {
+    dispatch(loginUser({
+      credential: 'Demo-lition',
+      password: 'password'
+    }))
+  }
 
   const openMenu = () => {
     if (showMenu) return;
@@ -63,6 +71,11 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
             setCreateSpot(false)
           }}>
             <button className="transparent-button">Sign up</button>
+          </div>
+          <div>
+            <button className="transparent-button"
+              onClick={() => demoUserLogin()}
+            >Demo User</button>
           </div>
         </div>
       )}
