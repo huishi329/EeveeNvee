@@ -11,10 +11,15 @@ form {
     min-width: 40rem;
     padding: 2rem 2rem;
     border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    gap: 10px;
+    margin: 0 auto;
 }
 
 form button {
-    background-color: #9C425B;
+    background-color: #FF385C;
     border-radius: 0.5rem;
     border: none;
     height: 2.5rem;
@@ -30,7 +35,8 @@ form input {
 form textarea {
     border-radius: 0.5rem;
     border: 0.05rem gray solid;
-    height: 5rem
+    height: 5rem;
+    width: 36rem
 }
 
 h1 {

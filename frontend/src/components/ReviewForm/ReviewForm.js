@@ -30,21 +30,24 @@ export default function ReviewForm({ setShowModal, spot }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
+            <h2>Rate your stay</h2>
+            <div style={{ color: '#FF385C' }}>
+                {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+            </div>
 
             <label>
-                How was your stay at {spot.Owner.firstName} 's place?
+
                 <textarea
+                    placeholder={`How was your stay at ${spot.Owner.firstName} 's place?`}
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                     required
                 ></textarea>
             </label>
             <label>
-                Rate your stay at {spot.Owner.firstName}'s place
+
                 <input
+                    placeholder={`Rate your stay at ${spot.Owner.firstName}'s place`}
                     type="number"
                     value={stars}
                     onChange={(e) => setStars(e.target.value)}

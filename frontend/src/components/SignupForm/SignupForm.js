@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
-import './SignupForm.css';
 
 function SignupForm({ setShowModal }) {
   const dispatch = useDispatch();
@@ -30,7 +29,7 @@ function SignupForm({ setShowModal }) {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Welcome to Airbnb</h2>
-      <div>
+      <div style={{ color: '#FF385C' }}>
         {errors.map((error, idx) => <div key={idx}>{error}</div>)}
       </div>
       <input
