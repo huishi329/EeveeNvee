@@ -42,82 +42,67 @@ function SpotForm({ setShowModal }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Address
-                <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                City
-                <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                State
-                <input
-                    type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Country
-                <input
-                    type="text"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Name
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Description
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                ></textarea>
-            </label>
-            <label>
-                Price
-                <input
-                    type="number"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Preview Image
-                <input
-                    type="text"
-                    value={imgURL}
-                    onChange={(e) => setImgURL(e.target.value)}
-                    required
-                />
-            </label>
+            <h2>Create a spot</h2>
+            <div>
+                {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+            </div>
+            <input
+                placeholder='Address'
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+            />
+            <input
+                placeholder='city'
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required
+            />
+            <input
+                placeholder='state'
+                type="text"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                required
+            />
+            <input
+                placeholder='Country'
+                type="text"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                required
+            />
+            <input
+                placeholder='Name'
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+            />
+            <textarea
+                placeholder='Description'
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+            ></textarea>
+            <input
+                placeholder='Price'
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                required
+            />
+            <input
+                placeholder='Preview Image'
+                type="text"
+                value={imgURL}
+                onChange={(e) => setImgURL(e.target.value)}
+                required
+            />
             <button type="submit">Submit</button>
-        </form>
+        </form >
     );
 }
 

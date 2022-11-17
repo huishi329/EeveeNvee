@@ -30,65 +30,55 @@ function SignupForm({ setShowModal }) {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Welcome to Airbnb</h2>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        First Name
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Last Name
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Username
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </label>
+      <div>
+        {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+      </div>
+      <input
+        placeholder="Email"
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+
+      <input
+        placeholder="First Name"
+        type="text"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+        required
+      />
+      <input
+        placeholder="Last Name"
+        type="text"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+        required
+      />
+      <input
+        placeholder="Username"
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
+      />
+      <input
+        placeholder="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <input
+        placeholder="Confirm Password"
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        required
+      />
+
       <button type="submit">Sign Up</button>
-    </form>
+    </form >
   );
 }
 

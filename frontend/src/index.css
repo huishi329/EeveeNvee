@@ -21,6 +21,17 @@ form button {
     color: white;
 }
 
+form input {
+    border-radius: 0.5rem;
+    border: 0.05rem gray solid;
+    height: 3rem;
+}
+
+form textarea {
+    border-radius: 0.5rem;
+    border: 0.05rem gray solid;
+    height: 5rem
+}
 
 h1 {
     font-size: 2rem;
