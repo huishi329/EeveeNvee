@@ -1,0 +1,27 @@
+.outer-panel {
+    margin: 0 15%;
+}
+
+.reviews-overview i {
+    color: #9C425B;
+}
+
+.reviews-overview span {
+    margin: 0.5rem;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.reviews-container {
+    margin-top: 1rem;
+    line-height: 1.5rem;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0.5rem 0.5rem;
+    grid-template-areas:
+        ". ."
+        ". ."
+        ". .";
+}

@@ -3,19 +3,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 270px;
-    margin: 15px 15px;
+    max-width: 20rem;
+    margin: 1rem 0.8rem;
 }
 
 .spot_image {
-    max-width: 275px;
-    max-height: 275px;
-    /* padding: 10px 0px; */
+    max-width: 20rem;
+    max-height: 20rem;
 }
 
 .spot_tile img {
-    max-width: 275px;
-    min-height: 275px;
+    max-width: 20rem;
+    min-height: 20rem;
     object-fit: cover;
     border-radius: 16px;
 }
@@ -23,13 +22,13 @@
 .spot_intro {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    /* justify-content: flex-start; */
 }
 
 .spot_title {
     display: flex;
     justify-content: space-between;
-    min-width: 275px;
+    min-width: 20rem;
     margin-top: 0.5rem;
 }
 
@@ -37,6 +36,7 @@
     font-weight: 400;
 }
 
-.title_bold {
+.title-bold {
     font-weight: 600;
+    margin: 0.2rem 0rem;
 }

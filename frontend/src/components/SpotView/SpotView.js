@@ -1,11 +1,10 @@
-import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SpotTile from "../SpotTile";
 import { getAllSpots } from "../../store/spot";
-import './SpotList.css'
+import './SpotView.css'
 
-function SpotList() {
+function SpotView() {
     const spots = useSelector(state => state.spots.allSpots);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -17,10 +16,10 @@ function SpotList() {
     const spotsArr = Object.values(spots);
 
     return (
-        <div className="spot_list">
+        <div className="spot-view">
             {spotsArr.map(spot => <SpotTile key={spot.id} spot={spot} />)}
         </div>
     )
 }
 
-export default SpotList;
+export default SpotView;
