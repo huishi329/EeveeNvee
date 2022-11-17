@@ -17,6 +17,16 @@
     font-weight: 600;
 }
 
+.reviews-overview button {
+    background-color: #9C425B;
+    border-radius: 0.5rem;
+    border: none;
+    height: 2.0rem;
+    width: 10rem;
+    color: white;
+}
+
+
 .reviews-container {
     margin-top: 1rem;
     line-height: 1.5rem;
