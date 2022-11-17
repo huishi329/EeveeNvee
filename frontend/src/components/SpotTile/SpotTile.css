@@ -22,7 +22,6 @@
 .spot_intro {
     display: flex;
     flex-direction: column;
-    /* justify-content: flex-start; */
 }
 
 .spot_title {
@@ -36,7 +35,11 @@
     font-weight: 400;
 }
 
-.title-bold {
+.title_bold {
     font-weight: 600;
     margin: 0.2rem 0rem;
+}
+
+.spot_rating {
+    font-weight: 400;
 }
