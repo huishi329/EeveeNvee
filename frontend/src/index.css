@@ -8,7 +8,7 @@
 
 
 form {
-    min-width: 40rem;
+    width: 50vw;
     padding: 2rem 2rem;
     border-radius: 1rem;
     display: flex;
@@ -16,6 +16,7 @@ form {
     width: fit-content;
     gap: 0;
     margin: 0 auto;
+    overflow-y: scroll;
 }
 
 form button {

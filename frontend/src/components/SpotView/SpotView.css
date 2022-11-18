@@ -1,5 +1,6 @@
 .spot-view {
     display: flex;
     flex-wrap: wrap;
-    padding: 0rem 5rem;
+    max-width: 90vw;
+    margin: 0 auto;
 }
