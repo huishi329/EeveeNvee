@@ -31,7 +31,7 @@
     display: grid;
     grid-template-columns: 35rem 35rem;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 1rem 2rem;
+    gap: 1vw 2vh;
     grid-template-areas:
         ". ."
         ". ."

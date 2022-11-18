@@ -34,14 +34,14 @@ function EditSpot({ spot }) {
                     <div className="night">night</div>
                 </div>
                 <div className="spot-info-right">
-                    <span style={{ textDecoration: 'none' }}>
+                    {/* <span style={{ textDecoration: 'none' }}>
                         <i className="fa-sharp fa-solid fa-star"></i>
                         {spot.avgStarRating ?
                             <span style={{ fontWeight: 600 }}>{`${Number(spot.avgStarRating).toFixed(1)}`}</span> :
                             <span style={{ fontWeight: 400 }}>New</span>
                         }
                     </span>
-                    ·
+                    · */}
                     <span style={{ color: '#6B7070' }}>
                         {`${spot.numReviews} reviews`}
                     </span>

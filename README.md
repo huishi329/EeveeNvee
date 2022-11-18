@@ -5,8 +5,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://eeveenvee.herokuapp.com/">
+    <img src="./eeveeNvee-logo.png" alt="Logo" height="80">
   </a>
 
 </div>
