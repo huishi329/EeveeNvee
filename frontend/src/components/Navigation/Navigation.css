@@ -51,7 +51,7 @@ i {
 .navbar-right button {
     min-width: fit-content;
     margin-left: 1rem;
-    background-color: white;
+    background-color: transparent;
     border: none;
     color: black;
 
@@ -77,11 +77,9 @@ i {
     background-color: white;
 }
 
-.transparent-button {
-    background-color: white;
-    border: none;
-    color: black;
-    text-align: left;
+
+.button-div:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .profile-dropdown div {

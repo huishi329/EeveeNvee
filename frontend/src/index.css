@@ -16,7 +16,7 @@ form {
     width: fit-content;
     gap: 0;
     margin: 0 auto;
-    overflow-y: scroll;
+
 }
 
 form button {
@@ -34,12 +34,15 @@ form input {
     border: 0.05rem rgba(0, 0, 0, 0.2) solid;
     height: 4rem;
     width: 36rem;
+    text-indent: 1rem;
 }
 
 form textarea {
     border: 0.05rem rgba(0, 0, 0, 0.2) solid;
     height: 5rem;
-    width: 36rem
+    width: 36rem;
+    text-indent: 1rem;
+    padding-top: 0.5rem;
 }
 
 h1 {
