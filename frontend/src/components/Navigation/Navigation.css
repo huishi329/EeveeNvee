@@ -57,7 +57,6 @@ i {
 
 }
 
-
 .navbar-left button {
     min-width: fit-content;
     margin-right: 1rem;
@@ -77,6 +76,9 @@ i {
     background-color: white;
 }
 
+.profile-info {
+    margin-left: 1rem;
+}
 
 .button-div:hover {
     background-color: rgba(0, 0, 0, 0.1);
