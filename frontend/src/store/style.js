@@ -2,8 +2,8 @@ const NARROW_NAVBAR = 'style/NARROW_NARBAR';
 const RESTORE_NAVBAR = 'style_RESTORE_NAVBAR';
 
 const narrowNavbar = {
-    header: { width: '80rem' },
-    menu: { right: '13vw' }
+    // header: { width: '80rem' },
+    // menu: { right: '0vw' }
 };
 
 export const setNavbar = () => {
