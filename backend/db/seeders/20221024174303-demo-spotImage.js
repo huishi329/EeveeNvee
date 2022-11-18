@@ -57,7 +57,18 @@ module.exports = {
         spotId: 8,
         url: 'https://a0.muscache.com/im/pictures/f4d8c0f7-de93-4c7b-ac61-59c5686c34ae.jpg?im_w=1200',
         preview: true
-      }
+      },
+      {
+        spotId: 9,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-713898202877836679/original/5bd69eb7-e4ae-4615-97b7-440f1658683c.jpeg?im_w=1200',
+        preview: true
+      },
+      {
+        spotId: 10,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-714327938077410431/original/bcc58a39-61bf-45fb-998a-acfe45039582.jpeg?im_w=1200',
+        preview: true
+      },
+
     ])
   },
 
@@ -70,7 +81,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete('SpotImages', {
       id: {
-        [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8]
+        [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       }
     });
   }
