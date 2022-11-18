@@ -4,7 +4,7 @@ import { Modal } from '../../context/Modal';
 import './ReviewPanel.css';
 import ReviewForm from "../ReviewForm";
 import ReviewCard from "../ReviewCard/ReviewCard";
-import { getSpotReviews } from "../../store/review";
+import { getSpotReviews, clearSpotReviews } from "../../store/review";
 
 function ReviewPanel({ spot }) {
     const dispatch = useDispatch();
@@ -16,6 +16,7 @@ function ReviewPanel({ spot }) {
 
     useEffect(() => {
         dispatch(getSpotReviews(spot.id))
+        return () => dispatch(clearSpotReviews())
     }, [dispatch, spot.id]);
 
     if (!reviews) return null;

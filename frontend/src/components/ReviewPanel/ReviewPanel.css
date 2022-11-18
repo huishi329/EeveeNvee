@@ -1,5 +1,6 @@
 .outer-panel {
-    width: 68rem;
+    width: 70rem;
+    max-width: 90vw;
     border-top: 0.08rem rgba(0, 0, 0, 0.1) solid;
     padding-top: 2rem;
 }
@@ -29,7 +30,7 @@
     margin-top: 1rem;
     line-height: 1.5rem;
     display: grid;
-    grid-template-columns: 33rem 33rem;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 1vw 2vh;
     grid-template-areas:

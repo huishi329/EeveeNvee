@@ -1,8 +1,8 @@
 import { csrfFetch } from "./crsf";
 import { getSpotDetail } from "./spot";
 
-const LOAD_SPOT_REVIEWS = 'review/LOAD_SPOT_REVIEWS'
-
+const LOAD_SPOT_REVIEWS = 'review/LOAD_SPOT_REVIEWS';
+const CLEAR_SPOT_REVIEWS = 'review/CLEAR_SPOT_REVIEWS';
 
 const loadSpotReviews = (reviews) => {
     return {
@@ -43,6 +43,12 @@ export const deleteReview = (review) => async dispatch => {
     await dispatch(getSpotReviews(review.spotId));
 };
 
+export const clearSpotReviews = () => {
+    return {
+        type: CLEAR_SPOT_REVIEWS
+    }
+}
+
 const initialState = {
     spot: null,
     user: null
@@ -53,6 +59,10 @@ export default function reviewReducer(state = initialState, action) {
         case LOAD_SPOT_REVIEWS:
             return {
                 spot: action.reviews
+            }
+        case CLEAR_SPOT_REVIEWS:
+            return {
+                spot: null
             }
         default:
             return state;
