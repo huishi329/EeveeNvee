@@ -25,3 +25,10 @@
     max-width: 3rem;
     margin-right: 0.5rem;
 }
+
+.review-content p {
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    overflow-x: none;
+    max-height: 8rem;
+}

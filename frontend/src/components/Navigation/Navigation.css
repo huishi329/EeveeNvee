@@ -17,7 +17,7 @@ i {
 }
 
 .navbar-outer {
-    border-bottom: 0.05rem rgba(0, 0, 0, 0.2) solid;
+    border-bottom: 0.08rem rgba(0, 0, 0, 0.1) solid;
     margin-bottom: 1rem;
     background-color: white;
     position: sticky;

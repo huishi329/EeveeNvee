@@ -1,5 +1,7 @@
 .outer-panel {
     width: 80rem;
+    border-top: 0.08rem rgba(0, 0, 0, 0.1) solid;
+    padding-top: 2rem;
 }
 
 .reviews-overview {
@@ -14,6 +16,7 @@
 }
 
 .reviews-overview button {
+    background-color: #ff385c;
     border-radius: 0.5rem;
     border: none;
     height: 2.0rem;
@@ -26,9 +29,9 @@
     margin-top: 1rem;
     line-height: 1.5rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 39rem 39rem;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 1rem 1.5rem;
+    gap: 1rem 2rem;
     grid-template-areas:
         ". ."
         ". ."

@@ -26,7 +26,6 @@ function ReviewPanel({ spot }) {
     return (
         <>
             <div className='outer-panel'>
-                <hr />
                 <div className='reviews-overview'>
                     <div>
                         <span>
