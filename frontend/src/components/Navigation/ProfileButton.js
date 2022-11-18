@@ -46,9 +46,9 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
       </button>
       {showMenu && (user ?
         (<div className="profile-dropdown" style={navbarStyle.menu}>
-          <div>{user.username}</div>
-          <div>{user.email}</div>
-          <div>
+          <div className="profile-info">{user.username}</div>
+          <div className="profile-info">{user.email}</div>
+          <div className="button-div" >
             <button
               className="transparent-button"
               onClick={logout}
@@ -56,7 +56,7 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
           </div>
         </div>) :
         <div className="profile-dropdown" style={navbarStyle.menu}>
-          <div onClick={() => {
+          <div className="button-div" onClick={() => {
             setShowModal(true)
             setLogin(true)
             setSignup(false)
@@ -64,7 +64,7 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
           }}>
             <button className="transparent-button">Log in</button>
           </div>
-          <div onClick={() => {
+          <div className="button-div" onClick={() => {
             setShowModal(true)
             setSignup(true)
             setLogin(false)

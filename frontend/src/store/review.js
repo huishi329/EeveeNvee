@@ -17,7 +17,7 @@ export const getSpotReviews = (spotId) => async dispatch => {
 
     const data = await response.json();
     const reviews = data.Reviews.reduce((reviewsObj, review) => {
-        reviewsObj[review.id] = review
+        reviewsObj[review.userId] = review
         return reviewsObj;
     }, {});
     dispatch(loadSpotReviews(reviews));

@@ -9,17 +9,14 @@ import { getSpotReviews } from "../../store/review";
 function ReviewPanel({ spot }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    const [isNotHost, setIsNotHost] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const reviews = useSelector(state => state.reviews.spot);
+    const hasReview = sessionUser && reviews && Object.keys(reviews).includes('' + sessionUser.id);
+    const isNotHost = sessionUser && sessionUser.id !== spot.ownerId;
 
     useEffect(() => {
-        if (sessionUser) {
-            if (sessionUser.id !== spot.ownerId) setIsNotHost(true)
-        }
         dispatch(getSpotReviews(spot.id))
-        return () => setIsNotHost(false);
-    }, [dispatch, spot.id, sessionUser, spot.ownerId]);
+    }, [dispatch, spot.id]);
 
     if (!reviews) return null;
 
@@ -43,7 +40,7 @@ function ReviewPanel({ spot }) {
                         </span>
 
                     </div>
-                    {isNotHost &&
+                    {isNotHost && !hasReview &&
                         <div>
                             <button
                                 onClick={() => setShowModal(true)}
