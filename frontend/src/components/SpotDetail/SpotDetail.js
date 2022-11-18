@@ -33,7 +33,6 @@ function SpotDetail({ spot }) {
                         <div className="spot-main">
                             <div className="spot-description">
                                 <h2>{`${spot.name} hosted by ${spot.Owner.firstName}`}</h2>
-                                <hr />
                                 <p>{spot.description}</p>
                             </div>
                             <EditSpot spot={spot} />

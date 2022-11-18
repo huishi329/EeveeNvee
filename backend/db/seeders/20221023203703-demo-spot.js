@@ -109,6 +109,30 @@ module.exports = {
         name: "Spectacular Oceanfront B&B - Beachcomber Suite",
         description: "Nestled into the granite of a sunny point surrounded by sea, the location of this boutique B&B is rated extreme oceanfront. You’d have to be sailing to be any closer.",
         price: 419
+      },
+      {
+        ownerId: 5,
+        address: "Back Rd",
+        city: "Broad Cove",
+        state: "Nova Scotia",
+        country: "Canada",
+        lat: 44.1847,
+        lng: 64.4855,
+        name: "Shackup Tower - 30 ft in the air & hot tub",
+        description: "Perched high on an ocean hillside, built on 30 ft tall steel legs, the cozy quarters above are akin to an old ship’s cabin. With 360 views at 30ft up you can chart the sun and stars across the sky, set your rhythm to the ebb & flow of the tide and scout the surf from above.",
+        price: 500
+      },
+      {
+        ownerId: 5,
+        address: "Chem. des Pompes",
+        city: "Sorgues",
+        state: "Provence-Alpes-Côte d'Azur",
+        country: "France",
+        lat: 44.0088,
+        lng: 4.8728,
+        name: "Cabane Spa Paradis",
+        description: "Découvrez la cabane Spa Paradis : empruntez un ponton en bois et embarquez sur votre cabane flottante pour un séjour hors du temps au fil de l’eau. À l’intérieur de votre cocon, vous trouverez une salle de bain, un coin salon lumineux ainsi qu’une chambre avec une vue imprenable sur le lac de la Lionne. Idéale pour un séjour romantique, les baies vitrées ouvertes sur la nature vous offriront de somptueux lever et coucher de soleil.",
+        price: 471
       }
     ], {});
   },
@@ -122,7 +146,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete('Spots', {
       id: {
-        [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8]
+        [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       }
     });
   }

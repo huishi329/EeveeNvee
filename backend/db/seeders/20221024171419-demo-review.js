@@ -55,7 +55,18 @@ module.exports = {
         review: 'Absolutely loved our stay at the cob cottage. Such a great place to unplug and be surrounded by nature. Alexis was a great host, prompt replies and made sure we were well taken care of after a power outage from the storm! Can’t wait to come back in the future!',
         stars: 5
       },
-
+      {
+        spotId: 9,
+        userId: 4,
+        review: 'Everything was great, and I especially liked the privacy and great view.',
+        stars: 5
+      },
+      {
+        spotId: 9,
+        userId: 3,
+        review: 'Mesmerizing. Unique. Memorable. The level of detail, the ambiance of tranquility… everything was perfect.',
+        stars: 5
+      },
     ], {})
   },
 
@@ -68,7 +79,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete('Reviews', {
       id: {
-        [Op.in]: [1, 2, 3, 4, 5, 6, 7]
+        [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9]
       }
     });
   }

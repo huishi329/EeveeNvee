@@ -27,6 +27,11 @@ function App() {
         <Route exact path='/'>
           <SpotView />
         </Route>
+        <Route>
+          <h1
+            style={{ marginLeft: '5rem' }}
+          >Page Not Found</h1>
+        </Route>
       </Switch>
 
     </>

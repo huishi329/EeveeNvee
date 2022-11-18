@@ -6,6 +6,7 @@ import { getSpotDetail } from "../../store/spot";
 import { setNavbar, restoreNavbar } from "../../store/style";
 import SpotDetail from '../SpotDetail';
 import ReviewPanel from '../ReviewPanel/ReviewPanel';
+import './SpotPage.css'
 
 function SpotPage() {
     const { spotId } = useParams();
@@ -20,10 +21,10 @@ function SpotPage() {
     if (!spot) return null;
 
     return (
-        <>
+        <div className='spot-page'>
             <SpotDetail spot={spot} />
             <ReviewPanel spot={spot} />
-        </>
+        </div>
     )
 };
 

@@ -34,26 +34,22 @@ export default function ReviewForm({ setShowModal, spot }) {
             <div style={{ color: '#FF385C' }}>
                 {errors.map((error, idx) => <div key={idx}>{error}</div>)}
             </div>
+            <textarea
+                placeholder={`How was your stay at ${spot.Owner.firstName} 's place?`}
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+                required
+                style={{ borderRadius: '0.5rem 0.5rem 0 0' }}
+            ></textarea>
+            <input
+                placeholder={`Rate your stay at ${spot.Owner.firstName}'s place`}
+                type="number"
+                value={stars}
+                onChange={(e) => setStars(e.target.value)}
+                required
+                style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
+            />
 
-            <label>
-
-                <textarea
-                    placeholder={`How was your stay at ${spot.Owner.firstName} 's place?`}
-                    value={review}
-                    onChange={(e) => setReview(e.target.value)}
-                    required
-                ></textarea>
-            </label>
-            <label>
-
-                <input
-                    placeholder={`Rate your stay at ${spot.Owner.firstName}'s place`}
-                    type="number"
-                    value={stars}
-                    onChange={(e) => setStars(e.target.value)}
-                    required
-                />
-            </label>
             <button type="submit">Submit</button>
         </form>
     );

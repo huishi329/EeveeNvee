@@ -17,8 +17,8 @@ export default function Navigation({ isLoaded }) {
     const [createSpot, setCreateSpot] = useState(false);
 
     return (
-        <>
-            <nav className='navbar' style={navbarStyle}>
+        <div className='navbar-outer'>
+            <nav className='navbar-inner' style={navbarStyle.header}>
                 <div className='navbar-left'>
                     <NavLink exact to="/">
                         <div className='logo'>
@@ -60,7 +60,6 @@ export default function Navigation({ isLoaded }) {
                     </Modal>
                 }
             </nav>
-            <hr></hr>
-        </>
+        </div>
     );
 }
