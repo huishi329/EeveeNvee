@@ -14,7 +14,7 @@ form {
     display: flex;
     flex-direction: column;
     width: fit-content;
-    gap: 10px;
+    gap: 0;
     margin: 0 auto;
 }
 
@@ -22,19 +22,21 @@ form button {
     background-color: #FF385C;
     border-radius: 0.5rem;
     border: none;
-    height: 2.5rem;
+    height: 3rem;
     color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
 }
 
 form input {
-    border-radius: 0.5rem;
-    border: 0.05rem gray solid;
-    height: 3rem;
+    border: 0.05rem rgba(0, 0, 0, 0.2) solid;
+    height: 4rem;
+    width: 36rem;
 }
 
 form textarea {
-    border-radius: 0.5rem;
-    border: 0.05rem gray solid;
+    border: 0.05rem rgba(0, 0, 0, 0.2) solid;
     height: 5rem;
     width: 36rem
 }
@@ -46,4 +48,8 @@ h1 {
 
 button {
     cursor: pointer;
+}
+
+hr {
+    background-color: rgba(0, 0, 0, 0.2);
 }

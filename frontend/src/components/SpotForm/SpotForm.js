@@ -52,16 +52,17 @@ function SpotForm({ setShowModal }) {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 required
+                style={{ borderRadius: '0.5rem 0.5rem 0 0' }}
             />
             <input
-                placeholder='city'
+                placeholder='City'
                 type="text"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 required
             />
             <input
-                placeholder='state'
+                placeholder='State'
                 type="text"
                 value={state}
                 onChange={(e) => setState(e.target.value)}
@@ -100,6 +101,7 @@ function SpotForm({ setShowModal }) {
                 value={imgURL}
                 onChange={(e) => setImgURL(e.target.value)}
                 required
+                style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
             />
             <button type="submit">Submit</button>
         </form >

@@ -32,6 +32,7 @@ function LoginForm({ setShowModal }) {
                 value={credential}
                 onChange={(e) => setCredential(e.target.value)}
                 required
+                style={{ borderRadius: '0.5rem 0.5rem 0 0' }}
             />
             <input
                 placeholder=' Password'
@@ -39,6 +40,7 @@ function LoginForm({ setShowModal }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
             />
 
             <button type="submit">Log In</button>

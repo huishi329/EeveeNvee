@@ -1,14 +1,10 @@
 .outer-panel {
-    margin: 2rem 15rem;
+    width: 80rem;
 }
 
 .reviews-overview {
     display: flex;
     justify-content: space-between;
-}
-
-.reviews-overview i {
-    color: #FF385C;
 }
 
 .reviews-overview span {
@@ -18,7 +14,6 @@
 }
 
 .reviews-overview button {
-    background-color: #FF385C;
     border-radius: 0.5rem;
     border: none;
     height: 2.0rem;

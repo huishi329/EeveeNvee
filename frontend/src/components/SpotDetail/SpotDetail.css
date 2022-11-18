@@ -10,15 +10,9 @@ h2 {
 }
 
 .spot-detail {
-    margin: 0 15rem;
+    width: 80rem;
     line-height: 1.5rem;
 }
-
-.spot-detail i {
-    color: #FF385C;
-}
-
-
 
 .spot-summary>span {
     text-decoration: underline;
@@ -43,4 +37,5 @@ h2 {
 .spot-description p {
     font-size: 1.1rem;
     font-weight: 400;
+
 }

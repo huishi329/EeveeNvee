@@ -16,12 +16,23 @@ i {
     margin: 0 5px;
 }
 
-.navbar {
+.navbar-outer {
+    border-bottom: 0.05rem rgba(0, 0, 0, 0.2) solid;
+    margin-bottom: 1rem;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-inner {
     display: flex;
     justify-content: space-between;
     position: static;
-    padding: 1.5rem 5rem;
+    padding: 1.5rem 0;
     align-items: flex-end;
+    width: 90%;
 }
 
 .logo {
@@ -59,10 +70,10 @@ i {
 .profile-dropdown {
     position: absolute;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    top: 55px;
-    right: 80px;
-    width: 180px;
+    border-radius: 1rem;
+    top: 3.5rem;
+    right: 5vw;
+    min-width: 15rem;
     background-color: white;
 }
 

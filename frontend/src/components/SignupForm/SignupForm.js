@@ -38,6 +38,7 @@ function SignupForm({ setShowModal }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        style={{ borderRadius: '0.5rem 0.5rem 0 0' }}
       />
 
       <input
@@ -74,9 +75,10 @@ function SignupForm({ setShowModal }) {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
         required
+        style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
       />
 
-      <button type="submit">Sign Up</button>
+      <button type="submit">Continue</button>
     </form >
   );
 }

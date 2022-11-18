@@ -45,7 +45,7 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
         <i className="fa-regular fa-user"></i>
       </button>
       {showMenu && (user ?
-        (<div className="profile-dropdown" style={navbarStyle}>
+        (<div className="profile-dropdown" style={navbarStyle.menu}>
           <div>{user.username}</div>
           <div>{user.email}</div>
           <div>
@@ -55,7 +55,7 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
             >Log Out</button>
           </div>
         </div>) :
-        <div className="profile-dropdown" style={navbarStyle}>
+        <div className="profile-dropdown" style={navbarStyle.menu}>
           <div onClick={() => {
             setShowModal(true)
             setLogin(true)
