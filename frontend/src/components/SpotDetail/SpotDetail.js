@@ -1,8 +1,8 @@
 import EditSpot from "../EditSpot";
 import './SpotDetail.css';
+import { reviewRef } from "../ReviewPanel/ReviewPanel";
 
-
-function SpotDetail({ spot }) {
+function SpotDetail({ spot, reviewRef }) {
     console.log(typeof spot.numReviews);
     return (
         <div className="spot-detail">
@@ -19,7 +19,12 @@ function SpotDetail({ spot }) {
                         </span>
                         ·
                         {spot.numReviews ?
-                            <span>{`${spot.numReviews} reviews`}</span> : ' '}
+                            <span
+                                onClick={() => {
+                                    reviewRef.current.scrollIntoView();
+                                }}
+                                style={{ cursor: 'pointer' }}
+                            >{`${spot.numReviews} reviews`}</span> : ' '}
 
                         <i className="fa-regular fa-heart"></i>
                         Superhost ·
@@ -35,7 +40,7 @@ function SpotDetail({ spot }) {
                                 <h2>{`${spot.name} hosted by ${spot.Owner.firstName}`}</h2>
                                 <p>{spot.description}</p>
                             </div>
-                            <EditSpot spot={spot} />
+                            <EditSpot spot={spot} reviewRef={reviewRef} />
                         </div>
                     </div>
                 </>

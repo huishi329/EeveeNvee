@@ -81,7 +81,10 @@ i {
 }
 
 .profile-dropdown div {
-    padding: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    min-height: 3rem;
 }
 
 

@@ -59,12 +59,13 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
           </div>
         </div>) :
         <div className="profile-dropdown" style={navbarStyle.menu}>
-          <div className="button-div" onClick={() => {
-            setShowModal(true)
-            setLogin(true)
-            setSignup(false)
-            setCreateSpot(false)
-          }}>
+          <div className="button-div" style={{ borderRadius: '1rem 1rem 0 0' }}
+            onClick={() => {
+              setShowModal(true)
+              setLogin(true)
+              setSignup(false)
+              setCreateSpot(false)
+            }}>
             <button className="transparent-button">Log in</button>
           </div>
           <div className="button-div" onClick={() => {

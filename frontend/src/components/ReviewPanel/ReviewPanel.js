@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from '../../context/Modal';
 import './ReviewPanel.css';
@@ -6,7 +6,9 @@ import ReviewForm from "../ReviewForm";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import { getSpotReviews, clearSpotReviews } from "../../store/review";
 
-function ReviewPanel({ spot }) {
+
+function ReviewPanel({ spot, reviewRef }) {
+
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
@@ -23,7 +25,10 @@ function ReviewPanel({ spot }) {
 
     return (
         <>
-            <div className='outer-panel'>
+            <div
+                ref={reviewRef}
+                className='outer-panel'
+            >
                 <div className='reviews-overview'>
                     <div>
                         <span>
