@@ -90,6 +90,7 @@ function SpotForm({ setShowModal }) {
             ></textarea>
             <input
                 placeholder='Price'
+                min='0'
                 type="number"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}

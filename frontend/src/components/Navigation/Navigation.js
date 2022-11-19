@@ -36,12 +36,14 @@ export default function Navigation({ isLoaded }) {
                     {isLoaded &&
                         <>
                             {sessionUser &&
-                                <button onClick={() => {
-                                    setShowModal(true)
-                                    setCreateSpot(true)
-                                    setLogin(false)
-                                    setSignup(false)
-                                }}>Create a spot</button>}
+                                <div className='create-spot-button'>
+                                    <button onClick={() => {
+                                        setShowModal(true)
+                                        setCreateSpot(true)
+                                        setLogin(false)
+                                        setSignup(false)
+                                    }}>Create a spot</button>
+                                </div>}
                             <ProfileButton
                                 user={sessionUser}
                                 setCreateSpot={setCreateSpot}

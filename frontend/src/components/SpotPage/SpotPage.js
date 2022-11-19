@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import ReviewPanel from '../ReviewPanel/ReviewPanel';
 import './SpotPage.css'
 
 function SpotPage() {
+    const reviewRef = useRef(null);
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot)
@@ -22,8 +23,8 @@ function SpotPage() {
 
     return (
         <div className='spot-page'>
-            <SpotDetail spot={spot} />
-            <ReviewPanel spot={spot} />
+            <SpotDetail spot={spot} reviewRef={reviewRef} />
+            <ReviewPanel spot={spot} reviewRef={reviewRef} />
         </div>
     )
 };

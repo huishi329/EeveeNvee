@@ -87,6 +87,7 @@ function EditSpotForm({ setShowModal, spot }) {
                 placeholder='Price'
                 type="number"
                 value={price}
+                min='0'
                 onChange={(e) => setPrice(e.target.value)}
                 required
             />

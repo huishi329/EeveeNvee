@@ -40,10 +40,13 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
 
   return (
     <>
-      <button className="fa-icon" onClick={openMenu}>
-        <i className="fa-solid fa-bars"></i>
-        <i className="fa-regular fa-user"></i>
-      </button>
+      <div className="fa-icon">
+        <button onClick={openMenu}>
+          <i className="fa-solid fa-bars"></i>
+          <i className="fa-regular fa-user"></i>
+        </button>
+
+      </div>
       {showMenu && (user ?
         (<div className="profile-dropdown" style={navbarStyle.menu}>
           <div className="profile-info">{user.username}</div>
@@ -56,12 +59,13 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
           </div>
         </div>) :
         <div className="profile-dropdown" style={navbarStyle.menu}>
-          <div className="button-div" onClick={() => {
-            setShowModal(true)
-            setLogin(true)
-            setSignup(false)
-            setCreateSpot(false)
-          }}>
+          <div className="button-div" style={{ borderRadius: '1rem 1rem 0 0' }}
+            onClick={() => {
+              setShowModal(true)
+              setLogin(true)
+              setSignup(false)
+              setCreateSpot(false)
+            }}>
             <button className="transparent-button">Log in</button>
           </div>
           <div className="button-div" onClick={() => {
