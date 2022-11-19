@@ -54,7 +54,7 @@
         max-width: 22.5vw;
         min-height: 22.5vw;
         object-fit: cover;
-        border-radius: 16px;
+        border-radius: 2vw;
     }
 
     .spot_intro {

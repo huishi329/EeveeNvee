@@ -1,19 +1,10 @@
-* {
-    font-weight: 500;
-    font-size: 14px;
-}
-
 a {
     text-decoration: none;
     color: black;
 }
 
-hr {
-    margin-bottom: 20px;
-}
-
 i {
-    margin: 0 5px;
+    margin: 0 0.5rem;
 }
 
 .navbar-outer {
@@ -68,7 +59,7 @@ i {
 
 .profile-dropdown {
     position: absolute;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     top: 3.5rem;
     right: 0rem;
@@ -85,5 +76,5 @@ i {
 }
 
 .profile-dropdown div {
-    padding: 15px 10px;
+    padding: 1.5rem 1rem;
 }

@@ -24,7 +24,7 @@ function SpotDetail({ spot }) {
                         <i className="fa-regular fa-heart"></i>
                         Superhost ·
                         <span>
-                            {`${spot.city}, ${spot.state},${spot.country}`}
+                            {`${spot.city}, ${spot.state}, ${spot.country}`}
                         </span>
                         {(spot.SpotImages).length > 0 ?
                             (<div className="spot-image">
@@ -38,7 +38,6 @@ function SpotDetail({ spot }) {
                             <EditSpot spot={spot} />
                         </div>
                     </div>
-
                 </>
             }
         </div >
