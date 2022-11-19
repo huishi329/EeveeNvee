@@ -58,10 +58,10 @@ export const createSpotImage = (spotId, imgURL) => async dispatch => {
     return response.json()
 }
 
-export const createSpot = (reqbody, imgURL, history) => async dispatch => {
+export const createSpot = (spotData, imgURL, history) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
-        body: JSON.stringify(reqbody)
+        body: JSON.stringify(spotData)
     });
 
     const spot = await response.json();
@@ -71,13 +71,12 @@ export const createSpot = (reqbody, imgURL, history) => async dispatch => {
     return spot;
 };
 
-export const updateSpot = (spotData) => async dispatch => {
-    const { id, ...reqBody } = spotData;
-    const response = await csrfFetch(`/api/spots/${id}`, {
+export const updateSpot = (spotId, spotData) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
-        body: JSON.stringify({ ...reqBody })
+        body: JSON.stringify(spotData)
     });
-    await dispatch(getSpotDetail(id));
+    await dispatch(getSpotDetail(spotId));
     return response.json();
 };
 

@@ -17,8 +17,7 @@ function EditSpotForm({ setShowModal, spot }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(updateSpot({
-            id: spot.id,
+        const spotData = {
             address,
             city,
             state,
@@ -28,7 +27,8 @@ function EditSpotForm({ setShowModal, spot }) {
             name,
             description,
             price
-        }))
+        };
+        return dispatch(updateSpot(spot.id, spotData))
             .then(() => setShowModal(false))
             .catch(async (res) => {
                 const data = await res.json();
