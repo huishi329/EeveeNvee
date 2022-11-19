@@ -58,16 +58,16 @@ export const createSpotImage = (spotId, imgURL) => async dispatch => {
     return response.json()
 }
 
-export const createSpot = (spotData) => async dispatch => {
-    const { imgURL, ...reqBody } = spotData
+export const createSpot = (reqbody, imgURL, history) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
-        body: JSON.stringify({ ...reqBody })
+        body: JSON.stringify(reqbody)
     });
 
     const spot = await response.json();
     await dispatch(createSpotImage(spot.id, imgURL))
     await dispatch(getAllSpots());
+    history.push(`/spots/${spot.id}`);
     return spot;
 };
 

@@ -12,24 +12,27 @@ function SignupForm({ setShowModal }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors([]);
-      return dispatch(sessionActions.signupUser({ email, username, password, firstName, lastName }))
-        .then(() => setShowModal(false))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(Object.values(data.errors));
-        });
-    }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    setErrors([]);
+    const errors = [];
+
+    await dispatch(sessionActions.signupUser({ email, username, password, firstName, lastName }))
+      .then(() => setShowModal(false))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) errors.push(...Object.values(data.errors));
+      });
+
+    if (password !== confirmPassword) errors.push(['Confirm Password field must be the same as the Password field']);
+
+    setErrors(errors);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Welcome to Airbnb</h2>
-      <div style={{ color: '#FF385C' }}>
+      <div className='errors-div'>
         {errors.map((error, idx) => <div key={idx}>{error}</div>)}
       </div>
       <input

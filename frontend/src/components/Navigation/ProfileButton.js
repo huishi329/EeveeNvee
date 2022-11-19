@@ -48,7 +48,7 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
         (<div className="profile-dropdown" style={navbarStyle.menu}>
           <div className="profile-info">{user.username}</div>
           <div className="profile-info">{user.email}</div>
-          <div className="button-div" >
+          <div className="button-div" style={{ borderRadius: '0 0 1rem 1rem' }}>
             <button
               className="transparent-button"
               onClick={logout}
@@ -72,7 +72,7 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
           }}>
             <button className="transparent-button">Sign up</button>
           </div>
-          <div>
+          <div className="button-div" style={{ borderRadius: '0 0 1rem 1rem' }}>
             <button className="transparent-button"
               onClick={() => demoUserLogin()}
             >Demo User</button>
