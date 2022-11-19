@@ -22,7 +22,7 @@ i {
     justify-content: space-between;
     position: relative;
     padding: 1.5rem 0;
-    align-items: flex-end;
+    align-items: center;
     width: 90vw;
 }
 
@@ -39,15 +39,6 @@ i {
     align-items: flex-end;
 }
 
-.navbar-right button {
-    min-width: fit-content;
-    margin-left: 1rem;
-    background-color: transparent;
-    border: none;
-    color: black;
-
-}
-
 .navbar-left button {
     min-width: fit-content;
     margin-right: 1rem;
@@ -57,11 +48,20 @@ i {
     font-weight: 900;
 }
 
+.navbar-right button {
+    min-width: fit-content;
+    padding: 0.8rem 1rem;
+    background-color: transparent;
+    border: none;
+    color: black;
+
+}
+
 .profile-dropdown {
     position: absolute;
     box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
-    top: 3.5rem;
+    top: 5rem;
     right: 0rem;
     min-width: 15rem;
     background-color: white;
@@ -71,10 +71,25 @@ i {
     margin-left: 1rem;
 }
 
+.create-spot-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 1.5rem;
+}
+
 .button-div:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
 .profile-dropdown div {
     padding: 1.5rem 1rem;
+}
+
+
+.fa-icon {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+}
+
+.fa-icon:hover {
+    box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2);
 }

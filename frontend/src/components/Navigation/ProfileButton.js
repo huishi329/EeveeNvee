@@ -40,10 +40,13 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
 
   return (
     <>
-      <button className="fa-icon" onClick={openMenu}>
-        <i className="fa-solid fa-bars"></i>
-        <i className="fa-regular fa-user"></i>
-      </button>
+      <div className="fa-icon">
+        <button onClick={openMenu}>
+          <i className="fa-solid fa-bars"></i>
+          <i className="fa-regular fa-user"></i>
+        </button>
+
+      </div>
       {showMenu && (user ?
         (<div className="profile-dropdown" style={navbarStyle.menu}>
           <div className="profile-info">{user.username}</div>
