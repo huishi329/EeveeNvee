@@ -20,7 +20,7 @@ function SpotForm({ setShowModal }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(createSpot({
+        const spotData = {
             address,
             city,
             state,
@@ -29,16 +29,16 @@ function SpotForm({ setShowModal }) {
             lng: 120,
             name,
             description,
-            price,
-            imgURL
-        }))
+            price
+        };
+        return dispatch(createSpot(spotData, imgURL, history))
             .then(() => setShowModal(false))
-            .then(() => history.push('/'))
+            // .then(() => history.push('/'))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(Object.values(data.errors));
             });
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -97,7 +97,7 @@ function SpotForm({ setShowModal }) {
             />
             <input
                 placeholder='Preview Image'
-                type="text"
+                type="url"
                 value={imgURL}
                 onChange={(e) => setImgURL(e.target.value)}
                 required

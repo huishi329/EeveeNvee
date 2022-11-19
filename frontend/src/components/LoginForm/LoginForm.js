@@ -23,7 +23,7 @@ function LoginForm({ setShowModal }) {
     return (
         <form onSubmit={handleSubmit}>
             <h2>Log in</h2>
-            <div style={{ color: '#FF385C' }}>
+            <div className='errors-div'>
                 {errors.map((error, idx) => <div key={idx}>{error}</div>)}
             </div>
             <input

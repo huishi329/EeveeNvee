@@ -27,8 +27,8 @@
 }
 
 .review-content p {
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     overflow-y: hidden;
     overflow-x: none;
-    max-height: 8rem;
+    max-height: 7.5rem;
 }
