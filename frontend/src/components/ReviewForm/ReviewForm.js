@@ -6,7 +6,7 @@ import { createReview } from '../../store/review';
 export default function ReviewForm({ setShowModal, spot }) {
     const dispatch = useDispatch();
     const [review, setReview] = useState('');
-    const [stars, setStars] = useState(0);
+    const [stars, setStars] = useState(1);
 
     const [errors, setErrors] = useState([]);
 
@@ -45,6 +45,8 @@ export default function ReviewForm({ setShowModal, spot }) {
                 placeholder={`Rate your stay at ${spot.Owner.firstName}'s place`}
                 type="number"
                 value={stars}
+                min='1'
+                max='5'
                 onChange={(e) => setStars(e.target.value)}
                 required
                 style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
