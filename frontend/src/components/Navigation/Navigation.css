@@ -28,10 +28,11 @@ i {
 
 .logo {
     display: flex;
+    align-items: center;
 }
 
 .logo img {
-    max-width: 2rem;
+    max-height: 3rem;
 }
 
 .navbar-right {
@@ -39,13 +40,16 @@ i {
     align-items: flex-end;
 }
 
+
+
 .navbar-left button {
     min-width: fit-content;
     margin-right: 1rem;
     background-color: white;
     border: none;
     color: #FF385C;
-    font-weight: 900;
+    font-weight: 800;
+    font-size: 1.3rem;
 }
 
 .navbar-right button {
