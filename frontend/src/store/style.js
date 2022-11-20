@@ -1,5 +1,5 @@
 const NARROW_NAVBAR = 'style/NARROW_NARBAR';
-const RESTORE_NAVBAR = 'style_RESTORE_NAVBAR';
+const RESTORE_NAVBAR = 'style/RESTORE_NAVBAR';
 
 const narrowNavbar = {
     header: { width: '70rem', maxWidth: '90vw' },
