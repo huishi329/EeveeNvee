@@ -1,5 +1,6 @@
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
+[![Github](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/huishi329)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=LinkedIn&logoColor=white)](https://www.linkedin.com/in/huishi-an-8397311b1/)
+[![Gmail](https://img.shields.io/badge/Gmail-EA4335.svg?style=for-the-badge&logo=Gmail&logoColor=white)](mailto:anhuishi95@gmail.com)
 
 
 <!-- PROJECT LOGO -->
@@ -17,11 +18,11 @@
 
 ## EeveeNvee
 
-EeveeNveeis a clone of airbnb, which provides a light-weight scheduling web application for users to organize their daily life.
+EeveeNvee is a clone of airbnb, which provides a rental listing platform for users to book their trips.
 
 Live demo: https://eeveenvee.herokuapp.com/
 
-It was built using this stack:
+It was built with this stack:
 
 #### Frontend
 
@@ -64,13 +65,13 @@ The most common user flow of Plendar is as follows:
 
 ### Getting started
 
-1. Start the backend server: From a terminal within the project directory, run:
+1. Start the backend server: From a terminal within the `backend` directory, run:
 
     ```javascript
-    sh ./setup.sh
+    sh reset-db.sh
     ```
 
-2. Start the frontend server: From a second terminal within the `react-app` directory, run:
+2. Start the frontend server: From a second terminal within the `frontend` directory, run:
 
     ```javascript
     npm start
@@ -80,10 +81,13 @@ The most common user flow of Plendar is as follows:
     > http://localhost:3000
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Contact
 
-This is a solo project created by [Huishi An](https://www.linkedin.com/in/huishi-an-8397311b1/)
+This is a solo project created by Huishi An. Find her on:
+
+[![Github](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/huishi329)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=LinkedIn&logoColor=white)](https://www.linkedin.com/in/huishi-an-8397311b1/)
+[![Gmail](https://img.shields.io/badge/Gmail-EA4335.svg?style=for-the-badge&logo=Gmail&logoColor=white)](mailto:anhuishi95@gmail.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
