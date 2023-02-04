@@ -8,9 +8,9 @@ const { validateBooking, validateDate, validateReview } = require('../../utils/r
 const { Op } = require('sequelize');
 
 const validateSpot = [
-    check('address')
+    check('street')
         .exists({ checkFalsy: true })
-        .withMessage('Street address is required'),
+        .withMessage('Street street is required'),
     check('city')
         .exists({ checkFalsy: true })
         .withMessage('City is required'),
@@ -112,22 +112,22 @@ const isSpotOwner = (req, res, next) => {
 
 router.post('/', restoreUser, requireAuth, validateSpot,
     async (req, res) => {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        const { street, city, state, country, lat, lng, name, description, price } = req.body;
         const { user } = req;
 
         const spot = await Spot.create({
             ownerId: user.id,
-            address, city, state, country, lat, lng, name, description, price
+            street, city, state, country, lat, lng, name, description, price
         });
         res.status(201).json(spot);
     })
 
 router.put('/:spotId', requireAuth, isSpotExisting, isSpotOwner, validateSpot, async (req, res) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { street, city, state, country, lat, lng, name, description, price } = req.body;
     const { user, spot } = req;
 
     spot.set({
-        address, city, state, country, lat, lng, name, description, price
+        street, city, state, country, lat, lng, name, description, price
     });
 
     await spot.save();
