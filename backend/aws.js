@@ -1,7 +1,7 @@
 const AWS = require("aws-sdk");
 // name of your bucket here
 const NAME_OF_BUCKET = "eeveenvee";
-
+const fetch = require('node-fetch');
 const multer = require("multer");
 
 //  make sure to set environment variables in production for:
@@ -39,6 +39,21 @@ const multiplePublicFileUpload = async (files) => {
 };
 
 // --------------------------- Prviate UPLOAD ------------------------
+
+const uploadImageFromURL = async url => {
+    const buffer = await fetch(url).then(res => res.buffer());
+    // use the last segment of the url as key
+    const key = new URL(url).pathname.split('/').pop();
+    const uploadParams = {
+        Bucket: NAME_OF_BUCKET,
+        Key: key,
+        Body: buffer,
+        ACL: "public-read",
+    };
+    const result = await s3.upload(uploadParams).promise();
+    return result.Location
+};
+
 
 const singlePrivateFileUpload = async (file) => {
     const { originalname, mimetype, buffer } = await file;
@@ -97,4 +112,5 @@ module.exports = {
     retrievePrivateFile,
     singleMulterUpload,
     multipleMulterUpload,
+    uploadImageFromURL
 };
