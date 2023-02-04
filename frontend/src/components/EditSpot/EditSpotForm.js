@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 function EditSpotForm({ setShowModal, spot }) {
     const dispatch = useDispatch();
-    const [address, setAddress] = useState(spot.address);
+    const [street, setStreet] = useState(spot.street);
     const [city, setCity] = useState(spot.city);
     const [state, setState] = useState(spot.state);
     const [country, setCountry] = useState(spot.country);
@@ -18,7 +18,7 @@ function EditSpotForm({ setShowModal, spot }) {
         e.preventDefault();
         setErrors([]);
         const spotData = {
-            address,
+            street,
             city,
             state,
             country,
@@ -43,10 +43,10 @@ function EditSpotForm({ setShowModal, spot }) {
                 {errors.map((error, idx) => <div key={idx}>{error}</div>)}
             </div>
             <input
-                placeholder='Address'
+                placeholder='Street'
                 type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
                 required
             />
             <input
