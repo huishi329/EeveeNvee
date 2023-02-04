@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { SpotImage } = require('../../db/models');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../aws')
 const { restoreUser, requireAuth } = require('../../utils/auth');
 
 
@@ -17,6 +18,20 @@ const isImageExisting = async (req, res, next) => {
     req.spotImage = spotImage;
     next();
 };
+
+router.post('/', requireAuth, singleMulterUpload("image"), async (req, res) => {
+    const { preview } = req.body;
+    const { user } = req;
+
+    const url = await singlePublicFileUpload(req.file);
+    const spotImage = SpotImage.create({
+        ownerId: user.id,
+        preview,
+        url
+    });
+
+    res.status(201).json(spotImage);
+})
 
 router.delete('/:imageId', restoreUser, requireAuth, isImageExisting,
     async (req, res) => {
