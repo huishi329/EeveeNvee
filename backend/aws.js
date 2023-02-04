@@ -40,18 +40,31 @@ const multiplePublicFileUpload = async (files) => {
 
 // --------------------------- Prviate UPLOAD ------------------------
 
-const uploadImageFromURL = async url => {
+const uploadImageFromUrl = async url => {
     const buffer = await fetch(url).then(res => res.buffer());
     // use the last segment of the url as key
     const key = new URL(url).pathname.split('/').pop();
-    const uploadParams = {
-        Bucket: NAME_OF_BUCKET,
-        Key: key,
-        Body: buffer,
-        ACL: "public-read",
-    };
-    const result = await s3.upload(uploadParams).promise();
-    return result.Location
+    const params = { Bucket: NAME_OF_BUCKET, Key: key };
+
+    try {
+        await s3.headObject(params).promise();
+        const signedUrl = s3.getSignedUrl('getObject', params);
+        return signedUrl;
+    } catch (error) {
+        if (error.name === 'NotFound') {
+            const uploadParams = {
+                Bucket: NAME_OF_BUCKET,
+                Key: key,
+                Body: buffer,
+                ACL: "public-read",
+            };
+            const result = await s3.upload(uploadParams).promise();
+            console.log(result.Location);
+            return result.Location;
+        } else {
+            console.log(error);
+        }
+    }
 };
 
 
@@ -112,5 +125,5 @@ module.exports = {
     retrievePrivateFile,
     singleMulterUpload,
     multipleMulterUpload,
-    uploadImageFromURL
+    uploadImageFromUrl
 };
