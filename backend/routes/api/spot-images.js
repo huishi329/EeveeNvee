@@ -19,20 +19,6 @@ const isImageExisting = async (req, res, next) => {
     next();
 };
 
-router.post('/', requireAuth, singleMulterUpload("image"), async (req, res) => {
-    const { preview } = req.body;
-    const { user } = req;
-
-    const url = await singlePublicFileUpload(req.file);
-    const spotImage = SpotImage.create({
-        ownerId: user.id,
-        preview,
-        url
-    });
-
-    res.status(201).json(spotImage);
-})
-
 router.delete('/:imageId', restoreUser, requireAuth, isImageExisting,
     async (req, res) => {
         const { spotImage, user } = req;
