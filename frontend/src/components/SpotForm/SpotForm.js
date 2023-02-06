@@ -7,21 +7,21 @@ import { useHistory } from 'react-router-dom';
 function SpotForm({ setShowModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [address, setAddress] = useState('');
+    const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [imgURL, setImgURL] = useState('');
+    const [imgFile, setImgFile] = useState('');
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
         const spotData = {
-            address,
+            street,
             city,
             state,
             country,
@@ -31,9 +31,8 @@ function SpotForm({ setShowModal }) {
             description,
             price
         };
-        return dispatch(createSpot(spotData, imgURL, history))
+        return dispatch(createSpot(spotData, imgFile, history))
             .then(() => setShowModal(false))
-            // .then(() => history.push('/'))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(Object.values(data.errors));
@@ -47,10 +46,10 @@ function SpotForm({ setShowModal }) {
                 {errors.map((error, idx) => <div key={idx}>{error}</div>)}
             </div>
             <input
-                placeholder='Address'
+                placeholder='Street'
                 type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
                 required
                 style={{ borderRadius: '0.5rem 0.5rem 0 0' }}
             />
@@ -97,11 +96,13 @@ function SpotForm({ setShowModal }) {
                 required
             />
             <input
+                className='spotImageInput'
                 placeholder='Preview Image'
-                type="url"
-                value={imgURL}
-                onChange={(e) => setImgURL(e.target.value)}
+                type="file"
+                accept='.png, .jpeg, .jpg'
+                onChange={(e) => setImgFile(e.target.files[0])}
                 required
+                multiple
                 style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
             />
             <button type="submit">Submit</button>

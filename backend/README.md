@@ -255,7 +255,7 @@ Returns all the spots.
         {
           "id": 1,
           "ownerId": 1,
-          "address": "123 Disney Lane",
+          "street": "123 Disney Lane",
           "city": "San Francisco",
           "state": "California",
           "country": "United States of America",
@@ -295,7 +295,7 @@ Returns all the spots owned (created) by the current user.
         {
           "id": 1,
           "ownerId": 1,
-          "address": "123 Disney Lane",
+          "street": "123 Disney Lane",
           "city": "San Francisco",
           "state": "California",
           "country": "United States of America",
@@ -333,7 +333,7 @@ Returns the details of a spot specified by its id.
     {
       "id": 1,
       "ownerId": 1,
-      "address": "123 Disney Lane",
+      "street": "123 Disney Lane",
       "city": "San Francisco",
       "state": "California",
       "country": "United States of America",
@@ -393,7 +393,7 @@ Creates and returns a new spot.
 
     ```json
     {
-      "address": "123 Disney Lane",
+      "street": "123 Disney Lane",
       "city": "San Francisco",
       "state": "California",
       "country": "United States of America",
@@ -415,7 +415,7 @@ Creates and returns a new spot.
     {
       "id": 1,
       "ownerId": 1,
-      "address": "123 Disney Lane",
+      "street": "123 Disney Lane",
       "city": "San Francisco",
       "state": "California",
       "country": "United States of America",
@@ -440,7 +440,7 @@ Creates and returns a new spot.
       "message": "Validation Error",
       "statusCode": 400,
       "errors": {
-        "address": "Street address is required",
+        "street": "Street street is required",
         "city": "City is required",
         "state": "State is required",
         "country": "Country is required",
@@ -515,7 +515,7 @@ Updates and returns an existing spot.
 
     ```json
     {
-      "address": "123 Disney Lane",
+      "street": "123 Disney Lane",
       "city": "San Francisco",
       "state": "California",
       "country": "United States of America",
@@ -537,7 +537,7 @@ Updates and returns an existing spot.
     {
       "id": 1,
       "ownerId": 1,
-      "address": "123 Disney Lane",
+      "street": "123 Disney Lane",
       "city": "San Francisco",
       "state": "California",
       "country": "United States of America",
@@ -562,7 +562,7 @@ Updates and returns an existing spot.
       "message": "Validation Error",
       "statusCode": 400,
       "errors": {
-        "address": "Street address is required",
+        "street": "Street street is required",
         "city": "City is required",
         "state": "State is required",
         "country": "Country is required",
@@ -662,7 +662,7 @@ Returns all the reviews written by the current user.
           "Spot": {
             "id": 1,
             "ownerId": 1,
-            "address": "123 Disney Lane",
+            "street": "123 Disney Lane",
             "city": "San Francisco",
             "state": "California",
             "country": "United States of America",
@@ -1010,7 +1010,7 @@ Return all the bookings that the current user has made.
           "Spot": {
             "id": 1,
             "ownerId": 1,
-            "address": "123 Disney Lane",
+            "street": "123 Disney Lane",
             "city": "San Francisco",
             "state": "California",
             "country": "United States of America",
@@ -1435,7 +1435,7 @@ Return spots filtered by query parameters.
         {
           "id": 1,
           "ownerId": 1,
-          "address": "123 Disney Lane",
+          "street": "123 Disney Lane",
           "city": "San Francisco",
           "state": "California",
           "country": "United States of America",

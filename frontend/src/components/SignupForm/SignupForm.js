@@ -31,7 +31,7 @@ function SignupForm({ setShowModal }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Welcome to Airbnb</h2>
+      <h2>Welcome to Eeveenvee</h2>
       <div className='errors-div'>
         {errors.map((error, idx) => <div key={idx}>{error}</div>)}
       </div>

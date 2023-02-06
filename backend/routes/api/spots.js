@@ -5,12 +5,13 @@ const { restoreUser, requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { validateBooking, validateDate, validateReview } = require('../../utils/reqValidation');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../aws')
 const { Op } = require('sequelize');
 
 const validateSpot = [
-    check('address')
+    check('street')
         .exists({ checkFalsy: true })
-        .withMessage('Street address is required'),
+        .withMessage('Street street is required'),
     check('city')
         .exists({ checkFalsy: true })
         .withMessage('City is required'),
@@ -112,22 +113,22 @@ const isSpotOwner = (req, res, next) => {
 
 router.post('/', restoreUser, requireAuth, validateSpot,
     async (req, res) => {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+        const { street, city, state, country, lat, lng, name, description, price } = req.body;
         const { user } = req;
 
         const spot = await Spot.create({
             ownerId: user.id,
-            address, city, state, country, lat, lng, name, description, price
+            street, city, state, country, lat, lng, name, description, price
         });
         res.status(201).json(spot);
     })
 
 router.put('/:spotId', requireAuth, isSpotExisting, isSpotOwner, validateSpot, async (req, res) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { street, city, state, country, lat, lng, name, description, price } = req.body;
     const { user, spot } = req;
 
     spot.set({
-        address, city, state, country, lat, lng, name, description, price
+        street, city, state, country, lat, lng, name, description, price
     });
 
     await spot.save();
@@ -147,22 +148,37 @@ router.delete('/:spotId', requireAuth, isSpotExisting, isSpotOwner,
         });
     })
 
-router.post('/:spotId/images', requireAuth, isSpotExisting, isSpotOwner,
+router.post('/:spotId/images', requireAuth, isSpotExisting, isSpotOwner, singleMulterUpload("image"),
     async (req, res) => {
-        const { url, preview } = req.body;
+        const { preview } = req.body;
         const { spot } = req;
+        const url = await singlePublicFileUpload(req.file);
 
         const spotImage = await spot.createSpotImage({
             url,
             preview
-        })
-        res.json({
+        });
+        res.status(201).json({
             id: spotImage.id,
             url,
             preview
         });
     }
 )
+
+// router.post('/', requireAuth, singleMulterUpload("image"), async (req, res) => {
+//     const { preview } = req.body;
+//     const { user } = req;
+
+//     const url = await singlePublicFileUpload(req.file);
+//     const spotImage = SpotImage.create({
+//         ownerId: user.id,
+//         preview,
+//         url
+//     });
+
+//     res.status(201).json(spotImage);
+// })
 
 router.get('/', ValidateSpotQuery, async (req, res, next) => {
     const where = {};

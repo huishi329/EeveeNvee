@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { SpotImage } = require('../../db/models');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../aws')
 const { restoreUser, requireAuth } = require('../../utils/auth');
 
 

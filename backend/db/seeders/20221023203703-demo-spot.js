@@ -16,7 +16,7 @@ module.exports = {
     await queryInterface.bulkInsert('Spots', [
       {
         ownerId: 1,
-        address: "Thurlow St",
+        street: "Thurlow St",
         city: "Vancouver",
         state: "British Comlumbia",
         country: "Canada",
@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         ownerId: 1,
-        address: "Nelson St",
+        street: "Nelson St",
         city: "Vancouver",
         state: "British Comlumbia",
         country: "Canada",
@@ -40,7 +40,7 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: "Songhees Rd",
+        street: "Songhees Rd",
         city: "Victoria",
         state: "British Comlumbia",
         country: "Canada",
@@ -52,7 +52,7 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: "Lacon Rd",
+        street: "Lacon Rd",
         city: "Denman Island",
         state: "British Comlumbia",
         country: "Canada",
@@ -64,7 +64,7 @@ module.exports = {
       },
       {
         ownerId: 3,
-        address: "Horton Bay Rd",
+        street: "Horton Bay Rd",
         city: "Mayne Island",
         state: "British Comlumbia",
         country: "Canada",
@@ -76,7 +76,7 @@ module.exports = {
       },
       {
         ownerId: 3,
-        address: "Stevens Canyon Rd",
+        street: "Stevens Canyon Rd",
         city: "Leavenworth",
         state: "Washington",
         country: "United States",
@@ -88,7 +88,7 @@ module.exports = {
       },
       {
         ownerId: 4,
-        address: "Ferry Rd",
+        street: "Ferry Rd",
         city: "Lopez Island",
         state: "Washington",
         country: "United States",
@@ -100,7 +100,7 @@ module.exports = {
       },
       {
         ownerId: 4,
-        address: "Redrooffs Rd",
+        street: "Redrooffs Rd",
         city: "Halfmoon Bay",
         state: "British Comlumbia",
         country: "Canada",
@@ -112,7 +112,7 @@ module.exports = {
       },
       {
         ownerId: 5,
-        address: "Back Rd",
+        street: "Back Rd",
         city: "Broad Cove",
         state: "Nova Scotia",
         country: "Canada",
@@ -124,7 +124,7 @@ module.exports = {
       },
       {
         ownerId: 5,
-        address: "Chem. des Pompes",
+        street: "Chem. des Pompes",
         city: "Sorgues",
         state: "Provence-Alpes-Côte d'Azur",
         country: "France",
