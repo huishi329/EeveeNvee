@@ -21,7 +21,6 @@ export default function ReviewForm({ setShowModal, spot }) {
             .catch(async (res) => {
                 const errors = [];
                 const data = await res.json();
-                console.log(data);
                 if (data.statusCode === 403) errors.push('You already has a review for this spot.')
                 if (data && data.errors) errors.push(...Object.values(data.errors));
                 setErrors(errors);
