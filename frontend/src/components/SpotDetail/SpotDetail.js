@@ -1,4 +1,4 @@
-import EditSpot from "../EditSpot";
+import EditSpot from '../EditSpot/EditSpot';
 import './SpotDetail.css';
 
 function SpotDetail({ spot, reviewRef }) {

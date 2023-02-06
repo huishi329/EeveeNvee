@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import './EditSpot.css';
-import EditSpotForm from './EditSpotForm';
+import EditSpotForm from './EditSpotForm/EditSpotForm';
 import { deleteSpot } from '../../store/spot';
 import { Modal } from '../../context/Modal';
 
-function EditSpot({ spot, reviewRef }) {
+export default function EditSpot({ spot, reviewRef }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
@@ -67,5 +67,3 @@ function EditSpot({ spot, reviewRef }) {
 
     )
 }
-
-export default EditSpot;
