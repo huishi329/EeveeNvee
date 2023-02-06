@@ -41,16 +41,17 @@ const multiplePublicFileUpload = async (files) => {
 // --------------------------- Prviate UPLOAD ------------------------
 
 const uploadImageFromUrl = async url => {
-    const buffer = await fetch(url).then(res => res.buffer());
-    // use the last segment of the url as key
+    const S3_LOCATION = `https://${NAME_OF_BUCKET}.s3.amazonaws.com/`;
     const key = new URL(url).pathname.split('/').pop();
+    const bucket_url = S3_LOCATION + key;
+    // use the last segment of the url as key
     const params = { Bucket: NAME_OF_BUCKET, Key: key };
 
     try {
         await s3.headObject(params).promise();
-        const signedUrl = s3.getSignedUrl('getObject', params);
-        return signedUrl;
+        return bucket_url;
     } catch (error) {
+        const buffer = await fetch(url).then(res => res.buffer());
         if (error.name === 'NotFound') {
             const uploadParams = {
                 Bucket: NAME_OF_BUCKET,
