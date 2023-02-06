@@ -1,6 +1,5 @@
 import EditSpot from "../EditSpot";
 import './SpotDetail.css';
-import { reviewRef } from "../ReviewPanel/ReviewPanel";
 
 function SpotDetail({ spot, reviewRef }) {
     return (
