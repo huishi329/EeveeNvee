@@ -3,6 +3,7 @@ import { createSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styles from './SpotForm.module.css';
+import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
 
 
 export default function SpotForm({ setShowModal }) {
@@ -15,9 +16,9 @@ export default function SpotForm({ setShowModal }) {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [imgFile, setImgFile] = useState('');
+    const [imgFiles, setImgFiles] = useState([]);
     const [errors, setErrors] = useState([]);
-
+    console.log(imgFiles, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -32,7 +33,7 @@ export default function SpotForm({ setShowModal }) {
             description,
             price
         };
-        return dispatch(createSpot(spotData, imgFile, history))
+        return dispatch(createSpot(spotData, imgFiles, history))
             .then(() => setShowModal(false))
             .catch(async (res) => {
                 const data = await res.json();
@@ -40,15 +41,6 @@ export default function SpotForm({ setShowModal }) {
             });
     };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setImgFile(file)
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.querySelector(".spotImage").src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-    }
 
 
     return (
@@ -110,7 +102,8 @@ export default function SpotForm({ setShowModal }) {
                         onChange={(e) => setPrice(e.target.value)}
                         required
                     />
-                    <input
+                    <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
+                    {/* <input
                         className='spotImageInput'
                         placeholder='Preview Image'
                         type="file"
@@ -119,10 +112,11 @@ export default function SpotForm({ setShowModal }) {
                         required
                         multiple
                         style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
-                    />
-                    {imgFile !== '' && <div className={styles.previewImage}>
-                        <img className="spotImage" alt={name} />
-                    </div>}
+                    /> */}
+                    {imgFiles.map((file, i) => (
+                        <div className={styles.previewImage} key={i}>
+                            <img className="spotImage" src={file} alt={name} />
+                        </div>))}
                     <button type="submit">Submit</button>
                 </form >
             </div>
