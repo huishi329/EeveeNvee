@@ -16,7 +16,6 @@ export default function Navigation({ isLoaded }) {
     const [login, setLogin] = useState(false);
     const [signup, setSignup] = useState(false);
     const [createSpot, setCreateSpot] = useState(false);
-    console.log(location);
 
     return (
         <div className='navbar-outer'>
