@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginForm/LoginForm';
@@ -11,10 +11,12 @@ import ProfileButton from './ProfileButton/ProfileButton';
 export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const navbarStyle = useSelector(state => state.style.navbar);
+    const location = useLocation().pathname;
     const [showModal, setShowModal] = useState(false);
     const [login, setLogin] = useState(false);
     const [signup, setSignup] = useState(false);
     const [createSpot, setCreateSpot] = useState(false);
+    console.log(location);
 
     return (
         <div className='navbar-outer'>
@@ -22,13 +24,13 @@ export default function Navigation({ isLoaded }) {
                 <div className='navbar-left'>
                     <NavLink exact to="/">
                         <div className='logo'>
-                            <img src='https://github.com/huishi329/EeveeNvee/blob/main/eeveeNvee-logo.png?raw=true' alt='logo'>
+                            <img src='/eeveeNvee-logo.png' alt='logo'>
                             </img>
-                            <div>
+                            {!location.includes('spots') && <div>
                                 <button>
                                     EeveeNvee
                                 </button>
-                            </div>
+                            </div>}
                         </div>
                     </NavLink>
                 </div>
