@@ -25,7 +25,7 @@ function ReviewCard({ review }) {
             <div className='review-info'>
                 <div className='user-info'>
                     <div className='profile-image'>
-                        <img src='https://github.com/huishi329/EeveeNvee/blob/main/eeveeNvee-logo.png?raw=true' alt={review.User.firstName}></img>
+                        <img src='/eeveeNvee-logo.png' alt={review.User.firstName}></img>
                     </div>
                     <div>
                         <div style={{ fontWeight: 600 }}>
