@@ -102,21 +102,15 @@ export default function SpotForm({ setShowModal }) {
                         onChange={(e) => setPrice(e.target.value)}
                         required
                     />
-                    <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
-                    {/* <input
-                        className='spotImageInput'
-                        placeholder='Preview Image'
-                        type="file"
-                        accept='.png, .jpeg, .jpg'
-                        onChange={handleImageChange}
-                        required
-                        multiple
-                        style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
-                    /> */}
-                    {imgFiles.map((file, i) => (
-                        <div className={styles.previewImage} key={i}>
-                            <img className="spotImage" src={file} alt={name} />
-                        </div>))}
+                    {imgFiles.length === 0 && <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />}
+                    <div className={styles.imgSection}>
+                        {imgFiles.map((file, i) => (
+                            <div className={styles.previewImage} key={i}>
+                                <img className="spotImage" src={file} alt={name} />
+                            </div>))}
+                        {imgFiles.length > 0 && <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />}
+                    </div>
+
                     <button type="submit">Submit</button>
                 </form >
             </div>
