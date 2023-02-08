@@ -56,12 +56,15 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
                 multiple
                 style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
             />
-            <div className={styles.container} onClick={handleClick} onDrop={handleDrop}>
+            {imgFiles.length === 0 && <div className={styles.container} onClick={handleClick} onDrop={handleDrop}>
                 <i className="fa-solid fa-images"></i>
                 <div>Drag your photos here</div>
-                <div className={styles.lightText}>Choose at least 5 photos</div>
+                <div className={styles.lightText}>Choose at least 1 photos</div>
                 <button type='button' className={styles.button} >Upload from your device</button>
-            </div>
+            </div>}
+            {imgFiles.length > 0 && <div className={styles.smallContainer} onClick={handleClick} onDrop={handleDrop}>
+                <i className="fa-solid fa-images"></i>
+            </div>}
         </div>
     )
 
