@@ -18,7 +18,7 @@ export default function SpotForm({ setShowModal }) {
     const [price, setPrice] = useState('');
     const [imgFiles, setImgFiles] = useState([]);
     const [errors, setErrors] = useState([]);
-    console.log(imgFiles, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);

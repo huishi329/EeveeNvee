@@ -15,7 +15,6 @@ function EditSpotForm({ setShowModal, spot }) {
     const [price, setPrice] = useState(spot.price);
     const [imgFile, setImgFile] = useState(spot.SpotImages[0].url);
     const [errors, setErrors] = useState([]);
-    console.log(imgFile, spot);
 
     const handleSubmit = (e) => {
         e.preventDefault();

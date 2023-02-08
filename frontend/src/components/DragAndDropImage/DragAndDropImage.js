@@ -5,7 +5,6 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
     const inputRef = useRef(null);
 
     const handleImageChange = (e) => {
-        console.log(e);
         if (!e.files) e = e.target;
         const files = [...e.files];
         // Map each file object to its data url, for display in <img>
