@@ -47,7 +47,6 @@ export const getHostingSpots = (spotData) => async dispatch => {
 };
 
 export const createSpotImage = (spotId, imgFile) => async dispatch => {
-    console.log(spotId, imgFile);
     const formData = new FormData();
     formData.append('spotId', spotId);
     formData.append('preview', true);

@@ -60,7 +60,6 @@ const uploadImageFromUrl = async url => {
                 ACL: "public-read",
             };
             const result = await s3.upload(uploadParams).promise();
-            console.log(result.Location);
             return result.Location;
         } else {
             console.log(error);

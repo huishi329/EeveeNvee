@@ -1,0 +1,31 @@
+.container {
+    overflow-y: hidden;
+    border-radius: 1rem;
+    background-color: white;
+}
+
+.wrapper {
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+.previewImage {
+    width: 100%;
+    height: 10rem;
+}
+
+.previewImage img {
+    height: 10rem;
+}
+
+.wrapper::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.wrapper::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.2rem rgba(0, 0, 0, 0.2);
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+    background-color: #FF385C;
+}

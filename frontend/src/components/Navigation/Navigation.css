@@ -61,42 +61,7 @@ i {
 
 }
 
-.profile-dropdown {
-    position: absolute;
-    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
-    top: 5rem;
-    right: 0rem;
-    min-width: 15rem;
-    background-color: white;
-}
-
-.profile-info {
-    margin-left: 1rem;
-}
-
 .create-spot-button:hover {
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 1.5rem;
-}
-
-.button-div:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-.profile-dropdown div {
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-    min-height: 3rem;
-}
-
-
-.fa-icon {
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-radius: 2rem;
-}
-
-.fa-icon:hover {
-    box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2);
 }

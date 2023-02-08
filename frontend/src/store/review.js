@@ -35,10 +35,9 @@ export const createReview = (spotId, review) => async dispatch => {
 };
 
 export const deleteReview = (review) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${review.id}`, {
+    await csrfFetch(`/api/reviews/${review.id}`, {
         method: 'DELETE'
     });
-    console.log(response.json());
     await dispatch(getSpotDetail(review.spotId));
     await dispatch(getSpotReviews(review.spotId));
 };

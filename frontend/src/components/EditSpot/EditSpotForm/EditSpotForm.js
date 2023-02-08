@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import { createSpot } from '../../store/spot';
+import { updateSpot } from '../../../store/spot';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import styles from './SpotForm.module.css';
-import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
+import styles from './EditSpotForm.module.css';
 
 
-export default function SpotForm({ setShowModal }) {
+function EditSpotForm({ setShowModal, spot }) {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const [street, setStreet] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [country, setCountry] = useState('');
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
-    const [imgFiles, setImgFiles] = useState([]);
+    const [street, setStreet] = useState(spot.street);
+    const [city, setCity] = useState(spot.city);
+    const [state, setState] = useState(spot.state);
+    const [country, setCountry] = useState(spot.country);
+    const [name, setName] = useState(spot.name)
+    const [description, setDescription] = useState(spot.description);
+    const [price, setPrice] = useState(spot.price);
+    const [imgFile, setImgFile] = useState(spot.SpotImages[0].url);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
@@ -33,23 +30,29 @@ export default function SpotForm({ setShowModal }) {
             description,
             price
         };
-        return dispatch(createSpot(spotData, imgFiles, history))
+        return dispatch(updateSpot(spot.id, spotData))
             .then(() => setShowModal(false))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(Object.values(data.errors));
             });
     };
-
-
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setImgFile(file)
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.querySelector(".spotImage").src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
 
     return (
         <div className={styles.container}>
-
             <div className={styles.wrapper}>
-                <form className={styles.form} onSubmit={handleSubmit}>
-                    <h2>Create a spot</h2>
-                    <div>
+                <form onSubmit={handleSubmit}>
+                    <h2>Edit Spot</h2>
+                    <div className='errors-div'>
                         {errors.map((error, idx) => <div key={idx}>{error}</div>)}
                     </div>
                     <input
@@ -58,17 +61,16 @@ export default function SpotForm({ setShowModal }) {
                         value={street}
                         onChange={(e) => setStreet(e.target.value)}
                         required
-                        style={{ borderRadius: '0.5rem 0.5rem 0 0' }}
                     />
                     <input
-                        placeholder='City'
+                        placeholder='city'
                         type="text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         required
                     />
                     <input
-                        placeholder='State'
+                        placeholder='state'
                         type="text"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
@@ -96,24 +98,30 @@ export default function SpotForm({ setShowModal }) {
                     ></textarea>
                     <input
                         placeholder='Price'
-                        min='0'
                         type="number"
                         value={price}
+                        min='0'
                         onChange={(e) => setPrice(e.target.value)}
                         required
                     />
-                    {imgFiles.length === 0 && <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />}
-                    <div className={styles.imgSection}>
-                        {imgFiles.map((file, i) => (
-                            <div className={styles.previewImage} key={i}>
-                                <img className="spotImage" src={file} alt={name} />
-                            </div>))}
-                        {imgFiles.length > 0 && <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />}
+                    <input
+                        className='spotImageInput'
+                        placeholder='Preview Image'
+                        type="file"
+                        accept='.png, .jpeg, .jpg'
+                        onChange={handleImageChange}
+                        required
+                        multiple
+                        style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
+                    />
+                    <div className={styles.previewImage}>
+                        <img className="spotImage" src={imgFile} alt={name} />
                     </div>
-
                     <button type="submit">Submit</button>
                 </form >
             </div>
         </div>
     );
 }
+
+export default EditSpotForm;

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import * as sessionActions from '../../store/session';
-import './Navigation.css'
-import { loginUser } from "../../store/session";
+import * as sessionActions from '../../../store/session';
+import styles from './ProfileButton.module.css'
+import { loginUser } from "../../../store/session";
 
-function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal }) {
+export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal }) {
   const dispatch = useDispatch();
   const navbarStyle = useSelector(state => state.style.navbar);
   const [showMenu, setShowMenu] = useState(false);
@@ -40,7 +40,7 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
 
   return (
     <>
-      <div className="fa-icon">
+      <div className={styles.faIcon}>
         <button onClick={openMenu}>
           <i className="fa-solid fa-bars"></i>
           <i className="fa-regular fa-user"></i>
@@ -48,36 +48,36 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
 
       </div>
       {showMenu && (user ?
-        (<div className="profile-dropdown" style={navbarStyle.menu}>
-          <div className="profile-info">{user.username}</div>
-          <div className="profile-info">{user.email}</div>
-          <div className="button-div" style={{ borderRadius: '0 0 1rem 1rem' }}>
+        (<div className={styles.profileDropdown} style={navbarStyle.menu}>
+          <div className={styles.profileInfo}>{user.username}</div>
+          <div className={styles.profileInfo}>{user.email}</div>
+          <div className={styles.buttonDiv} style={{ borderRadius: '0 0 1rem 1rem' }}>
             <button
-              className="transparent-button"
+              className={styles.transparentButton}
               onClick={logout}
             >Log Out</button>
           </div>
         </div>) :
-        <div className="profile-dropdown" style={navbarStyle.menu}>
-          <div className="button-div" style={{ borderRadius: '1rem 1rem 0 0' }}
+        <div className={styles.profileDropdown} style={navbarStyle.menu}>
+          <div className={styles.buttonDiv} style={{ borderRadius: '1rem 1rem 0 0' }}
             onClick={() => {
               setShowModal(true)
               setLogin(true)
               setSignup(false)
               setCreateSpot(false)
             }}>
-            <button className="transparent-button">Log in</button>
+            <button className={styles.transparentButton}>Log in</button>
           </div>
-          <div className="button-div" onClick={() => {
+          <div className={styles.buttonDiv} onClick={() => {
             setShowModal(true)
             setSignup(true)
             setLogin(false)
             setCreateSpot(false)
           }}>
-            <button className="transparent-button">Sign up</button>
+            <button className={styles.transparentButton}>Sign up</button>
           </div>
-          <div className="button-div" style={{ borderRadius: '0 0 1rem 1rem' }}>
-            <button className="transparent-button"
+          <div className={styles.buttonDiv} style={{ borderRadius: '0 0 1rem 1rem' }}>
+            <button className={styles.transparentButton}
               onClick={() => demoUserLogin()}
             >Demo User</button>
           </div>
@@ -85,6 +85,4 @@ function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal 
       )}
     </>
   );
-}
-
-export default ProfileButton;
+};

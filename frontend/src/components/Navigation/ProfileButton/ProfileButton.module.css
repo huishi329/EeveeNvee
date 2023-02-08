@@ -1,0 +1,35 @@
+.faIcon {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+}
+
+.faIcon:hover {
+    box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2);
+}
+
+
+.profileDropdown {
+    position: absolute;
+    box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    top: 5rem;
+    right: 0rem;
+    min-width: 15rem;
+    background-color: white;
+}
+
+.profileInfo {
+    margin-left: 1rem;
+}
+
+
+.buttonDiv:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.profileDropdown div {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    min-height: 3rem;
+}

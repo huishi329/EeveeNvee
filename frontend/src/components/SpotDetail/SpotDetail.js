@@ -1,9 +1,7 @@
-import EditSpot from "../EditSpot";
+import EditSpot from '../EditSpot/EditSpot';
 import './SpotDetail.css';
-import { reviewRef } from "../ReviewPanel/ReviewPanel";
 
 function SpotDetail({ spot, reviewRef }) {
-    console.log(typeof spot.numReviews);
     return (
         <div className="spot-detail">
             {spot &&
