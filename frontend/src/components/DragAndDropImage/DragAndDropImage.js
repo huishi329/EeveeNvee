@@ -1,12 +1,14 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styles from './DragAndDropImage.module.css'
 
 export default function DragAndDropImage({ imgFiles, setImgFiles }) {
     const inputRef = useRef(null);
-
+    // display on frontend
+    const [previewImages, setPreviewImages] = useState([]);
     const handleImageChange = async (e) => {
         if (!e.files) e = e.target;
         const files = [...e.files];
+        setImgFiles(imgFiles.concat(files));
         // Map each file object to its data url, for display in <img>
         // Don't update React state until we convert all img files to data url
         function getBase64(file) {
@@ -20,7 +22,7 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
         }
         const promises = files.map(file => getBase64(file));
 
-        setImgFiles(imgFiles.concat(await Promise.all(promises)));
+        setPreviewImages(previewImages.concat(await Promise.all(promises)));
 
     };
 
@@ -62,9 +64,15 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
                 <div className={styles.lightText}>Choose at least 1 photos</div>
                 <button type='button' className={styles.button} >Upload from your device</button>
             </div>}
-            {imgFiles.length > 0 && <div className={styles.smallContainer} onClick={handleClick} onDrop={handleDrop}>
-                <i className="fa-solid fa-images"></i>
-            </div>}
+            <div className={styles.imgSection}>
+                {previewImages.map((file, i) => (
+                    <div className={styles.previewImage} key={i}>
+                        <img className="spotImage" src={file} alt={`image ${i}`} />
+                    </div>))}
+                {imgFiles.length > 0 && <div className={styles.smallContainer} onClick={handleClick} onDrop={handleDrop}>
+                    <i className="fa-solid fa-images"></i>
+                </div>}
+            </div>
         </div>
     )
 
