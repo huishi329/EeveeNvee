@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://eeveenvee.herokuapp.com/">
-    <img src="./eeveeNvee-logo.png" alt="Logo" height="80">
+    <img src="/frontend/public/eeveeNvee-logo.png" alt="Logo" height="80">
   </a>
 
 </div>
