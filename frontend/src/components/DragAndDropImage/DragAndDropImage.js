@@ -4,23 +4,24 @@ import styles from './DragAndDropImage.module.css'
 export default function DragAndDropImage({ imgFiles, setImgFiles }) {
     const inputRef = useRef(null);
 
-    const handleImageChange = (e) => {
+    const handleImageChange = async (e) => {
         if (!e.files) e = e.target;
         const files = [...e.files];
         // Map each file object to its data url, for display in <img>
-        let count = 0;
-        files.forEach((file, i) => {
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                files[i] = event.target.result;
-                count++;
-                // Don't update React state until we convert all img files to data url
-                if (count === files.length) {
-                    setImgFiles(imgFiles.concat(files));
-                }
-            };
-            reader.readAsDataURL(file);
-        });
+        // Don't update React state until we convert all img files to data url
+        function getBase64(file) {
+            const reader = new FileReader()
+            return new Promise(resolve => {
+                reader.onload = event => {
+                    resolve(event.target.result)
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        const promises = files.map(file => getBase64(file));
+
+        setImgFiles(imgFiles.concat(await Promise.all(promises)));
+
     };
 
     const handleClick = () => {
@@ -46,12 +47,12 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
             onDrop={handleDrop}>
             <input
                 ref={inputRef}
+                hidden
                 className={styles.spotImageInput}
-                placeholder='Preview Image'
                 type="file"
                 accept='.png, .jpeg, .jpg'
                 onChange={handleImageChange}
-                required
+                required={imgFiles.length === 0}
                 multiple
                 style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
             />
