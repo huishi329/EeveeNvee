@@ -1,13 +1,14 @@
 import EditSpot from '../EditSpot/EditSpot';
-import './SpotDetail.css';
+import styles from './SpotDetail.module.css';
+import SpotImages from './SpotImages/SpotImages';
 
-function SpotDetail({ spot, reviewRef }) {
+export default function SpotDetail({ spot, reviewRef }) {
     return (
-        <div className="spot-detail">
+        <div className={styles.spotDetail}>
             {spot &&
                 <>
                     <h1>{spot.name}</h1>
-                    <div className="spot-summary">
+                    <div className={styles.spotSummary}>
                         <span style={{ textDecoration: 'none' }}>
                             <i className="fa-sharp fa-solid fa-star"></i>
                             {spot.avgStarRating ?
@@ -29,12 +30,10 @@ function SpotDetail({ spot, reviewRef }) {
                         <span>
                             {`${spot.city}, ${spot.state}, ${spot.country}`}
                         </span>
-                        {(spot.SpotImages).length > 0 ?
-                            (<div className="spot-image">
-                                <img src={spot.SpotImages[0].url} alt={spot.name}></img>
-                            </div>) : (<h2>No image found</h2>)}
-                        <div className="spot-main">
-                            <div className="spot-description">
+                        {(spot.SpotImages).length > 0 && <SpotImages images={spot.SpotImages} />}
+
+                        <div className={styles.spotMain}>
+                            <div className={styles.spotDescription}>
                                 <h2>{`${spot.name} hosted by ${spot.Owner.firstName}`}</h2>
                                 <p>{spot.description}</p>
                             </div>
@@ -47,5 +46,3 @@ function SpotDetail({ spot, reviewRef }) {
     )
 
 }
-
-export default SpotDetail

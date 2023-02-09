@@ -51,7 +51,8 @@ const uploadImageFromUrl = async url => {
         await s3.headObject(params).promise();
         return bucket_url;
     } catch (error) {
-        const buffer = await fetch(url).then(res => res.buffer());
+        const res = await fetch(url);
+        const buffer = await res.buffer();
         if (error.name === 'NotFound') {
             const uploadParams = {
                 Bucket: NAME_OF_BUCKET,

@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getSpotDetail } from "../../store/spot";
 import { setNavbar, restoreNavbar } from "../../store/style";
-import SpotDetail from '../SpotDetail';
 import ReviewPanel from '../ReviewPanel/ReviewPanel';
 import './SpotPage.css'
+import SpotDetail from '../SpotDetail/SpotDetail';
 
 function SpotPage() {
     const reviewRef = useRef(null);

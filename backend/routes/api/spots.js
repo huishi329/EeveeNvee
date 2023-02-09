@@ -206,7 +206,7 @@ router.get('/', ValidateSpotQuery, async (req, res, next) => {
         include: [
             {
                 model: SpotImage,
-                where: { preview: true },
+                where: { position: 0 },
                 required: false
             },
             {
@@ -259,7 +259,7 @@ router.get('/current', requireAuth, async (req, res) => {
         include: [
             {
                 model: SpotImage,
-                where: { preview: true },
+                where: { position: 0 },
                 attributes: [],
                 required: false
             },
@@ -365,7 +365,7 @@ router.get('/:spotId', async (req, res, next) => {
             },
             {
                 model: SpotImage,
-                attributes: ['id', 'url', 'preview'],
+                attributes: ['id', 'url', 'position'],
                 required: false
             },
             {
