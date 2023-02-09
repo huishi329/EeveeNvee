@@ -10,23 +10,14 @@ result = `[
 `
 console.log(result)
 
-ratings = Array.from(document.querySelectorAll(".wt-grid__item-xs-12 [name='rating']")).map(review => review.value)
-reviews = Array.from(document.querySelectorAll(".wt-text-truncate--multi-line")).map(review => review.innerText).slice(0, ratings.length)
-users = ["brian", "caitlynn", "derrik", "elizabeth"]
-
-ratings.forEach((rating, i) => {
-    result += `
-        Review(
-            buyer=${users[i]},
-            product=product,
-            rating=${rating},
-            review="${reviews[i].replaceAll('"', "'")}"
-        ),
+// spotImage
+result = ''
+Array.from(document.querySelectorAll("._6tbg2q")).map(ele => ele.src).forEach((url, i) =>
+    result += `{
+        spotId:10,
+        url: await uploadImageFromUrl("${url}"),
+        position: ${i}
+    },
     `
-})
-
-result += '])'
-
-result += '\n\n    db.session.commit()'
-
+)
 console.log(result)
