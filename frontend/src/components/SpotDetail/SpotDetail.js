@@ -1,5 +1,6 @@
 import EditSpot from '../EditSpot/EditSpot';
 import styles from './SpotDetail.module.css';
+import SpotImages from './SpotImages/SpotImages';
 
 export default function SpotDetail({ spot, reviewRef }) {
     return (
@@ -29,11 +30,9 @@ export default function SpotDetail({ spot, reviewRef }) {
                         <span>
                             {`${spot.city}, ${spot.state}, ${spot.country}`}
                         </span>
-                        {(spot.SpotImages).length > 0 ?
-                            (<div className={styles.spotImage}>
-                                <img src={spot.SpotImages[0].url} alt={spot.name}></img>
-                            </div>) : (<h2>No image found</h2>)}
-                        <div className="spot-main">
+                        {(spot.SpotImages).length > 0 && <SpotImages images={spot.SpotImages} />}
+
+                        <div className={styles.spotMain}>
                             <div className={styles.spotDescription}>
                                 <h2>{`${spot.name} hosted by ${spot.Owner.firstName}`}</h2>
                                 <p>{spot.description}</p>

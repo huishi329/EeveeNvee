@@ -26,24 +26,20 @@ h2 {
     margin: 0 0.5rem;
 }
 
-.spotImage {
-    max-width: 50%;
-    padding: 2rem 0;
-    max-height: 60%
-}
+.spotMain {
 
-.spotImage img {
-    min-width: 100%;
-    max-width: 100%;
-    object-fit: cover;
-    border-radius: 1rem;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". .";
 }
-
 
 .spotDescription p {
     font-size: 1.1rem;
     font-weight: 400;
-
 }
 
 .spotDescription h2 {
