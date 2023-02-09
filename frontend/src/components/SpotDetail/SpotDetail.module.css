@@ -9,30 +9,30 @@ h2 {
     line-height: 2rem;
 }
 
-.spot-detail {
+.spotDetail {
     width: 70rem;
     max-width: 90vw;
     line-height: 1.5rem;
     margin: 0 auto;
 }
 
-.spot-summary {
+.spotSummary {
     margin-bottom: 3rem;
 }
 
-.spot-summary>span {
+.spotSummary>span {
     text-decoration: underline;
     font-weight: 600;
     margin: 0 0.5rem;
 }
 
-.spot-image {
+.spotImage {
     max-width: 50%;
     padding: 2rem 0;
     max-height: 60%
 }
 
-.spot-image img {
+.spotImage img {
     min-width: 100%;
     max-width: 100%;
     object-fit: cover;
@@ -40,13 +40,13 @@ h2 {
 }
 
 
-.spot-description p {
+.spotDescription p {
     font-size: 1.1rem;
     font-weight: 400;
 
 }
 
-.spot-description h2 {
+.spotDescription h2 {
     border-bottom: 0.08rem rgba(0, 0, 0, 0.1) solid;
     padding-bottom: 1rem;
 }
