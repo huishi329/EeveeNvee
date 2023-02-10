@@ -5,6 +5,7 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
     const inputRef = useRef(null);
     // display on frontend
     const [previewImages, setPreviewImages] = useState([]);
+    const [isDragActive, setIsDragActive] = useState(false);
     const handleImageChange = async (e) => {
         if (!e.files) e = e.target;
         const files = [...e.files];
@@ -33,12 +34,14 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
     const handleDrag = (e) => {
         e.preventDefault();
         e.stopPropagation();
+        setIsDragActive(true);
     }
 
     const handleDrop = (e) => {
         e.preventDefault();
         e.stopPropagation();
         handleImageChange(e.dataTransfer);
+        setIsDragActive(false);
     };
 
     return (
@@ -46,6 +49,7 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
             // Must add e.preventDefault() for onDragOver and onDragEnter for the dropTarget
             onDragOver={handleDrag}
             onDragEnter={handleDrag}
+            onDragExit={() => setIsDragActive(false)}
             onDrop={handleDrop}>
             <input
                 ref={inputRef}
@@ -56,9 +60,8 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
                 onChange={handleImageChange}
                 required={imgFiles.length === 0}
                 multiple
-                style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
             />
-            {imgFiles.length === 0 && <div className={styles.container} onClick={handleClick} onDrop={handleDrop}>
+            {imgFiles.length === 0 && <div className={`${styles.container} ${isDragActive && styles.dragActive}`} onClick={handleClick} onDrop={handleDrop}>
                 <i className="fa-solid fa-images"></i>
                 <div>Drag your photos here</div>
                 <div className={styles.lightText}>Choose at least 1 photos</div>
@@ -69,11 +72,16 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
                     <div className={styles.previewImage} key={i}>
                         <img className="spotImage" src={file} alt={`image ${i}`} />
                     </div>))}
-                {imgFiles.length > 0 && <div className={styles.smallContainer} onClick={handleClick} onDrop={handleDrop}>
-                    <i className="fa-solid fa-images"></i>
-                </div>}
+                {imgFiles.length > 0 &&
+                    <div className={`${styles.smallContainer} ${isDragActive && styles.dragActive}`}
+                        onClick={handleClick}
+                        onDrop={handleDrop}
+                        onDragExit={() => setIsDragActive(false)}
+                    >
+                        <i className="fa-solid fa-images"></i>
+                    </div>}
             </div>
-        </div>
+        </div >
     )
 
 }

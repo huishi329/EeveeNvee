@@ -13,6 +13,7 @@
     color: rgba(0, 0, 0, 0.2)
 }
 
+
 .button {
     cursor: pointer;
     color: black;
@@ -75,4 +76,8 @@
 
 .smallContainer:hover {
     border: 1px rgba(0, 0, 0, 0.5) solid;
+}
+
+.dragActive {
+    border: 0.1rem #FF385C solid;
 }
