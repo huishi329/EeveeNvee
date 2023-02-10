@@ -21,32 +21,3 @@
 .wrapper::-webkit-scrollbar-thumb {
     background-color: #FF385C;
 }
-
-
-.imgSection {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem 0.5rem;
-    max-width: 100%;
-}
-
-
-.imgSection>div {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    min-width: 100%;
-}
-
-.previewImage {
-    max-width: 50%;
-    height: 12rem;
-    display: flex;
-    overflow: hidden;
-
-}
-
-.previewImage img {
-    min-width: 100%;
-    object-fit: cover;
-}
