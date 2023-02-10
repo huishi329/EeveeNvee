@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { updateSpot } from '../../../store/spot';
 import { useDispatch } from 'react-redux';
 import styles from './EditSpotForm.module.css';
+import DragAndDropImage from '../../DragAndDropImage/DragAndDropImage';
 
 
 function EditSpotForm({ setShowModal, spot }) {
@@ -13,7 +14,7 @@ function EditSpotForm({ setShowModal, spot }) {
     const [name, setName] = useState(spot.name)
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
-    const [imgFile, setImgFile] = useState(spot.SpotImages[0].url);
+    const [imgFiles, setImgFiles] = useState(spot.SpotImages);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
@@ -37,15 +38,6 @@ function EditSpotForm({ setShowModal, spot }) {
                 if (data && data.errors) setErrors(Object.values(data.errors));
             });
     };
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setImgFile(file)
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.querySelector(".spotImage").src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-    }
 
     return (
         <div className={styles.container}>
@@ -104,19 +96,7 @@ function EditSpotForm({ setShowModal, spot }) {
                         onChange={(e) => setPrice(e.target.value)}
                         required
                     />
-                    <input
-                        className='spotImageInput'
-                        placeholder='Preview Image'
-                        type="file"
-                        accept='.png, .jpeg, .jpg'
-                        onChange={handleImageChange}
-                        required
-                        multiple
-                        style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
-                    />
-                    <div className={styles.previewImage}>
-                        <img className="spotImage" src={imgFile} alt={name} />
-                    </div>
+                    <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
                     <button type="submit">Submit</button>
                 </form >
             </div>
