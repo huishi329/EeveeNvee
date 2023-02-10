@@ -3,8 +3,8 @@ import { csrfFetch } from "./crsf";
 const LOAD_ALL_SPOTS = 'spots/LOAD_ALL_SPOTS';
 const LOAD_HOSTING_SPOTS = 'spots/LOAD_HOSTING_SPOTS';
 const LOAD_SINGLE_SPOT = 'spots/LOAD_SINGLE_SPOT';
-const CREATE_SPOT = 'spots/CREATE_SPOT';
-const CREATE_SPOT_IMAGE = 'spots/CREATE_SPOT_IMAGE';
+// const CREATE_SPOT = 'spots/CREATE_SPOT';
+// const CREATE_SPOT_IMAGE = 'spots/CREATE_SPOT_IMAGE';
 
 
 const loadAllSpots = (spots) => {
@@ -42,31 +42,29 @@ export const getHostingSpots = (spotData) => async dispatch => {
     return spots;
 };
 
-export const createSpotImage = (spotId, imgFile, position) => async dispatch => {
+export const createSpotImage = (spotId, imgFile, position) => async () => {
     const formData = new FormData();
     formData.append('spotId', spotId);
     formData.append('position', position);
-    formData.append("images", imgFile);
+    formData.append("image", imgFile);
 
-    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    await csrfFetch(`/api/spots/${spotId}/images`, {
         method: 'POST',
         headers: {
             "Content-Type": "multipart/form-data",
         },
         body: formData
     });
-
-    return response.json();
 }
 
-export const createSpot = (spotData) => async dispatch => {
+
+export const createSpot = spotData => async () => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(spotData)
     });
 
     const spot = await response.json();
-    dispatch({ type: CREATE_SPOT, spot });
     return spot.id;
 };
 
@@ -123,9 +121,13 @@ const spotReducer = (state = initialState, action) => {
         case LOAD_SINGLE_SPOT:
             newState.singleSpot = action.spot;
             return newState;
-        case CREATE_SPOT:
-            newState.singleSpot = action.spot;
-            return newState;
+        // case CREATE_SPOT:
+        //     newState.singleSpot = action.spot;
+        //     return newState;
+        // case CREATE_SPOT_IMAGE:
+        //     newState.SpotImages = { ...newState.SpotImages };
+        //     newState.SpotImages[action.image.position] = action.image;
+        //     return newState;
         default:
             return state;
     }
