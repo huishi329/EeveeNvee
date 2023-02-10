@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
+import styles from './SignupForm.module.css';
 
-function SignupForm({ setShowModal }) {
+export default function SignupForm({ setShowModal }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -30,7 +31,7 @@ function SignupForm({ setShowModal }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.wrapper}>
       <h2>Welcome to Eeveenvee</h2>
       <div className='errors-div'>
         {errors.map((error, idx) => <div key={idx}>{error}</div>)}
@@ -85,5 +86,3 @@ function SignupForm({ setShowModal }) {
     </form >
   );
 }
-
-export default SignupForm;
