@@ -1,15 +1,14 @@
 import { csrfFetch } from "./crsf";
 
-const LOAD_ALL_SPOTS = 'spot/LOAD_ALL_SPOTS';
-const LOAD_HOSTING_SPOTS = 'spot/LOAD_HOSTING_SPOTS';
-const LOAD_SINGLE_SPOT = 'spot/LOAD_SINGLE_SPOT';
+const LOAD_ALL_SPOTS = 'spots/LOAD_ALL_SPOTS';
+const LOAD_HOSTING_SPOTS = 'spots/LOAD_HOSTING_SPOTS';
+const LOAD_SINGLE_SPOT = 'spots/LOAD_SINGLE_SPOT';
+// const CREATE_SPOT = 'spots/CREATE_SPOT';
+// const CREATE_SPOT_IMAGE = 'spots/CREATE_SPOT_IMAGE';
 
 
 const loadAllSpots = (spots) => {
-    return {
-        type: LOAD_ALL_SPOTS,
-        spots
-    };
+    return { type: LOAD_ALL_SPOTS, spots };
 };
 
 export const getAllSpots = () => async dispatch => {
@@ -27,10 +26,7 @@ export const getAllSpots = () => async dispatch => {
 
 
 const loadHostingSpots = (spots) => {
-    return {
-        type: LOAD_HOSTING_SPOTS,
-        spots
-    };
+    return { type: LOAD_HOSTING_SPOTS, spots };
 };
 
 export const getHostingSpots = (spotData) => async dispatch => {
@@ -46,35 +42,30 @@ export const getHostingSpots = (spotData) => async dispatch => {
     return spots;
 };
 
-export const createSpotImage = (spotId, imgFile) => async dispatch => {
+export const createSpotImage = (spotId, imgFile, position) => async () => {
     const formData = new FormData();
     formData.append('spotId', spotId);
-    formData.append('preview', true);
+    formData.append('position', position);
+    formData.append("image", imgFile);
 
-    if (imgFile) formData.append("image", imgFile);
-
-    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    await csrfFetch(`/api/spots/${spotId}/images`, {
         method: 'POST',
         headers: {
             "Content-Type": "multipart/form-data",
         },
         body: formData
     });
-
-    return response.json();
 }
 
-export const createSpot = (spotData, imgFile, history) => async dispatch => {
+
+export const createSpot = spotData => async () => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(spotData)
     });
 
     const spot = await response.json();
-    await dispatch(createSpotImage(spot.id, imgFile))
-    await dispatch(getAllSpots());
-    history.push(`/spots/${spot.id}`);
-    return spot;
+    return spot.id;
 };
 
 export const updateSpot = (spotId, spotData) => async dispatch => {
@@ -87,21 +78,20 @@ export const updateSpot = (spotId, spotData) => async dispatch => {
 };
 
 const loadSingleSpot = (spot) => {
-    return {
-        type: LOAD_SINGLE_SPOT,
-        spot
-    };
+    return { type: LOAD_SINGLE_SPOT, spot };
 };
 
 export const getSpotDetail = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`)
 
     const spot = await response.json();
-    await dispatch(loadSingleSpot(spot))
-    return spot;
+    const imagesNormalized = {}
+    spot.SpotImages.forEach(image => {
+        imagesNormalized[image.position] = image;
+    });
+    spot.SpotImages = imagesNormalized;
+    await dispatch(loadSingleSpot(spot));
 };
-
-
 
 export const deleteSpot = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
@@ -120,22 +110,24 @@ const initialState = {
 };
 
 const spotReducer = (state = initialState, action) => {
+    const newState = { ...initialState };
     switch (action.type) {
         case LOAD_ALL_SPOTS:
-            return {
-                hostSpots: state.hostSpots,
-                allSpots: action.spots
-            }
+            newState.allSpots = action.spots;
+            return newState;
         case LOAD_HOSTING_SPOTS:
-            return {
-                allSpots: state.allSpots,
-                hostSpots: action.spots
-            }
+            newState.hostSpots = action.spots;
+            return newState;
         case LOAD_SINGLE_SPOT:
-            return {
-                ...state,
-                singleSpot: action.spot
-            }
+            newState.singleSpot = action.spot;
+            return newState;
+        // case CREATE_SPOT:
+        //     newState.singleSpot = action.spot;
+        //     return newState;
+        // case CREATE_SPOT_IMAGE:
+        //     newState.SpotImages = { ...newState.SpotImages };
+        //     newState.SpotImages[action.image.position] = action.image;
+        //     return newState;
         default:
             return state;
     }

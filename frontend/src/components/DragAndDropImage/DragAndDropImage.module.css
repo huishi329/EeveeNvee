@@ -1,7 +1,3 @@
-.spotImageInput {
-    display: none;
-}
-
 .container {
     display: flex;
     flex-direction: column;
@@ -17,25 +13,6 @@
     color: rgba(0, 0, 0, 0.2)
 }
 
-.smallContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 0.1rem rgba(0, 0, 0, 0.2) dashed;
-    cursor: pointer;
-    width: 100%;
-    height: 12rem;
-}
-
-.smallContainer i {
-    font-size: 2rem;
-    color: rgba(0, 0, 0, 0.2)
-}
-
-.smallContainer:hover {
-    border: 1px rgba(0, 0, 0, 0.5) solid;
-}
 
 .button {
     cursor: pointer;
@@ -50,4 +27,57 @@
 .lightText {
     font-weight: 400;
     margin: 1rem auto;
+}
+
+.imgSection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 0.5rem;
+    max-width: 100%;
+}
+
+
+.imgSection>div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+}
+
+.previewImage {
+    max-width: 50%;
+    height: 12rem;
+    display: flex;
+    overflow: hidden;
+
+}
+
+.previewImage img {
+    min-width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+
+.smallContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.1rem rgba(0, 0, 0, 0.2) dashed;
+    cursor: pointer;
+    max-width: 50%;
+    height: 12rem;
+    overflow: hidden;
+}
+
+.smallContainer i {
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.2)
+}
+
+.smallContainer:hover {
+    border: 1px rgba(0, 0, 0, 0.5) solid;
+}
+
+.dragActive {
+    border: 0.1rem #FF385C solid;
 }

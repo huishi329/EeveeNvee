@@ -30,7 +30,7 @@ export default function SpotDetail({ spot, reviewRef }) {
                         <span>
                             {`${spot.city}, ${spot.state}, ${spot.country}`}
                         </span>
-                        {(spot.SpotImages).length > 0 && <SpotImages images={spot.SpotImages} />}
+                        {Object.keys(spot.SpotImages).length > 0 && <SpotImages images={spot.SpotImages} />}
 
                         <div className={styles.spotMain}>
                             <div className={styles.spotDescription}>

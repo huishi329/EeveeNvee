@@ -27,12 +27,11 @@ h2 {
 }
 
 .spotMain {
-
     display: grid;
     grid-auto-columns: 1fr;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr;
-    gap: 0px 0px;
+    gap: 0px 2rem;
     grid-template-areas:
         ". .";
 }
