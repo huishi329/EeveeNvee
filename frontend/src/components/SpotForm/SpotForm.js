@@ -34,16 +34,14 @@ export default function SpotForm({ setShowModal }) {
             price
         };
         try {
-            console.log(imgFiles);
             const spotId = await dispatch(createSpot(spotData, imgFiles));
             const promises = imgFiles.map((file, i) => new Promise(resolve => resolve(dispatch(createSpotImage(spotId, file, i)))));
             await Promise.all(promises);
             setShowModal(false);
             history.push(`/spots/${spotId}`)
         } catch (e) {
-            console.log(e);
-            // const data = await e.json();
-            // if (data && data.errors) setErrors(Object.values(data.errors));
+            const data = await e.json();
+            if (data && data.errors) setErrors(Object.values(data.errors));
         };
     };
 
@@ -108,15 +106,6 @@ export default function SpotForm({ setShowModal }) {
                         onChange={(e) => setPrice(e.target.value)}
                         required
                     />
-                    {/* {imgFiles.length === 0 &&
-                        <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />}
-                    <div className={styles.imgSection}>
-                        {imgFiles.map((file, i) => (
-                            <div className={styles.previewImage} key={i}>
-                                <img className="spotImage" src={file} alt={name} />
-                            </div>))}
-                        {imgFiles.length > 0 && <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />}
-                    </div> */}
                     <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
 
                     <button type="submit">Submit</button>
