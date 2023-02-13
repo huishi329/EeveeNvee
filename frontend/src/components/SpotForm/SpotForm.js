@@ -108,7 +108,7 @@ export default function SpotForm({ setShowModal }) {
                     />
                     <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
 
-                    <button type="submit">Submit</button>
+                    <button className={styles.button} type="submit">Submit</button>
                 </form >
             </div>
         </div>

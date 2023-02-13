@@ -42,7 +42,7 @@ function EditSpotForm({ setShowModal, spot }) {
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
-                <form onSubmit={handleSubmit}>
+                <form className={styles.form} onSubmit={handleSubmit}>
                     <h2>Edit Spot</h2>
                     <div className='errors-div'>
                         {errors.map((error, idx) => <div key={idx}>{error}</div>)}
@@ -97,7 +97,7 @@ function EditSpotForm({ setShowModal, spot }) {
                         required
                     />
                     <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
-                    <button type="submit">Submit</button>
+                    <button className={styles.button} type="submit">Submit</button>
                 </form >
             </div>
         </div>

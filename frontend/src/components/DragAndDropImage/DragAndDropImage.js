@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import styles from './DragAndDropImage.module.css'
+import ImageEditor from './ImageEditor/ImageEditor';
 
 export default function DragAndDropImage({ imgFiles, setImgFiles }) {
     const inputRef = useRef(null);
@@ -68,10 +69,7 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
                 <button type='button' className={styles.button} >Upload from your device</button>
             </div>}
             <div className={styles.imgSection}>
-                {previewImages.map((file, i) => (
-                    <div className={styles.previewImage} key={i}>
-                        <img className="spotImage" src={file} alt={`image ${i}`} />
-                    </div>))}
+                {previewImages.map((imgURL, i) => <ImageEditor imgURL={imgURL} position={i} key={i} />)}
                 {imgFiles.length > 0 &&
                     <div className={`${styles.smallContainer} ${isDragActive && styles.dragActive}`}
                         onClick={handleClick}

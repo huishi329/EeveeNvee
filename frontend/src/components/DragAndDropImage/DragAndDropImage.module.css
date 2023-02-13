@@ -44,20 +44,6 @@
     min-width: 100%;
 }
 
-.previewImage {
-    max-width: 50%;
-    height: 12rem;
-    display: flex;
-    overflow: hidden;
-
-}
-
-.previewImage img {
-    min-width: 100%;
-    object-fit: cover;
-    vertical-align: bottom;
-}
-
 .smallContainer {
     display: flex;
     align-items: center;
