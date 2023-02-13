@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from '../../context/Modal';
 import './ReviewPanel.css';
-import ReviewForm from "../ReviewForm";
+import ReviewForm from "../ReviewForm/ReviewForm";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import { getSpotReviews, clearSpotReviews } from "../../store/review";
 
