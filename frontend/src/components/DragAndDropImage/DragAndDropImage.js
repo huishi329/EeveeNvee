@@ -50,7 +50,7 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
             // Must add e.preventDefault() for onDragOver and onDragEnter for the dropTarget
             onDragOver={handleDrag}
             onDragEnter={handleDrag}
-            onDragExit={() => setIsDragActive(false)}
+            onDragLeave={() => setIsDragActive(false)}
             onDrop={handleDrop}>
             <input
                 ref={inputRef}
