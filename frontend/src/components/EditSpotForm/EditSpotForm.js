@@ -61,59 +61,82 @@ export default function EditSpotForm({ setShowModal }) {
     return (
         <div className={styles.wrapper} id='editSpotForm'>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <h2>Edit Spot</h2>
-                <div className='errors-div'>
+                {/* <h2>Edit Spot</h2> */}
+                {errors.length > 0 && <div className='errors-div'>
                     {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+                </div>}
+                <div className={styles.input}>
+                    <label>Street</label>
+                    <input
+                        placeholder='e.g. 11108 108th Avenue'
+                        type="text"
+                        value={street}
+                        onChange={(e) => setStreet(e.target.value)}
+                        required
+                    />
                 </div>
-                <input
-                    placeholder='Street'
-                    type="text"
-                    value={street}
-                    onChange={(e) => setStreet(e.target.value)}
-                    required
-                />
-                <input
-                    placeholder='city'
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                />
-                <input
-                    placeholder='state'
-                    type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                />
-                <input
-                    placeholder='Country'
-                    type="text"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    required
-                />
-                <input
-                    placeholder='Name'
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-                <textarea
-                    placeholder='Description'
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                ></textarea>
-                <input
-                    placeholder='Price'
-                    type="number"
-                    value={price}
-                    min='0'
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                />
+                <div className={styles.input}>
+                    <label>City</label>
+                    <input
+                        placeholder='e.g. Edmonton'
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className={styles.input}>
+                    <label>State</label>
+                    <input
+                        placeholder='e.g. Alberta'
+                        type="text"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className={styles.input}>
+                    <label>Country</label>
+                    <input
+                        placeholder='e.g. Canada'
+                        type="text"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className={styles.input}>
+                    <label>Name</label>
+                    <input
+                        placeholder='Name'
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className={styles.input}>
+                    <label>Description</label>
+                    <textarea
+                        placeholder='Description'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    ></textarea>
+                </div>
+                <div className={styles.input}>
+
+                    <label>Price</label>
+                    <input
+                        placeholder='Price'
+                        type="number"
+                        value={price}
+                        min='0'
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                    />
+                </div>
+
                 <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
                 <button className={styles.button} type="submit">Submit</button>
             </form >

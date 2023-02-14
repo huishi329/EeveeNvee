@@ -18,3 +18,13 @@
     font-weight: 600;
     margin-top: 1rem;
 }
+
+.wrapper label {
+    margin: 0.5rem 0rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+}
