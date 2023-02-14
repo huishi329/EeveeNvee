@@ -5,7 +5,7 @@ import { restoreUser } from "./store/session";
 import Navigation from "./components/Navigation/Navigation";
 import SpotView from "./components/SpotView";
 import SpotPage from "./components/SpotPage/SpotPage";
-import EditSpotForm from "./components/EditSpot/EditSpotForm/EditSpotForm";
+import EditSpotForm from "./components/EditSpotForm/EditSpotForm";
 
 function App() {
   const dispatch = useDispatch();
