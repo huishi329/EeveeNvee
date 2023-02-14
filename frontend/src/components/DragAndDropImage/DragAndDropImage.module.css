@@ -1,3 +1,7 @@
+.wrapper {
+    width: 36rem;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -35,6 +39,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem 0.5rem;
     max-width: 100%;
+    padding: 1rem 0;
 }
 
 
