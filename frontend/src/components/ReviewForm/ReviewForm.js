@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createReview } from '../../store/review';
+import { createReview, updateReview } from '../../store/review';
 import styles from './ReviewForm.module.css';
-
 
 export default function ReviewForm({ setShowModal, spot, originalReview }) {
     const dispatch = useDispatch();
@@ -11,21 +10,29 @@ export default function ReviewForm({ setShowModal, spot, originalReview }) {
     const [hover, setHover] = useState(stars);
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(createReview(spot.id, {
-            review,
-            stars
-        }))
-            .then(() => setShowModal(false))
-            .catch(async (res) => {
-                const errors = [];
-                const data = await res.json();
-                if (data.statusCode === 403) errors.push('You already has a review for this spot.')
-                if (data && data.errors) errors.push(...Object.values(data.errors));
-                setErrors(errors);
-            });
+        try {
+            if (originalReview) {
+                dispatch(updateReview(originalReview.id, {
+                    review,
+                    stars
+                }))
+            } else {
+                dispatch(createReview(spot.id, {
+                    review,
+                    stars
+                }))
+            };
+        } catch (res) {
+            const errors = [];
+            const data = await res.json();
+            if (data.statusCode === 403) errors.push('You already has a review for this spot.')
+            if (data && data.errors) errors.push(...Object.values(data.errors));
+            setErrors(errors);
+        };
+        setShowModal(false);
     }
 
     return (
