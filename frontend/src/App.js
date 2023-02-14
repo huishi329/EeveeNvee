@@ -5,6 +5,7 @@ import { restoreUser } from "./store/session";
 import Navigation from "./components/Navigation/Navigation";
 import SpotView from "./components/SpotView";
 import SpotPage from "./components/SpotPage/SpotPage";
+import EditSpotForm from "./components/EditSpot/EditSpotForm/EditSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,16 +22,17 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       <Switch>
-        <Route path='/spots/:spotId'>
+        <Route exact path='/spots/:spotId'>
           <SpotPage />
+        </Route>
+        <Route path='/spots/:spotId/edit'>
+          <EditSpotForm />
         </Route>
         <Route exact path='/'>
           <SpotView />
         </Route>
         <Route>
-          <h1
-            style={{ marginLeft: '5rem' }}
-          >Page Not Found</h1>
+          <h1 style={{ marginLeft: '5rem' }}>Page Not Found</h1>
         </Route>
       </Switch>
 
