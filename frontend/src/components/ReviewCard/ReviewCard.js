@@ -2,13 +2,19 @@ import './ReviewCard.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteReview } from '../../store/review';
 import { useEffect, useState } from 'react';
+import ReviewForm from '../ReviewForm/ReviewForm';
+import { Modal } from '../../context/Modal';
 
-function ReviewCard({ review }) {
+function ReviewCard({ spot, review }) {
     const dispatch = useDispatch();
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const sessionUser = useSelector(state => state.session.user);
     const [isReviewWriter, setIsReviewWriter] = useState(false);
+    const [showEditFormModal, setShowEditFormModal] = useState(false);
 
+    const deleteHandler = () => {
+        dispatch(deleteReview(review));
+    }
     useEffect(() => {
         if (sessionUser) {
             if (review.userId === sessionUser.id) setIsReviewWriter(true);
@@ -16,9 +22,8 @@ function ReviewCard({ review }) {
         return () => setIsReviewWriter(false);
     }, [sessionUser, review])
 
-    const deleteHandler = () => {
-        dispatch(deleteReview(review));
-    }
+
+    if (!review) return null;
 
     return (
         <div className='review-card'>
@@ -37,9 +42,16 @@ function ReviewCard({ review }) {
                     </div>
                 </div>
                 <div>
-                    {isReviewWriter && <button
-                        onClick={() => deleteHandler()}
-                    >Delete my review</button>}
+                    {isReviewWriter &&
+                        <div>
+                            <button
+                                onClick={() => setShowEditFormModal(true)}
+                            >Edit</button>
+                            <button
+                                onClick={() => deleteHandler()}
+                            >Delete</button>
+                        </div>
+                    }
                 </div>
 
             </div>
@@ -49,6 +61,11 @@ function ReviewCard({ review }) {
                 </p>
 
             </div>
+            {showEditFormModal &&
+                <Modal onClose={() => setShowEditFormModal(false)}>
+                    <ReviewForm setShowModal={setShowEditFormModal} spot={spot} originalReview={review} />
+                </Modal>
+            }
         </div >
     )
 };

@@ -1,0 +1,50 @@
+.wrapper {
+    position: relative;
+    height: 12rem;
+}
+
+.previewImage {
+    position: relative;
+    min-width: 100%;
+    display: flex;
+}
+
+.previewImage img {
+    min-width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+
+.cover {
+    position: absolute;
+    left: 1rem;
+    top: 0.5rem;
+
+    padding: 0.5rem;
+    width: fit-content;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 5px;
+
+    font-weight: 600;
+}
+
+.button {
+    border: none;
+    position: absolute;
+    right: 0.5rem;
+    top: 1rem;
+    cursor: pointer;
+    background-color: rbga(255, 255, 255, 0.3);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    height: fit-content;
+    margin: 0;
+    padding: 0.3rem 0;
+}
+
+.button:hover {
+    background-color: white;
+    /* box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5); */
+
+}

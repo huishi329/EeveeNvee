@@ -1,57 +1,70 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createReview } from '../../store/review';
+import { createReview, updateReview } from '../../store/review';
+import styles from './ReviewForm.module.css';
 
-
-export default function ReviewForm({ setShowModal, spot }) {
+export default function ReviewForm({ setShowModal, spot, originalReview }) {
     const dispatch = useDispatch();
-    const [review, setReview] = useState('');
-    const [stars, setStars] = useState(1);
-
+    const [review, setReview] = useState(originalReview?.review || '');
+    const [stars, setStars] = useState(originalReview?.stars || 0);
+    const [hover, setHover] = useState(stars);
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(createReview(spot.id, {
-            review,
-            stars
-        }))
-            .then(() => setShowModal(false))
-            .catch(async (res) => {
-                const errors = [];
-                const data = await res.json();
-                if (data.statusCode === 403) errors.push('You already has a review for this spot.')
-                if (data && data.errors) errors.push(...Object.values(data.errors));
-                setErrors(errors);
-            });
+        try {
+            if (originalReview) {
+                dispatch(updateReview(originalReview.id, {
+                    review,
+                    stars
+                }))
+            } else {
+                dispatch(createReview(spot.id, {
+                    review,
+                    stars
+                }))
+            };
+        } catch (res) {
+            const errors = [];
+            const data = await res.json();
+            if (data.statusCode === 403) errors.push('You already has a review for this spot.')
+            if (data && data.errors) errors.push(...Object.values(data.errors));
+            setErrors(errors);
+        };
+        setShowModal(false);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.wrapper} onSubmit={handleSubmit}>
             <h2>Rate your stay</h2>
-            <div className='errors-div'>
+            {errors.length > 0 && <div className='errors-div'>
                 {errors.map((error, idx) => <div key={idx}>{error}</div>)}
-            </div>
+            </div>}
+            <div className={styles.stars}>
+                {[...Array(5)].map((star, i) => {
+                    i += 1;
+                    return (
+                        <button
+                            type='button'
+                            key={i}
+                            className={styles.star}
+                            onClick={() => setStars(i)}
+                            onMouseEnter={() => setHover(i)}
+                            onMouseLeave={() => setHover(stars)}
+                        >
+                            <span><i className="fa-solid fa-star"
+                                style={i <= ((stars && hover) || hover) ? { color: '#FF385C' } : { color: 'white' }} /></span>
+                        </button>);
+                })}
+            </div >
             <textarea
                 placeholder={`How was your stay at ${spot.Owner.firstName} 's place?`}
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
                 required
-                style={{ borderRadius: '0.5rem 0.5rem 0 0' }}
             ></textarea>
-            <input
-                placeholder={`Rate your stay at ${spot.Owner.firstName}'s place`}
-                type="number"
-                value={stars}
-                min='1'
-                max='5'
-                onChange={(e) => setStars(e.target.value)}
-                required
-                style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
-            />
-
-            <button type="submit">Submit</button>
+            <button className={styles.button} type="submit">Submit</button>
         </form>
     );
 };

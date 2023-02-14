@@ -17,21 +17,33 @@ export const getSpotReviews = (spotId) => async dispatch => {
 
     const data = await response.json();
     const reviews = data.Reviews.reduce((reviewsObj, review) => {
-        reviewsObj[review.userId] = review
+        reviewsObj[review.id] = review
         return reviewsObj;
     }, {});
     dispatch(loadSpotReviews(reviews));
     return reviews;
 };
 
-export const createReview = (spotId, review) => async dispatch => {
+export const createReview = (spotId, reqBody) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
-        body: JSON.stringify(review)
+        body: JSON.stringify(reqBody)
     });
+    const review = await response.json();
     await dispatch(getSpotDetail(spotId));
     await dispatch(getSpotReviews(spotId));
-    return response.json();
+    return review;
+};
+
+export const updateReview = (reviewId, reqBody) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        body: JSON.stringify(reqBody)
+    });
+
+    const review = await response.json();
+    await dispatch(getSpotDetail(review.spotId));
+    await dispatch(getSpotReviews(review.spotId));
 };
 
 export const deleteReview = (review) => async dispatch => {

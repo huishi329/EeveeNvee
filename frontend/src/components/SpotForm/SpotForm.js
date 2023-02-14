@@ -49,8 +49,7 @@ export default function SpotForm({ setShowModal }) {
 
     return (
         <div className={styles.container}>
-
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} id='editSpotForm'>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <h2>Create a spot</h2>
                     <div>
@@ -108,7 +107,7 @@ export default function SpotForm({ setShowModal }) {
                     />
                     <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
 
-                    <button type="submit">Submit</button>
+                    <button className={styles.button} type="submit">Submit</button>
                 </form >
             </div>
         </div>

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from '../../context/Modal';
 import './ReviewPanel.css';
-import ReviewForm from "../ReviewForm";
+import ReviewForm from "../ReviewForm/ReviewForm";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import { getSpotReviews, clearSpotReviews } from "../../store/review";
 
@@ -13,7 +13,7 @@ function ReviewPanel({ spot, reviewRef }) {
     const sessionUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
     const reviews = useSelector(state => state.reviews.spot);
-    const hasReview = sessionUser && reviews && Object.keys(reviews).includes('' + sessionUser.id);
+    const hasReview = sessionUser && reviews && Object.values(reviews).find(review => review.User.id === sessionUser.id);
     const isNotHost = sessionUser && sessionUser.id !== spot.ownerId;
 
     useEffect(() => {
@@ -25,10 +25,7 @@ function ReviewPanel({ spot, reviewRef }) {
 
     return (
         <>
-            <div
-                ref={reviewRef}
-                className='outer-panel'
-            >
+            <div ref={reviewRef} className='outer-panel'>
                 <div className='reviews-overview'>
                     <div>
                         <span>
@@ -55,6 +52,7 @@ function ReviewPanel({ spot, reviewRef }) {
                 </div>
                 <div className="reviews-container">
                     {Object.values(reviews).map(review => <ReviewCard
+                        spot={spot}
                         key={review.id}
                         review={review}
                     />)}

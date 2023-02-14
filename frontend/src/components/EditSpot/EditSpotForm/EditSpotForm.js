@@ -14,7 +14,7 @@ function EditSpotForm({ setShowModal, spot }) {
     const [name, setName] = useState(spot.name)
     const [description, setDescription] = useState(spot.description);
     const [price, setPrice] = useState(spot.price);
-    const [imgFiles, setImgFiles] = useState(spot.SpotImages);
+    const [imgFiles, setImgFiles] = useState([]);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
@@ -41,8 +41,8 @@ function EditSpotForm({ setShowModal, spot }) {
 
     return (
         <div className={styles.container}>
-            <div className={styles.wrapper}>
-                <form onSubmit={handleSubmit}>
+            <div className={styles.wrapper} id='editSpotForm'>
+                <form className={styles.form} onSubmit={handleSubmit}>
                     <h2>Edit Spot</h2>
                     <div className='errors-div'>
                         {errors.map((error, idx) => <div key={idx}>{error}</div>)}
@@ -97,7 +97,7 @@ function EditSpotForm({ setShowModal, spot }) {
                         required
                     />
                     <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
-                    <button type="submit">Submit</button>
+                    <button className={styles.button} type="submit">Submit</button>
                 </form >
             </div>
         </div>

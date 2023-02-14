@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './DragAndDropImage.module.css'
+import ImageEditor from './ImageEditor/ImageEditor';
 
 export default function DragAndDropImage({ imgFiles, setImgFiles }) {
     const inputRef = useRef(null);
     // display on frontend
-    const [previewImages, setPreviewImages] = useState([]);
+    const spot = useSelector(state => state.spots.singleSpot)
+    const [previewImages, setPreviewImages] = useState(spot ? Object.values(spot.SpotImages) : []);
     const [isDragActive, setIsDragActive] = useState(false);
     const handleImageChange = async (e) => {
         if (!e.files) e = e.target;
@@ -22,8 +25,10 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
             });
         }
         const promises = files.map(file => getBase64(file));
+        const imageURLs = await Promise.all(promises);
+        const newPreviewImages = imageURLs.map((url, i) => ({ url, position: i }));
 
-        setPreviewImages(previewImages.concat(await Promise.all(promises)));
+        setPreviewImages(previewImages.concat(newPreviewImages));
 
     };
 
@@ -46,10 +51,11 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
 
     return (
         <div draggable
+            className={styles.wrapper}
             // Must add e.preventDefault() for onDragOver and onDragEnter for the dropTarget
             onDragOver={handleDrag}
             onDragEnter={handleDrag}
-            onDragExit={() => setIsDragActive(false)}
+            onDragLeave={() => setIsDragActive(false)}
             onDrop={handleDrop}>
             <input
                 ref={inputRef}
@@ -58,21 +64,19 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
                 type="file"
                 accept='.png, .jpeg, .jpg'
                 onChange={handleImageChange}
-                required={imgFiles.length === 0}
+                required={previewImages.length === 0}
                 multiple
             />
-            {imgFiles.length === 0 && <div className={`${styles.container} ${isDragActive && styles.dragActive}`} onClick={handleClick} onDrop={handleDrop}>
-                <i className="fa-solid fa-images"></i>
-                <div>Drag your photos here</div>
-                <div className={styles.lightText}>Choose at least 1 photos</div>
-                <button type='button' className={styles.button} >Upload from your device</button>
-            </div>}
+            {previewImages.length === 0 &&
+                <div className={`${styles.container} ${isDragActive && styles.dragActive}`} onClick={handleClick} onDrop={handleDrop}>
+                    <i className="fa-solid fa-images"></i>
+                    <div>Drag your photos here</div>
+                    <div className={styles.lightText}>Choose at least 1 photos</div>
+                    <button type='button' className={styles.button} >Upload from your device</button>
+                </div>}
             <div className={styles.imgSection}>
-                {previewImages.map((file, i) => (
-                    <div className={styles.previewImage} key={i}>
-                        <img className="spotImage" src={file} alt={`image ${i}`} />
-                    </div>))}
-                {imgFiles.length > 0 &&
+                {previewImages.map((image, i) => <ImageEditor imgURL={image.url} position={i} key={i} />)}
+                {previewImages.length > 0 &&
                     <div className={`${styles.smallContainer} ${isDragActive && styles.dragActive}`}
                         onClick={handleClick}
                         onDrop={handleDrop}
