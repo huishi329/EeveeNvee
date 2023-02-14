@@ -12,6 +12,9 @@ function ReviewCard({ spot, review }) {
     const [isReviewWriter, setIsReviewWriter] = useState(false);
     const [showEditFormModal, setShowEditFormModal] = useState(false);
 
+    const deleteHandler = () => {
+        dispatch(deleteReview(review));
+    }
     useEffect(() => {
         if (sessionUser) {
             if (review.userId === sessionUser.id) setIsReviewWriter(true);
@@ -19,9 +22,8 @@ function ReviewCard({ spot, review }) {
         return () => setIsReviewWriter(false);
     }, [sessionUser, review])
 
-    const deleteHandler = () => {
-        dispatch(deleteReview(review));
-    }
+
+    if (!review) return null;
 
     return (
         <div className='review-card'>

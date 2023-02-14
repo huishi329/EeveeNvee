@@ -13,7 +13,7 @@ function ReviewPanel({ spot, reviewRef }) {
     const sessionUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
     const reviews = useSelector(state => state.reviews.spot);
-    const hasReview = sessionUser && reviews && Object.keys(reviews).includes('' + sessionUser.id);
+    const hasReview = sessionUser && reviews && Object.values(reviews).find(review => review.User.id === sessionUser.id);
     const isNotHost = sessionUser && sessionUser.id !== spot.ownerId;
 
     useEffect(() => {
@@ -25,10 +25,7 @@ function ReviewPanel({ spot, reviewRef }) {
 
     return (
         <>
-            <div
-                ref={reviewRef}
-                className='outer-panel'
-            >
+            <div ref={reviewRef} className='outer-panel'>
                 <div className='reviews-overview'>
                     <div>
                         <span>
