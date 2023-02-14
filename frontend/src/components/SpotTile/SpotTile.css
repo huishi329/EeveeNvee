@@ -8,11 +8,13 @@
 }
 
 
-.spot_tile img {
+.spot_image img {
     max-width: 30vw;
+    min-width: 30vw;
     min-height: 30vw;
+    max-height: 30vw;
     object-fit: cover;
-    border-radius: 2vw;
+    border-radius: 16px;
     padding: 0.8rem;
 }
 
@@ -50,8 +52,10 @@
         max-width: 22.5vw;
     }
 
-    .spot_tile img {
+    .spot_image img {
         max-width: 22.5vw;
+        min-width: 22.5vw;
+        max-height: 22.5vw;
         min-height: 22.5vw;
         object-fit: cover;
         border-radius: 2vw;
