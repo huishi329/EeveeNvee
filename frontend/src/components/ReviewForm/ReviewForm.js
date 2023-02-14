@@ -4,13 +4,11 @@ import { createReview } from '../../store/review';
 import styles from './ReviewForm.module.css';
 
 
-export default function ReviewForm({ setShowModal, spot }) {
+export default function ReviewForm({ setShowModal, spot, originalReview }) {
     const dispatch = useDispatch();
-    const [review, setReview] = useState('');
-    const [stars, setStars] = useState(0);
+    const [review, setReview] = useState(originalReview?.review || '');
+    const [stars, setStars] = useState(originalReview?.stars || 0);
     const [hover, setHover] = useState(stars);
-    console.log(hover, stars);
-
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {

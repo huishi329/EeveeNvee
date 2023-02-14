@@ -55,6 +55,7 @@ function ReviewPanel({ spot, reviewRef }) {
                 </div>
                 <div className="reviews-container">
                     {Object.values(reviews).map(review => <ReviewCard
+                        spot={spot}
                         key={review.id}
                         review={review}
                     />)}
