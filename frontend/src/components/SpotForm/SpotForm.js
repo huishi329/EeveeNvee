@@ -50,7 +50,7 @@ export default function SpotForm({ setShowModal }) {
     return (
         <div className={styles.container}>
 
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper} id='editSpotForm'>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <h2>Create a spot</h2>
                     <div>
