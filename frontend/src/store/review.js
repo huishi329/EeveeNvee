@@ -66,7 +66,6 @@ const initialState = {
 }
 
 export default function reviewReducer(state = initialState, action) {
-    const newState = { ...state };
     switch (action.type) {
         case LOAD_SPOT_REVIEWS:
             return {
