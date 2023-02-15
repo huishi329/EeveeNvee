@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { getSpotDetail, updateSpot } from '../../store/spot';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { updateSpot } from '../../store/spot';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styles from './EditSpotForm.module.css';
 import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
 
-export default function EditSpotForm({ setShowModal }) {
+export default function EditSpotForm({ spot }) {
     const dispatch = useDispatch();
-    const spot = useSelector(state => state.spots.singleSpot);
-    const params = useParams();
-    const spotId = params.spotId;
+    const history = useHistory();
     const [street, setStreet] = useState(spot?.street);
     const [city, setCity] = useState(spot?.city);
     const [state, setState] = useState(spot?.state);
@@ -20,7 +18,7 @@ export default function EditSpotForm({ setShowModal }) {
     const [imgFiles, setImgFiles] = useState([]);
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
         const spotData = {
@@ -34,29 +32,14 @@ export default function EditSpotForm({ setShowModal }) {
             description,
             price
         };
-        return dispatch(updateSpot(spot.id, spotData))
-            .then(() => setShowModal(false))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(Object.values(data.errors));
-            });
+        try {
+            dispatch(updateSpot(spot.id, spotData));
+        } catch (res) {
+            const data = await res.json();
+            if (data && data.errors) setErrors(Object.values(data.errors));
+        };
+        history.push(`/spots/${spot.id}`);
     };
-
-    useEffect(() => {
-        dispatch(getSpotDetail(spotId));
-    }, [dispatch, spotId]);
-
-    useEffect(() => {
-        setStreet(spot?.street);
-        setCity(spot?.city);
-        setState(spot?.state);
-        setCountry(spot?.country);
-        setName(spot?.name);
-        setDescription(spot?.description);
-        setPrice(spot?.price);
-    }, [spot]);
-
-    if (!spot) return null;
 
     return (
         <div className={styles.wrapper} id='editSpotForm'>
@@ -138,7 +121,7 @@ export default function EditSpotForm({ setShowModal }) {
                 </div>
 
                 <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
-                <button className={styles.button} type="submit">Submit</button>
+                <button className={styles.button} type="submit">Save</button>
             </form >
         </div>
     );
