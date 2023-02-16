@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginForm/LoginForm';
@@ -9,6 +9,7 @@ import './Navigation.css';
 import ProfileButton from './ProfileButton/ProfileButton';
 
 export default function Navigation({ isLoaded }) {
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const navbarStyle = useSelector(state => state.style.navbar);
     const location = useLocation().pathname;
@@ -37,13 +38,10 @@ export default function Navigation({ isLoaded }) {
                     {isLoaded &&
                         <>
                             {sessionUser &&
-                                <div className='create-spot-button'>
+                                <div className='switch-to-hosting'>
                                     <button onClick={() => {
-                                        setShowModal(true)
-                                        setCreateSpot(true)
-                                        setLogin(false)
-                                        setSignup(false)
-                                    }}>Create a spot</button>
+                                        history.push('/listing')
+                                    }}>Switch to hosting</button>
                                 </div>}
                             <ProfileButton
                                 user={sessionUser}
