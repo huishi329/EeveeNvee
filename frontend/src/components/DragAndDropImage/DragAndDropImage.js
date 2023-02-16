@@ -1,20 +1,33 @@
 import { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { createSpotImage } from '../../store/spot';
 import styles from './DragAndDropImage.module.css'
 import ImageEditor from './ImageEditor/ImageEditor';
 
-export default function DragAndDropImage({ imgFiles, setImgFiles }) {
+
+export default function DragAndDropImage() {
+    const dispatch = useDispatch();
     const inputRef = useRef(null);
     const location = useLocation();
     // display on frontend
     const spot = useSelector(state => state.spots.singleSpot);
     const [previewImages, setPreviewImages] = useState(spot && location.pathname.includes('edit') ? Object.values(spot.SpotImages) : []);
     const [isDragActive, setIsDragActive] = useState(false);
+
+    const handleImageSubmission = async (imgFiles) => {
+        const promises = imgFiles.map((file, i) => {
+            return new Promise(resolve => resolve(
+                dispatch(createSpotImage(spot.id, file, i + previewImages.length))
+            ))
+        });
+        await Promise.all(promises);
+    };
+
     const handleImageChange = async (e) => {
         if (!e.files) e = e.target;
         const files = [...e.files];
-        setImgFiles(imgFiles.concat(files));
+        await handleImageSubmission(files);
         // Map each file object to its data url, for display in <img>
         // Don't update React state until we convert all img files to data url
         function getBase64(file) {
