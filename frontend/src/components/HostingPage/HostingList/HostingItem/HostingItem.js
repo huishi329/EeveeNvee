@@ -1,19 +1,18 @@
-import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { deleteSpot } from "../../../../store/spot";
+import { Modal } from "../../../../context/Modal";
+import DeleteWarning from "./DeleteWarning/DeleteWarning";
 import styles from "./HostingItem.module.css";
 
 export default function HostingItem({ spot }) {
     const history = useHistory();
-    const dispatch = useDispatch();
+    const [showDeleteWarning, setShowDeleteWarning] = useState(false);
     const { id, name, city, state, country, updatedAt, previewImage } = spot;
     const date = new Date(updatedAt);
     const month = date.toLocaleString('default', { month: 'long' });
     const day = date.getDate();
     const year = date.getFullYear();
-    const deleteHostSpot = () => {
-        dispatch(deleteSpot(spot.id)).then(() => history.push('/'))
-    }
+
 
     return (
         <div className={styles.wrapper}>
@@ -33,7 +32,7 @@ export default function HostingItem({ spot }) {
                         Edit
                     </div>
                     <div className={styles.delete}
-                        onClick={deleteHostSpot}>
+                        onClick={() => setShowDeleteWarning(true)}>
                         <i className="fa-solid fa-trash"></i>
                         Delete
                     </div>
@@ -45,6 +44,10 @@ export default function HostingItem({ spot }) {
             <div className={styles.lastModified}>
                 {month} {day}, {year}
             </div>
+            {showDeleteWarning &&
+                <Modal onClose={() => setShowDeleteWarning(false)}>
+                    <DeleteWarning spotId={id} setShowDeleteWarning={setShowDeleteWarning} name={name} />
+                </Modal>}
         </div>
     )
 }
