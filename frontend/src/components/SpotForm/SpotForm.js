@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { createSpot, createSpotImage } from '../../store/spot';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './SpotForm.module.css';
 import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
 
 
 export default function SpotForm({ setShowModal }) {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -38,7 +38,7 @@ export default function SpotForm({ setShowModal }) {
             const promises = imgFiles.map((file, i) => new Promise(resolve => resolve(dispatch(createSpotImage(spotId, file, i)))));
             await Promise.all(promises);
             setShowModal(false);
-            history.push(`/spots/${spotId}`)
+            navigate(`/spots/${spotId}`)
         } catch (e) {
             const data = await e.json();
             if (data && data.errors) setErrors(Object.values(data.errors));
