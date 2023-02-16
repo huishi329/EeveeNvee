@@ -1,5 +1,5 @@
 .wrapper {
-    width: 36rem;
+    width: 45rem;
 }
 
 .container {
@@ -37,7 +37,7 @@
 .imgSection {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem 0.5rem;
+    gap: 1rem 1rem;
     max-width: 100%;
     padding: 1rem 0;
 }
@@ -45,9 +45,9 @@
 
 .imgSection>div {
     width: 100%;
+    min-width: 100%;
     display: flex;
     justify-content: center;
-    min-width: 100%;
 }
 
 .smallContainer {
@@ -57,7 +57,7 @@
     border: 0.1rem rgba(0, 0, 0, 0.2) dashed;
     cursor: pointer;
     max-width: 50%;
-    height: 12rem;
+    height: 15rem;
     overflow: hidden;
 }
 
