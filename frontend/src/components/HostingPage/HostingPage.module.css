@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.button {
+    background-color: white;
+    border: 1px solid;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+}
