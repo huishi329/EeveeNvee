@@ -61,7 +61,7 @@ i {
 
 }
 
-.create-spot-button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.switch-to-hosting:hover {
+    background-color: rgba(0, 0, 0, 0.05);
     border-radius: 1.5rem;
 }
