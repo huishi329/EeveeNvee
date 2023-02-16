@@ -40,7 +40,7 @@ export default function Navigation({ isLoaded }) {
                             {sessionUser &&
                                 <div className='switch-to-hosting'>
                                     <button onClick={() => {
-                                        history.push('/listing')
+                                        history.push('/listings')
                                     }}>Switch to hosting</button>
                                 </div>}
                             <ProfileButton
