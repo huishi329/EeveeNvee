@@ -3,6 +3,7 @@ import { csrfFetch } from "./crsf";
 const LOAD_ALL_SPOTS = 'spots/LOAD_ALL_SPOTS';
 const LOAD_HOSTING_SPOTS = 'spots/LOAD_HOSTING_SPOTS';
 const LOAD_SINGLE_SPOT = 'spots/LOAD_SINGLE_SPOT';
+const CLEAR_SINGLE_SPOT = 'spots/CLEAR_SINGLE_SPOT';
 const DELETE_SPOT = 'spots/DELETE_SPOT';
 
 
@@ -89,8 +90,12 @@ export const getSpotDetail = (spotId) => async dispatch => {
         imagesNormalized[image.position] = image;
     });
     spot.SpotImages = imagesNormalized;
-    await dispatch(loadSingleSpot(spot));
+    dispatch(loadSingleSpot(spot));
 };
+
+export const clearSingleSpot = () => {
+    return { type: CLEAR_SINGLE_SPOT };
+}
 
 export const deleteSpot = (spotId) => async dispatch => {
     await csrfFetch(`/api/spots/${spotId}`, {
@@ -117,6 +122,9 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         case LOAD_SINGLE_SPOT:
             newState.singleSpot = action.spot;
+            return newState;
+        case CLEAR_SINGLE_SPOT:
+            newState.singleSpot = null;
             return newState;
         case DELETE_SPOT:
             delete newState.hostingSpots[action.spotId];
