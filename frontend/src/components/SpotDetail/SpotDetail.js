@@ -1,6 +1,6 @@
-import EditSpot from '../EditSpot/EditSpot';
 import styles from './SpotDetail.module.css';
 import SpotImages from './SpotImages/SpotImages';
+import SpotBooking from '../SpotBooking/SpotBooking';
 
 export default function SpotDetail({ spot, reviewRef }) {
     return (
@@ -37,7 +37,7 @@ export default function SpotDetail({ spot, reviewRef }) {
                                 <h2>{`${spot.name} hosted by ${spot.Owner.firstName}`}</h2>
                                 <p>{spot.description}</p>
                             </div>
-                            <EditSpot spot={spot} reviewRef={reviewRef} />
+                            <SpotBooking spot={spot} reviewRef={reviewRef} />
                         </div>
                     </div>
                 </>
