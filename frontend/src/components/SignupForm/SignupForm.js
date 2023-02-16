@@ -82,7 +82,7 @@ export default function SignupForm({ setShowModal }) {
         style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
       />
 
-      <button type="submit">Continue</button>
+      <button className={styles.button} type="submit">Continue</button>
     </form >
   );
 }
