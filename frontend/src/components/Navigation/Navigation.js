@@ -22,7 +22,7 @@ export default function Navigation({ isLoaded }) {
         <div className='navbar-outer'>
             <nav className='navbar-inner' style={navbarStyle.header}>
                 <div className='navbar-left'>
-                    <NavLink exact to="/">
+                    <NavLink to="/">
                         <div className='logo'>
                             <img src='/eeveeNvee-logo.png' alt='logo'>
                             </img>
