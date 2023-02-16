@@ -42,6 +42,14 @@
     margin-right: 6rem;
 }
 
+.edit {
+    cursor: pointer;
+}
+
+.delete {
+    cursor: pointer;
+}
+
 .location {
     display: flex;
     align-items: center;
