@@ -5,7 +5,7 @@ import { restoreUser } from "./store/session";
 import Navigation from "./components/Navigation/Navigation";
 import SpotView from "./components/SpotView";
 import SpotPage from "./components/SpotPage/SpotPage";
-import EditSpotForm from "./components/EditSpotForm/EditSpotForm";
+import EditSpotPage from "./components/EditSpotPage/EditSpotPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function App() {
           <SpotPage />
         </Route>
         <Route path='/spots/:spotId/edit'>
-          <EditSpotForm />
+          <EditSpotPage />
         </Route>
         <Route exact path='/'>
           <SpotView />
