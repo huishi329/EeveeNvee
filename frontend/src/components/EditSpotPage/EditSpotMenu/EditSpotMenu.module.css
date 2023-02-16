@@ -1,3 +1,8 @@
+.menu {
+    position: sticky;
+    top: 10rem;
+}
+
 .option {
     margin: 1rem 0;
     font-size: 16px;
@@ -6,5 +11,5 @@
 }
 
 .selected {
-    font-weight: 800;
+    font-weight: 600;
 }
