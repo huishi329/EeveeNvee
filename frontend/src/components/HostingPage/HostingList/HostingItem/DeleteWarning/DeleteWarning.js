@@ -12,7 +12,7 @@ export default function DeleteWarning({ spotId, setShowDeleteWarning, name }) {
         <div className={styles.wrapper}>
             <div className={styles.warning}>
                 <div className={styles.title}>
-                    <i className="fa-solid fa-xmark"></i>
+                    <i className="fa-solid fa-xmark" onClick={() => setShowDeleteWarning(false)}></i>
                     <div className={styles.titleText}>Delete this spot?</div>
                     <div></div>
                 </div>
