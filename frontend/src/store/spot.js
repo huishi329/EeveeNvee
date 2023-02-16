@@ -48,13 +48,15 @@ export const createSpotImage = (spotId, imgFile, position) => async () => {
     formData.append('position', position);
     formData.append("image", imgFile);
 
-    await csrfFetch(`/api/spots/${spotId}/images`, {
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
         method: 'POST',
         headers: {
             "Content-Type": "multipart/form-data",
         },
         body: formData
     });
+    const image = await response.json();
+    return image;
 }
 
 
