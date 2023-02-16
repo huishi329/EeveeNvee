@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ImageDropdownMenu from './ImageDropdownMenu/ImageDropdownMenu';
 
 
-export default function ImageEditor({ imgURL, position }) {
+export default function ImageEditor({ image }) {
     const [showDropDownMenu, setShowDropDownMenu] = useState(false);
 
     useEffect(() => {
@@ -25,8 +25,8 @@ export default function ImageEditor({ imgURL, position }) {
     return (
         <div className={styles.wrapper} draggable>
             <div className={styles.previewImage}>
-                <img className="spotImage" src={imgURL} alt={`${position}`} />
-                {position === 0 && <div className={styles.cover}>Cover photo</div>}
+                <img className="spotImage" src={image.url} alt={`${image.position}`} />
+                {image.position === 0 && <div className={styles.cover}>Cover photo</div>}
                 <button type='button' className={styles.button}
                     onClick={() => setShowDropDownMenu(true)}
                 >
@@ -34,7 +34,7 @@ export default function ImageEditor({ imgURL, position }) {
                 </button>
             </div>
             {showDropDownMenu &&
-                <ImageDropdownMenu />}
+                <ImageDropdownMenu image={image} />}
         </div>
     )
 }
