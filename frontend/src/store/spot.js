@@ -29,7 +29,7 @@ const loadHostingSpots = (spots) => {
     return { type: LOAD_HOSTING_SPOTS, spots };
 };
 
-export const getHostingSpots = (spotData) => async dispatch => {
+export const getHostingSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots/current', {
     });
 
@@ -105,7 +105,7 @@ export const deleteSpot = (spotId) => async dispatch => {
 
 const initialState = {
     allSpots: null,
-    hostSpots: null,
+    hostingSpots: null,
     singleSpot: null
 };
 
@@ -116,18 +116,11 @@ const spotReducer = (state = initialState, action) => {
             newState.allSpots = action.spots;
             return newState;
         case LOAD_HOSTING_SPOTS:
-            newState.hostSpots = action.spots;
+            newState.hostingSpots = action.spots;
             return newState;
         case LOAD_SINGLE_SPOT:
             newState.singleSpot = action.spot;
             return newState;
-        // case CREATE_SPOT:
-        //     newState.singleSpot = action.spot;
-        //     return newState;
-        // case CREATE_SPOT_IMAGE:
-        //     newState.SpotImages = { ...newState.SpotImages };
-        //     newState.SpotImages[action.image.position] = action.image;
-        //     return newState;
         default:
             return state;
     }
