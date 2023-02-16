@@ -3,8 +3,7 @@ import { csrfFetch } from "./crsf";
 const LOAD_ALL_SPOTS = 'spots/LOAD_ALL_SPOTS';
 const LOAD_HOSTING_SPOTS = 'spots/LOAD_HOSTING_SPOTS';
 const LOAD_SINGLE_SPOT = 'spots/LOAD_SINGLE_SPOT';
-// const CREATE_SPOT = 'spots/CREATE_SPOT';
-// const CREATE_SPOT_IMAGE = 'spots/CREATE_SPOT_IMAGE';
+const DELETE_SPOT = 'spots/DELETE_SPOT';
 
 
 const loadAllSpots = (spots) => {
@@ -94,13 +93,11 @@ export const getSpotDetail = (spotId) => async dispatch => {
 };
 
 export const deleteSpot = (spotId) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spotId}`, {
+    await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     });
 
-    await dispatch(getAllSpots());
-    await dispatch(getHostingSpots());
-    return response.json();
+    dispatch({ type: DELETE_SPOT, spotId });
 };
 
 const initialState = {
@@ -110,7 +107,7 @@ const initialState = {
 };
 
 const spotReducer = (state = initialState, action) => {
-    const newState = { ...initialState };
+    const newState = { ...state };
     switch (action.type) {
         case LOAD_ALL_SPOTS:
             newState.allSpots = action.spots;
@@ -120,6 +117,9 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         case LOAD_SINGLE_SPOT:
             newState.singleSpot = action.spot;
+            return newState;
+        case DELETE_SPOT:
+            delete newState.hostingSpots[action.spotId];
             return newState;
         default:
             return state;
