@@ -4,6 +4,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpotDetail } from '../../store/spot';
 import EditSpotForm from '../EditSpotForm/EditSpotForm';
+import EditSpotMenu from './EditSpotMenu/EditSpotMenu';
+import { Route, Routes } from 'react-router-dom';
+import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
 
 export default function EditSpotPage({ }) {
     const dispatch = useDispatch();
@@ -21,9 +24,11 @@ export default function EditSpotPage({ }) {
         <div className={styles.wrapper}>
             <h1>{spot.name}</h1>
             <div className={styles.container}>
-                <div></div>
-                <EditSpotForm spot={spot} />
-
+                <EditSpotMenu spot={spot} />
+                <Routes>
+                    <Route path='/basics' element={<EditSpotForm />} />
+                    <Route path='/photos' element={<DragAndDropImage />}></Route>
+                </Routes>
             </div>
         </div>
     );
