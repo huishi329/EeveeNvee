@@ -12,8 +12,7 @@ export default function HostingList({ hostingSpots }) {
                 <div>LAST MODIFIED</div>
             </div>
             <div>
-
-                {Object.values(hostingSpots).map(spot => (<HostingItem spot={spot} />))}
+                {Object.values(hostingSpots).map(spot => (<HostingItem key={spot.id} spot={spot} />))}
             </div>
         </div>
     )
