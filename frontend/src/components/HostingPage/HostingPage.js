@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getHostingSpots } from '../../store/spot';
 import HostingList from './HostingList/HostingList';
 import styles from './HostingPage.module.css';
 
 export default function HostingPage() {
     const user = useSelector(state => state.session.user);
-    const history = useHistory();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const hostingSpots = useSelector(state => state.spots.hostingSpots);
 
     useEffect(() => {
         if (!user) {
-            history.push('/');
+            navigate('/');
         }
         dispatch(getHostingSpots());
     }, [user]);
