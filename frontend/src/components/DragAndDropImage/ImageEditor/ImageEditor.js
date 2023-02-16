@@ -13,14 +13,12 @@ export default function ImageEditor({ imgURL, position }) {
             setShowDropDownMenu(false);
         };
         // click anywhere on the window, close the profile menu
-        const modal = document.getElementById('editSpotForm');
-        console.log(modal);
-        modal.addEventListener('click', closeDropdownMenu);
-        modal.addEventListener('scroll', closeDropdownMenu);
+        window.addEventListener('click', closeDropdownMenu);
+        window.addEventListener('scroll', closeDropdownMenu);
 
         return () => {
-            modal.removeEventListener("click", closeDropdownMenu);
-            modal.removeEventListener("scroll", closeDropdownMenu);
+            window.removeEventListener("click", closeDropdownMenu);
+            window.removeEventListener("scroll", closeDropdownMenu);
         }
     }, [showDropDownMenu]);
 
