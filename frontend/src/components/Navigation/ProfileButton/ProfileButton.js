@@ -29,8 +29,12 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
     };
     // click anywhere on the window, close the profile menu
     document.addEventListener('click', closeMenu);
+    document.addEventListener('wheel', closeMenu);
 
-    return () => document.removeEventListener("click", closeMenu);
+    return () => {
+      document.removeEventListener("click", closeMenu);
+      document.removeEventListener("wheel", closeMenu);
+    }
   }, [showMenu]);
 
   const logout = (e) => {
@@ -51,15 +55,13 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
         (<div className={styles.profileDropdown} style={navbarStyle.menu}>
           <div className={styles.profileInfo}>{user.username}</div>
           <div className={styles.profileInfo}>{user.email}</div>
-          <div className={styles.buttonDiv} style={{ borderRadius: '0 0 1rem 1rem' }}>
-            <button
-              className={styles.transparentButton}
-              onClick={logout}
-            >Log Out</button>
+          <div className={styles.buttonDiv}
+            onClick={logout}>
+            <button className={styles.transparentButton}>Log Out</button>
           </div>
         </div>) :
         <div className={styles.profileDropdown} style={navbarStyle.menu}>
-          <div className={styles.buttonDiv} style={{ borderRadius: '1rem 1rem 0 0' }}
+          <div className={styles.buttonDiv}
             onClick={() => {
               setShowModal(true)
               setLogin(true)

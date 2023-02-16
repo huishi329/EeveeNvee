@@ -12,6 +12,7 @@
     position: absolute;
     box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
+    overflow: hidden;
     top: 5rem;
     right: 0rem;
     min-width: 15rem;
@@ -25,6 +26,7 @@
 
 .buttonDiv:hover {
     background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .profileDropdown div {
