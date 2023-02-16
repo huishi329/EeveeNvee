@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Modal } from "../../../../context/Modal";
 import DeleteWarning from "./DeleteWarning/DeleteWarning";
 import styles from "./HostingItem.module.css";
 
 export default function HostingItem({ spot }) {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [showDeleteWarning, setShowDeleteWarning] = useState(false);
     const { id, name, city, state, country, updatedAt, previewImage } = spot;
     const date = new Date(updatedAt);
@@ -26,7 +26,7 @@ export default function HostingItem({ spot }) {
                 </div>
                 <div className={styles.options}>
                     <div className={styles.edit}
-                        onClick={() => history.push(`/spots/${id}/edit`)}
+                        onClick={() => navigate(`/spots/${id}/edit/basics`)}
                     >
                         <i className="fa-solid fa-edit"></i>
                         Edit
