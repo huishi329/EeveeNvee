@@ -22,7 +22,7 @@ export default function EditSpotPage({ }) {
 
     return (
         <div className={styles.wrapper}>
-            <h1>{spot.name}</h1>
+            <h1>{spot.title}</h1>
             <div className={styles.container}>
                 <EditSpotMenu spot={spot} />
                 <Routes>

@@ -7,7 +7,7 @@ export default function SpotDetail({ spot, reviewRef }) {
         <div className={styles.spotDetail}>
             {spot &&
                 <>
-                    <h1>{spot.name}</h1>
+                    <h1>{spot.title}</h1>
                     <div className={styles.spotSummary}>
                         <span style={{ textDecoration: 'none' }}>
                             <i className="fa-sharp fa-solid fa-star"></i>
@@ -34,7 +34,7 @@ export default function SpotDetail({ spot, reviewRef }) {
 
                         <div className={styles.spotMain}>
                             <div className={styles.spotDescription}>
-                                <h2>{`${spot.name} hosted by ${spot.Owner.firstName}`}</h2>
+                                <h2>{`${spot.title} hosted by ${spot.Owner.firstName}`}</h2>
                                 <p>{spot.description}</p>
                             </div>
                             <SpotBooking spot={spot} reviewRef={reviewRef} />

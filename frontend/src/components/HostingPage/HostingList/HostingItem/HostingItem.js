@@ -7,7 +7,7 @@ import styles from "./HostingItem.module.css";
 export default function HostingItem({ spot }) {
     const navigate = useNavigate();
     const [showDeleteWarning, setShowDeleteWarning] = useState(false);
-    const { id, name, city, state, country, updatedAt, previewImage } = spot;
+    const { id, title, city, state, country, updatedAt, previewImage } = spot;
     const date = new Date(updatedAt);
     const month = date.toLocaleString('default', { month: 'long' });
     const day = date.getDate();
@@ -19,9 +19,9 @@ export default function HostingItem({ spot }) {
             <div className={styles.listing}>
                 <div className={styles.identifier}>
                     <div className={styles.previeImage}>
-                        <img src={previewImage} alt={name}></img></div>
-                    <div className={styles.name}>
-                        <div>{name}</div>
+                        <img src={previewImage} alt={title}></img></div>
+                    <div className={styles.title}>
+                        <div>{title}</div>
                     </div>
                 </div>
                 <div className={styles.options}>
@@ -46,7 +46,7 @@ export default function HostingItem({ spot }) {
             </div>
             {showDeleteWarning &&
                 <Modal onClose={() => setShowDeleteWarning(false)}>
-                    <DeleteWarning spotId={id} setShowDeleteWarning={setShowDeleteWarning} name={name} />
+                    <DeleteWarning spotId={id} setShowDeleteWarning={setShowDeleteWarning} title={title} />
                 </Modal>}
         </div>
     )

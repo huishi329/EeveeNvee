@@ -3,7 +3,7 @@ import { deleteSpot } from "../../../../../store/spot";
 import styles from "./DeleteWarning.module.css";
 
 
-export default function DeleteWarning({ spotId, setShowDeleteWarning, name }) {
+export default function DeleteWarning({ spotId, setShowDeleteWarning, title }) {
     const dispatch = useDispatch();
     const deleteHostSpot = () => {
         dispatch(deleteSpot(spotId)).then(() => setShowDeleteWarning(false))
@@ -17,7 +17,7 @@ export default function DeleteWarning({ spotId, setShowDeleteWarning, name }) {
                     <div></div>
                 </div>
 
-                <div className={styles.message}>Once you delete <span>{name}</span>, this action cannot be undone.</div>
+                <div className={styles.message}>Once you delete <span>{title}</span>, this action cannot be undone.</div>
                 <div className={styles.buttons}>
                     <div className={styles.cancel}
                         onClick={() => setShowDeleteWarning(false)}

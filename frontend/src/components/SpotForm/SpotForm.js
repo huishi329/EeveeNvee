@@ -13,7 +13,7 @@ export default function SpotForm({ setShowModal }) {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
-    const [name, setName] = useState('')
+    const [title, setName] = useState('')
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [imgFiles, setImgFiles] = useState([]);
@@ -29,7 +29,7 @@ export default function SpotForm({ setShowModal }) {
             country,
             lat: 48,
             lng: 120,
-            name,
+            title,
             description,
             price
         };
@@ -87,7 +87,7 @@ export default function SpotForm({ setShowModal }) {
                     <input
                         placeholder='Name'
                         type="text"
-                        value={name}
+                        value={title}
                         onChange={(e) => setName(e.target.value)}
                         required
                     />

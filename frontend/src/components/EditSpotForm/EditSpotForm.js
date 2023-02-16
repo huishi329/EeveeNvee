@@ -12,7 +12,7 @@ export default function EditSpotForm({ spot }) {
     const [city, setCity] = useState(spot?.city);
     const [state, setState] = useState(spot?.state);
     const [country, setCountry] = useState(spot?.country);
-    const [name, setName] = useState(spot?.name)
+    const [title, setName] = useState(spot?.title)
     const [description, setDescription] = useState(spot?.description);
     const [price, setPrice] = useState(spot?.price);
     const [imgFiles, setImgFiles] = useState([]);
@@ -28,7 +28,7 @@ export default function EditSpotForm({ spot }) {
             country,
             lat: 48,
             lng: 120,
-            name,
+            title,
             description,
             price
         };
@@ -92,7 +92,7 @@ export default function EditSpotForm({ spot }) {
                     <input
                         placeholder='Name'
                         type="text"
-                        value={name}
+                        value={title}
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
