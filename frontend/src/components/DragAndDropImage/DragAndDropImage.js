@@ -1,13 +1,15 @@
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styles from './DragAndDropImage.module.css'
 import ImageEditor from './ImageEditor/ImageEditor';
 
 export default function DragAndDropImage({ imgFiles, setImgFiles }) {
     const inputRef = useRef(null);
+    const location = useLocation();
     // display on frontend
-    const spot = useSelector(state => state.spots.singleSpot)
-    const [previewImages, setPreviewImages] = useState(spot ? Object.values(spot.SpotImages) : []);
+    const spot = useSelector(state => state.spots.singleSpot);
+    const [previewImages, setPreviewImages] = useState(spot && location.pathname.includes('edit') ? Object.values(spot.SpotImages) : []);
     const [isDragActive, setIsDragActive] = useState(false);
     const handleImageChange = async (e) => {
         if (!e.files) e = e.target;
@@ -19,7 +21,7 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
             const reader = new FileReader()
             return new Promise(resolve => {
                 reader.onload = event => {
-                    resolve(event.target.result)
+                    resolve(event.target.result);
                 };
                 reader.readAsDataURL(file);
             });
@@ -29,7 +31,6 @@ export default function DragAndDropImage({ imgFiles, setImgFiles }) {
         const newPreviewImages = imageURLs.map((url, i) => ({ url, position: i }));
 
         setPreviewImages(previewImages.concat(newPreviewImages));
-
     };
 
     const handleClick = () => {
