@@ -1,8 +1,16 @@
 import styles from './SpotDetail.module.css';
 import SpotImages from './SpotImages/SpotImages';
 import SpotBooking from '../SpotBooking/SpotBooking';
+import { useEffect } from 'react';
+import { clearSingleSpot } from '../../store/spot';
+import { useDispatch } from 'react-redux';
 
 export default function SpotDetail({ spot, reviewRef }) {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        return () => dispatch(clearSingleSpot());
+    }, []);
+
     return (
         <div className={styles.spotDetail}>
             {spot &&
