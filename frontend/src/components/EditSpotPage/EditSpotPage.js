@@ -26,7 +26,7 @@ export default function EditSpotPage({ }) {
             <div className={styles.container}>
                 <EditSpotMenu spot={spot} />
                 <Routes>
-                    <Route path='/basics' element={<EditSpotForm />} />
+                    <Route path='/basics' element={<EditSpotForm spot={spot} />} />
                     <Route path='/photos' element={<DragAndDropImage />}></Route>
                 </Routes>
             </div>
