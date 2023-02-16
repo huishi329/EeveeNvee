@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { updateSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './EditSpotForm.module.css';
-import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
+// import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
 
 export default function EditSpotForm({ spot }) {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [street, setStreet] = useState(spot?.street);
     const [city, setCity] = useState(spot?.city);
     const [state, setState] = useState(spot?.state);
@@ -38,7 +38,6 @@ export default function EditSpotForm({ spot }) {
             const data = await res.json();
             if (data && data.errors) setErrors(Object.values(data.errors));
         };
-        history.push(`/spots/${spot.id}`);
     };
 
     return (
@@ -120,7 +119,7 @@ export default function EditSpotForm({ spot }) {
                     />
                 </div>
 
-                <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} />
+                {/* <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} /> */}
                 <button className={styles.button} type="submit">Save</button>
             </form >
         </div>
