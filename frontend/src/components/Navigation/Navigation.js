@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useHistory, useLocation } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginForm/LoginForm';
@@ -9,7 +9,7 @@ import './Navigation.css';
 import ProfileButton from './ProfileButton/ProfileButton';
 
 export default function Navigation({ isLoaded }) {
-    const history = useHistory();
+    const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
     const navbarStyle = useSelector(state => state.style.navbar);
     const location = useLocation().pathname;
@@ -40,7 +40,7 @@ export default function Navigation({ isLoaded }) {
                             {sessionUser &&
                                 <div className='switch-to-hosting'>
                                     <button onClick={() => {
-                                        history.push('/listings')
+                                        navigate('/listings')
                                     }}>Switch to hosting</button>
                                 </div>}
                             <ProfileButton
