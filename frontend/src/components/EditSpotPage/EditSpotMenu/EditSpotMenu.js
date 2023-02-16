@@ -4,7 +4,6 @@ import styles from './EditSpotMenu.module.css';
 export default function EditSpotMenu({ spot }) {
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location.pathname);
 
     return (
         <div className={styles.wrapper} >
