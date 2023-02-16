@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { updateSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,6 @@ export default function EditSpotForm({ spot }) {
     const [title, setName] = useState(spot?.title)
     const [description, setDescription] = useState(spot?.description);
     const [price, setPrice] = useState(spot?.price);
-    const [imgFiles, setImgFiles] = useState([]);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -39,6 +38,20 @@ export default function EditSpotForm({ spot }) {
             if (data && data.errors) setErrors(Object.values(data.errors));
         };
     };
+
+    useEffect(() => {
+        const removeFocus = () => {
+            if (document.activeElement.type === "number") {
+                // removes keyboard focus from the current element
+                document.activeElement.blur();
+            }
+        };
+
+        window.addEventListener("wheel", removeFocus);
+
+        return () => window.removeEventListener("wheel", removeFocus);
+    }, []);
+
 
     return (
         <div className={styles.wrapper} id='editSpotForm'>
