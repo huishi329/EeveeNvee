@@ -10,7 +10,7 @@
     grid-auto-columns: 1fr;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr;
-    gap: 0px 0px;
+    gap: 0px 1rem;
     grid-template-areas:
         ". .";
 }
