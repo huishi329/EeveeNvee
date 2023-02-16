@@ -2,17 +2,17 @@
 const { Op } = require('sequelize');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
      * Example:
      * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
+     *   title: 'John Doe',
      *   isBetaMember: false
      * }], {});
     */
-     await queryInterface.bulkInsert('ReviewImages', [
+    await queryInterface.bulkInsert('ReviewImages', [
       {
         reviewId: 4,
         url: 'https://a0.muscache.com/im/pictures/06fc60ab-04c7-4903-950c-5992cbc40674.jpg?im_w=1440'
@@ -29,20 +29,20 @@ module.exports = {
         reviewId: 1,
         url: 'https://a0.muscache.com/im/pictures/miso/Hosting-24372539/original/a801424e-3196-4357-ba5b-f577dcddd998.jpeg?im_w=1440'
       }
-     ], {});
+    ], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('ReviewImages', {
+    await queryInterface.bulkDelete('ReviewImages', {
       id: {
         [Op.in]: [1, 2, 3, 4]
       }
-     });
+    });
   }
 };

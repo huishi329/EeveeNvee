@@ -9,7 +9,7 @@ module.exports = {
      *
      * Example:
      * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
+     *   title: 'John Doe',
      *   isBetaMember: false
      * }], {});
     */

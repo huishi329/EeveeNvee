@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
         max: 180
       }
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false
     },

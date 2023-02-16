@@ -29,7 +29,7 @@ const validateSpot = [
         .exists({ checkFalsy: true })
         .isFloat({ min: -180, max: 180 })
         .withMessage('Longitude is not valid'),
-    check('name')
+    check('title')
         .exists({ checkFalsy: true })
         .isLength({ max: 50 })
         .withMessage('Name must be less than 50 characters'),
@@ -113,22 +113,22 @@ const isSpotOwner = (req, res, next) => {
 
 router.post('/', restoreUser, requireAuth, validateSpot,
     async (req, res) => {
-        const { street, city, state, country, lat, lng, name, description, price } = req.body;
+        const { street, city, state, country, lat, lng, title, description, price } = req.body;
         const { user } = req;
 
         const spot = await Spot.create({
             ownerId: user.id,
-            street, city, state, country, lat, lng, name, description, price
+            street, city, state, country, lat, lng, title, description, price
         });
         res.status(201).json(spot);
     })
 
 router.put('/:spotId', requireAuth, isSpotExisting, isSpotOwner, validateSpot, async (req, res) => {
-    const { street, city, state, country, lat, lng, name, description, price } = req.body;
+    const { street, city, state, country, lat, lng, title, description, price } = req.body;
     const { user, spot } = req;
 
     spot.set({
-        street, city, state, country, lat, lng, name, description, price
+        street, city, state, country, lat, lng, title, description, price
     });
 
     await spot.save();
