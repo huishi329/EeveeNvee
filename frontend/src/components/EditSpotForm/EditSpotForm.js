@@ -34,7 +34,10 @@ export default function EditSpotForm({ spot }) {
         };
         if (spot) {
             dispatch(updateSpot(spot.id, spotData))
-                .then(() => setIsSaved(true))
+                .then(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                    setIsSaved(true);
+                })
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(Object.values(data.errors));
