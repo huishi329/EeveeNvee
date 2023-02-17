@@ -1,7 +1,8 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    width: 80vw;
+    min-width: fit-content;
+    max-width: 90vw;
     margin: 0 auto;
 }
 
