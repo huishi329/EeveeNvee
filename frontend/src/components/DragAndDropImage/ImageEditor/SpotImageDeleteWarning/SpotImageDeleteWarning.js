@@ -8,7 +8,6 @@ export default function SpotImageDeleteWarning({ image, setShowSpotImageDeleteWa
         dispatch(deleteSpotImage(image.id, image.position))
             .then(() => setShowSpotImageDeleteWarning(false));
     };
-    console.log('HEYYYYY');
 
     return (
         <div className={styles.wrapper}>
@@ -18,8 +17,7 @@ export default function SpotImageDeleteWarning({ image, setShowSpotImageDeleteWa
                     <div className={styles.titleText}>Delete this photo?</div>
                     <div className={styles.placeholder}></div>
                 </div>
-
-                <div className={styles.message}>Once you delete it, this action cannot be undone.</div>
+                <div className={styles.message}>Once you delete it, you can't get it back.</div>
                 <div className={styles.buttons}>
                     <div className={styles.cancel}
                         onClick={() => setShowSpotImageDeleteWarning(false)}
