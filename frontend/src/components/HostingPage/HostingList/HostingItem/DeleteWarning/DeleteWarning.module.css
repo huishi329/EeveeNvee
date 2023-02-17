@@ -29,9 +29,12 @@
     background-color: rgba(0, 0, 0, 0.05);
 }
 
+.placeholder {
+    min-width: 2.2rem;
+}
+
 .message span {
     font-weight: 600;
-    /* color: #FF385C; */
 }
 
 .message {
@@ -70,8 +73,4 @@
     padding: 0.5rem;
     border-radius: 4px;
     text-align: center;
-}
-
-.delete:hover {
-    background-color: rgba(0, 0, 0, 0.05);
 }
