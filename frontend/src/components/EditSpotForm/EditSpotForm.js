@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { clearSingleSpot, createSpot, getSpotDetail, updateSpot } from '../../store/spot';
+import { createSpot, getSpotDetail, updateSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
 import styles from './EditSpotForm.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -30,22 +30,25 @@ export default function EditSpotForm({ spot }) {
             description,
             price
         };
-        try {
-            if (spot) {
-                dispatch(updateSpot(spot.id, spotData));
-            }
-            else {
-                dispatch(createSpot(spotData))
-                    .then((spotId) => {
-                        getSpotDetail(spotId);
-                        navigate(`/spots/${spotId}/photos`);
-                    });
-            }
-        } catch (res) {
-            const data = await res.json();
-            if (data && data.errors) setErrors(Object.values(data.errors));
-        };
-    };
+        if (spot) {
+            dispatch(updateSpot(spot.id, spotData))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(Object.values(data.errors));
+                });
+        }
+        else {
+            dispatch(createSpot(spotData))
+                .then((spotId) => {
+                    dispatch(getSpotDetail(spotId))
+                        .then(() => navigate(`/spots/${spotId}/edit/photos`));
+                })
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(Object.values(data.errors));
+                });
+        }
+    }
 
     useEffect(() => {
         const removeFocus = () => {
@@ -58,13 +61,12 @@ export default function EditSpotForm({ spot }) {
 
         return () => {
             window.removeEventListener("wheel", removeFocus);
-            dispatch(clearSingleSpot());
         };
     }, []);
 
 
     return (
-        <div className={styles.wrapper} id='editSpotForm'>
+        <div className={styles.wrapper}>
             <form className={styles.form} onSubmit={handleSubmit}>
                 {/* <h2>Edit Spot</h2> */}
                 {errors.length > 0 && <div className='errors-div'>
