@@ -34,3 +34,32 @@
     flex-direction: column;
     margin: 0.5rem;
 }
+
+.modal {
+    background-color: white;
+    border-radius: 4px;
+}
+
+.modal i {
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.modalButton {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: rgba(0, 0, 0, 0.05) solid 1px;
+    padding: 0.5rem;
+}
+
+.modalText {
+    display: flex;
+    font-size: 16px;
+    padding: 2rem;
+    width: 20rem;
+    justify-content: center;
+
+}

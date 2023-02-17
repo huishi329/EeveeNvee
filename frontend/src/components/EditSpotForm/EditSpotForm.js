@@ -3,6 +3,7 @@ import { createSpot, getSpotDetail, updateSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
 import styles from './EditSpotForm.module.css';
 import { useNavigate } from 'react-router-dom';
+import { Modal } from '../../context/Modal';
 
 export default function EditSpotForm({ spot }) {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function EditSpotForm({ spot }) {
     const [description, setDescription] = useState(spot?.description);
     const [price, setPrice] = useState(spot?.price);
     const [errors, setErrors] = useState([]);
+    const [isSaved, setIsSaved] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,6 +34,7 @@ export default function EditSpotForm({ spot }) {
         };
         if (spot) {
             dispatch(updateSpot(spot.id, spotData))
+                .then(() => setIsSaved(true))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(Object.values(data.errors));
@@ -145,6 +148,17 @@ export default function EditSpotForm({ spot }) {
                 </div>
                 <button className={styles.button} type="submit">{spot ? 'Save' : 'Next'}</button>
             </form >
+            {isSaved && <Modal onClose={() => setIsSaved(false)}>
+                <div className={styles.modal}>
+                    <div className={styles.modalButton}>
+                        <i className="fa-solid fa-xmark" onClick={() => setIsSaved(false)}></i>
+                    </div>
+                    <div className={styles.modalText}>
+                        Your listing is saved!
+                    </div>
+
+                </div>
+            </Modal>}
         </div>
     );
 }
