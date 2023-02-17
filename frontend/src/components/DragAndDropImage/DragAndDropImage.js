@@ -14,7 +14,7 @@ export default function DragAndDropImage() {
     const spot = useSelector(state => state.spots.singleSpot);
     const [previewImages, setPreviewImages] = useState(spot && location.pathname.includes('edit') ? Object.values(spot.SpotImages) : []);
     const [isDragActive, setIsDragActive] = useState(false);
-    console.log(previewImages);
+    const [dragStartImage, setDragStartImage] = useState(null);
 
     useEffect(() => {
         if (spot) {
@@ -75,24 +75,47 @@ export default function DragAndDropImage() {
                 multiple
             />
             {previewImages.length === 0 &&
-                <div className={`${styles.container} ${isDragActive && styles.dragActive}`} onClick={handleClick} onDrop={handleDrop}>
-                    <i className="fa-solid fa-images"></i>
-                    <div>Drag your photos here</div>
-                    <div className={styles.lightText}>Choose at least 1 photos</div>
-                    <button type='button' className={styles.button} >Upload from your device</button>
-                </div>}
-            <div className={styles.imgSection}>
-                {previewImages.map((image, i) => <ImageEditor image={image} key={i} />)}
-                {previewImages.length > 0 &&
-                    <div className={`${styles.smallContainer} ${isDragActive && styles.dragActive}`}
-                        onClick={handleClick}
-                        onDrop={handleDrop}
-                        onDragExit={() => setIsDragActive(false)}
-                    >
+                <div>
+                    <div className={styles.title}>
+                        <div>
+                            <div className={styles.bold}>Add some photos of your apartment</div>
+                            <div className={styles.lightText}>You'll need 5 photos to get started. You can add more or make changes later.</div>
+                        </div>
+                    </div>
+                    <div className={`${styles.container} ${isDragActive && styles.dragActive}`} onClick={handleClick} onDrop={handleDrop}>
                         <i className="fa-solid fa-images"></i>
-                    </div>}
-            </div>
+                        <div>Drag your photos here</div>
+                        <div className={styles.lightText}>Choose at least 1 photos</div>
+                        <button type='button' className={styles.button} >Upload from your device</button>
+                    </div>
+                </div>
+
+            }
+            {previewImages.length > 0 &&
+                <div>
+                    <div className={styles.title}>
+                        <div>
+                            <div className={styles.bold}>All photos</div>
+                            <div className={styles.lightText}>Drag and drop your photos to change the order.</div>
+                        </div>
+                        <button type='button' className={styles.roundButton} onClick={handleClick}>Upload photos</button>
+                    </div>
+                    <div className={styles.imgSection}>
+                        {previewImages.map((image, i) =>
+                            <ImageEditor image={image} key={i}
+                                dragStartImage={dragStartImage}
+                                setDragStartImage={setDragStartImage}
+                            />)}
+
+                        <div className={`${styles.smallContainer} ${isDragActive && styles.dragActive}`}
+                            onClick={handleClick}
+                            onDrop={handleDrop}
+                            onDragExit={() => setIsDragActive(false)}
+                        >
+                            <i className="fa-solid fa-images"></i>
+                        </div>
+                    </div>
+                </div>}
         </div >
     )
-
 }
