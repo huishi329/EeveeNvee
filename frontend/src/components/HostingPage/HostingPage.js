@@ -26,7 +26,8 @@ export default function HostingPage() {
                 <h2>
                     {Object.keys(hostingSpots).length} listings
                 </h2>
-                <button className={styles.button}>
+                <button className={styles.button}
+                    onClick={() => navigate('/spots/create-listing')}>
                     <i className="fa-solid fa-plus"></i>
                     Create listing
                 </button>
