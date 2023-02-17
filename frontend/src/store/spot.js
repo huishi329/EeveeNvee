@@ -138,6 +138,7 @@ const spotReducer = (state = initialState, action) => {
             newState.singleSpot = null;
             return newState;
         case DELETE_SPOT:
+            newState.hostingSpots = { ...newState.hostingSpots };
             delete newState.hostingSpots[action.spotId];
             return newState;
         case CREATE_SPOT_IMAGE:
