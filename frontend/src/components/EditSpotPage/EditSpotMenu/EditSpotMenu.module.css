@@ -1,0 +1,15 @@
+.menu {
+    position: sticky;
+    top: 10rem;
+}
+
+.option {
+    margin: 1rem 0;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.selected {
+    font-weight: 600;
+}

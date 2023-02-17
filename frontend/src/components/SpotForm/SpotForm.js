@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { createSpot, createSpotImage } from '../../store/spot';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './SpotForm.module.css';
 import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
 
 
 export default function SpotForm({ setShowModal }) {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
-    const [name, setName] = useState('')
+    const [title, setName] = useState('')
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [imgFiles, setImgFiles] = useState([]);
@@ -29,7 +29,7 @@ export default function SpotForm({ setShowModal }) {
             country,
             lat: 48,
             lng: 120,
-            name,
+            title,
             description,
             price
         };
@@ -38,7 +38,7 @@ export default function SpotForm({ setShowModal }) {
             const promises = imgFiles.map((file, i) => new Promise(resolve => resolve(dispatch(createSpotImage(spotId, file, i)))));
             await Promise.all(promises);
             setShowModal(false);
-            history.push(`/spots/${spotId}`)
+            navigate(`/spots/${spotId}`)
         } catch (e) {
             const data = await e.json();
             if (data && data.errors) setErrors(Object.values(data.errors));
@@ -87,7 +87,7 @@ export default function SpotForm({ setShowModal }) {
                     <input
                         placeholder='Name'
                         type="text"
-                        value={name}
+                        value={title}
                         onChange={(e) => setName(e.target.value)}
                         required
                     />

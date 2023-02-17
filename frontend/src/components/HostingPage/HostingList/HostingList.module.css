@@ -1,0 +1,11 @@
+.titles {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". . .";
+    padding: 0.5rem 0;
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+}

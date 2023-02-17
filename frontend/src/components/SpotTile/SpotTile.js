@@ -6,7 +6,7 @@ function SpotTile({ spot }) {
         <NavLink to={`/spots/${spot.id}`}>
             <div className="spot_tile">
                 <div className='spot_image'>
-                    <img src={spot.previewImage} alt={spot.name}></img>
+                    <img src={spot.previewImage || '/eeveeNvee-logo.png'} alt={spot.title}></img>
                 </div>
                 <div className='spot_title'>
                     <div className='spot_intro'>

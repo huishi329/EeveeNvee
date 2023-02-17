@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginForm/LoginForm';
 import SignupForm from '../SignupForm/SignupForm';
 import SpotForm from '../SpotForm/SpotForm';
-import './Navigation.css';
+import styles from './Navigation.module.css';
 import ProfileButton from './ProfileButton/ProfileButton';
 
 export default function Navigation({ isLoaded }) {
+    const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
     const navbarStyle = useSelector(state => state.style.navbar);
     const location = useLocation().pathname;
@@ -18,11 +19,11 @@ export default function Navigation({ isLoaded }) {
     const [createSpot, setCreateSpot] = useState(false);
 
     return (
-        <div className='navbar-outer'>
-            <nav className='navbar-inner' style={navbarStyle.header}>
-                <div className='navbar-left'>
-                    <NavLink exact to="/">
-                        <div className='logo'>
+        <div className={styles.navbarOuter}>
+            <nav className={styles.navbarInner} style={navbarStyle.header}>
+                <div className={styles.navbarLeft}>
+                    <NavLink to="/">
+                        <div className={styles.logo}>
                             <img src='/eeveeNvee-logo.png' alt='logo'>
                             </img>
                             {!location.includes('spots') && <div>
@@ -33,17 +34,28 @@ export default function Navigation({ isLoaded }) {
                         </div>
                     </NavLink>
                 </div>
-                <div className='navbar-right'>
+                <div>
+                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="https://huishi329.github.io/my-portfolio/">
+                        <img src='/logo2.png' alt='huishi logo'></img>
+                    </a>
+                    <a className={styles.socialLink} rel="nofollow noreferrer" href="https://www.linkedin.com/in/huishi-an-8397311b1/">
+                        <i className="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="https://github.com/huishi329">
+                        <i className="fa-brands fa-github"></i>
+                    </a>
+                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="mailto:anhuishi95@gmail.com">
+                        <i className="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+                <div className={styles.navbarRight}>
                     {isLoaded &&
                         <>
                             {sessionUser &&
-                                <div className='create-spot-button'>
+                                <div className={styles.switchToHostingButton}>
                                     <button onClick={() => {
-                                        setShowModal(true)
-                                        setCreateSpot(true)
-                                        setLogin(false)
-                                        setSignup(false)
-                                    }}>Create a spot</button>
+                                        navigate('/listings')
+                                    }}>Switch to hosting</button>
                                 </div>}
                             <ProfileButton
                                 user={sessionUser}
@@ -55,14 +67,15 @@ export default function Navigation({ isLoaded }) {
                         </>
                     }
                 </div>
-                {showModal &&
+                {
+                    showModal &&
                     <Modal onClose={() => setShowModal(false)}>
                         {login && <LoginForm setShowModal={setShowModal} />}
                         {signup && <SignupForm setShowModal={setShowModal} />}
                         {createSpot && <SpotForm setShowModal={setShowModal} />}
                     </Modal>
                 }
-            </nav>
-        </div>
+            </nav >
+        </div >
     );
 }

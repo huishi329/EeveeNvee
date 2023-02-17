@@ -43,7 +43,7 @@ export default function LoginForm({ setShowModal }) {
                 style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
             />
 
-            <button type="submit">Log In</button>
+            <button className={styles.button} type="submit">Log In</button>
         </form>
     );
 }
