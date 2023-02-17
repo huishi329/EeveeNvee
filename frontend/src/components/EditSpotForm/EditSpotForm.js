@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { updateSpot } from '../../store/spot';
+import { clearSingleSpot, createSpot, getSpotDetail, updateSpot } from '../../store/spot';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import styles from './EditSpotForm.module.css';
-// import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditSpotForm({ spot }) {
     const dispatch = useDispatch();
@@ -32,7 +31,16 @@ export default function EditSpotForm({ spot }) {
             price
         };
         try {
-            dispatch(updateSpot(spot.id, spotData));
+            if (spot) {
+                dispatch(updateSpot(spot.id, spotData));
+            }
+            else {
+                dispatch(createSpot(spotData))
+                    .then((spotId) => {
+                        getSpotDetail(spotId);
+                        navigate(`/spots/${spotId}/photos`);
+                    });
+            }
         } catch (res) {
             const data = await res.json();
             if (data && data.errors) setErrors(Object.values(data.errors));
@@ -46,10 +54,12 @@ export default function EditSpotForm({ spot }) {
                 document.activeElement.blur();
             }
         };
-
         window.addEventListener("wheel", removeFocus);
 
-        return () => window.removeEventListener("wheel", removeFocus);
+        return () => {
+            window.removeEventListener("wheel", removeFocus);
+            dispatch(clearSingleSpot());
+        };
     }, []);
 
 
@@ -101,9 +111,9 @@ export default function EditSpotForm({ spot }) {
                     />
                 </div>
                 <div className={styles.input}>
-                    <label>Name</label>
+                    <label>Title</label>
                     <input
-                        placeholder='Name'
+                        placeholder='Title'
                         type="text"
                         value={title}
                         onChange={(e) => setName(e.target.value)}
@@ -131,9 +141,7 @@ export default function EditSpotForm({ spot }) {
                         required
                     />
                 </div>
-
-                {/* <DragAndDropImage setImgFiles={setImgFiles} imgFiles={imgFiles} /> */}
-                <button className={styles.button} type="submit">Save</button>
+                <button className={styles.button} type="submit">{spot ? 'Save' : 'Next'}</button>
             </form >
         </div>
     );
