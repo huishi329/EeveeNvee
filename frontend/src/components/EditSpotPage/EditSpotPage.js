@@ -8,7 +8,7 @@ import EditSpotMenu from './EditSpotMenu/EditSpotMenu';
 import { Route, Routes } from 'react-router-dom';
 import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
 
-export default function EditSpotPage({ }) {
+export default function EditSpotPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const spot = useSelector(state => state.spots.singleSpot);
@@ -19,6 +19,11 @@ export default function EditSpotPage({ }) {
         dispatch(getSpotDetail(spotId));
         return () => dispatch(clearSingleSpot());
     }, [dispatch, spotId]);
+
+    useEffect(() => {
+        if (!spot) return;
+    }, [spot]);
+
 
     if (!spot) return null;
 
