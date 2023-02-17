@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { createSpotImage } from '../../store/spot';
@@ -14,6 +14,14 @@ export default function DragAndDropImage() {
     const spot = useSelector(state => state.spots.singleSpot);
     const [previewImages, setPreviewImages] = useState(spot && location.pathname.includes('edit') ? Object.values(spot.SpotImages) : []);
     const [isDragActive, setIsDragActive] = useState(false);
+    console.log(previewImages);
+
+    useEffect(() => {
+        if (spot) {
+            setPreviewImages(Object.values(spot.SpotImages));
+        }
+    }, [spot]);
+
 
     const handleImageSubmission = async (imgFiles) => {
         const promises = imgFiles.map((file, i) => {
@@ -21,28 +29,13 @@ export default function DragAndDropImage() {
                 dispatch(createSpotImage(spot.id, file, i + previewImages.length))
             ))
         });
-        await Promise.all(promises);
+        return await Promise.all(promises);
     };
 
     const handleImageChange = async (e) => {
         if (!e.files) e = e.target;
         const files = [...e.files];
-        await handleImageSubmission(files);
-        // Map each file object to its data url, for display in <img>
-        // Don't update React state until we convert all img files to data url
-        function getBase64(file) {
-            const reader = new FileReader()
-            return new Promise(resolve => {
-                reader.onload = event => {
-                    resolve(event.target.result);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-        const promises = files.map(file => getBase64(file));
-        const imageURLs = await Promise.all(promises);
-        const newPreviewImages = imageURLs.map((url, i) => ({ url, position: i }));
-
+        const newPreviewImages = await handleImageSubmission(files);
         setPreviewImages(previewImages.concat(newPreviewImages));
     };
 
@@ -89,7 +82,7 @@ export default function DragAndDropImage() {
                     <button type='button' className={styles.button} >Upload from your device</button>
                 </div>}
             <div className={styles.imgSection}>
-                {previewImages.map((image, i) => <ImageEditor imgURL={image.url} position={i} key={i} />)}
+                {previewImages.map((image, i) => <ImageEditor image={image} key={i} />)}
                 {previewImages.length > 0 &&
                     <div className={`${styles.smallContainer} ${isDragActive && styles.dragActive}`}
                         onClick={handleClick}
