@@ -1,5 +1,5 @@
 import styles from './EditSpotPage.module.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearSingleSpot, getSpotDetail } from '../../store/spot';
@@ -10,6 +10,7 @@ import DragAndDropImage from '../DragAndDropImage/DragAndDropImage';
 
 export default function EditSpotPage({ }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const spot = useSelector(state => state.spots.singleSpot);
     const params = useParams();
     const spotId = params.spotId;
@@ -23,7 +24,11 @@ export default function EditSpotPage({ }) {
 
     return (
         <div className={styles.wrapper}>
-            <h1>{spot.title}</h1>
+            <div className={styles.title}>
+                <i className="fa-solid fa-xmark" onClick={() => navigate('/listings')}></i>
+                <h1>{spot.title}</h1>
+
+            </div>
             <div className={styles.container}>
                 <EditSpotMenu spot={spot} />
                 <Routes>
