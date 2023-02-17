@@ -1,10 +1,13 @@
 import styles from './ImageEditor.module.css';
 import { useEffect, useState } from 'react';
 import ImageDropdownMenu from './ImageDropdownMenu/ImageDropdownMenu';
-
+import { Modal } from '../../../context/Modal';
+import SpotImageDeleteWarning from './SpotImageDeleteWarning/SpotImageDeleteWarning';
 
 export default function ImageEditor({ image }) {
     const [showDropDownMenu, setShowDropDownMenu] = useState(false);
+    const [showSpotImageDeleteWarning, setShowSpotImageDeleteWarning] = useState(false);
+
 
     useEffect(() => {
         if (!showDropDownMenu) return;
@@ -34,7 +37,11 @@ export default function ImageEditor({ image }) {
                 </button>
             </div>
             {showDropDownMenu &&
-                <ImageDropdownMenu image={image} />}
+                <ImageDropdownMenu image={image} setShowSpotImageDeleteWarning={setShowSpotImageDeleteWarning} />}
+            {showSpotImageDeleteWarning &&
+                <Modal onClose={() => setShowSpotImageDeleteWarning(false)}>
+                    <SpotImageDeleteWarning image={image} setShowSpotImageDeleteWarning={setShowSpotImageDeleteWarning} />
+                </Modal>}
         </div>
     )
 }
