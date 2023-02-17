@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../../../context/Modal";
-import DeleteWarning from "./DeleteWarning/DeleteWarning";
+import SpotDeleteWarning from "./SpotDeleteWarning/SpotDeleteWarning";
 import styles from "./HostingItem.module.css";
 
 export default function HostingItem({ spot }) {
     const navigate = useNavigate();
-    const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+    const [showSpotDeleteWarning, setShowSpotDeleteWarning] = useState(false);
     const { id, title, city, state, country, updatedAt, previewImage } = spot;
     const date = new Date(updatedAt);
     const month = date.toLocaleString('default', { month: 'long' });
@@ -32,7 +32,7 @@ export default function HostingItem({ spot }) {
                         Edit
                     </div>
                     <div className={styles.delete}
-                        onClick={() => setShowDeleteWarning(true)}>
+                        onClick={() => setShowSpotDeleteWarning(true)}>
                         <i className="fa-solid fa-trash"></i>
                         Delete
                     </div>
@@ -44,9 +44,9 @@ export default function HostingItem({ spot }) {
             <div className={styles.lastModified}>
                 {month} {day}, {year}
             </div>
-            {showDeleteWarning &&
-                <Modal onClose={() => setShowDeleteWarning(false)}>
-                    <DeleteWarning spotId={id} setShowDeleteWarning={setShowDeleteWarning} title={title} />
+            {showSpotDeleteWarning &&
+                <Modal onClose={() => setShowSpotDeleteWarning(false)}>
+                    <SpotDeleteWarning spotId={id} setShowSpotDeleteWarning={setShowSpotDeleteWarning} title={title} />
                 </Modal>}
         </div>
     )
