@@ -5,6 +5,8 @@ const LOAD_HOSTING_SPOTS = 'spots/LOAD_HOSTING_SPOTS';
 const LOAD_SINGLE_SPOT = 'spots/LOAD_SINGLE_SPOT';
 const CLEAR_SINGLE_SPOT = 'spots/CLEAR_SINGLE_SPOT';
 const DELETE_SPOT = 'spots/DELETE_SPOT';
+const CREATE_SPOT_IMAGE = 'spots/CREATE_SPOT_IMAGE';
+const DELETE_SPOT_IMAGE = 'spots/DELETE_SPOT_IMAGE';
 
 
 const loadAllSpots = (spots) => {
@@ -41,24 +43,6 @@ export const getHostingSpots = () => async dispatch => {
     dispatch(loadHostingSpots(spots));
     return spots;
 };
-
-export const createSpotImage = (spotId, imgFile, position) => async () => {
-    const formData = new FormData();
-    formData.append('spotId', spotId);
-    formData.append('position', position);
-    formData.append("image", imgFile);
-
-    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-        body: formData
-    });
-    const image = await response.json();
-    return image;
-}
-
 
 export const createSpot = spotData => async () => {
     const response = await csrfFetch('/api/spots', {
@@ -107,6 +91,31 @@ export const deleteSpot = (spotId) => async dispatch => {
     dispatch({ type: DELETE_SPOT, spotId });
 };
 
+export const createSpotImage = (spotId, imgFile, position) => async dispatch => {
+    const formData = new FormData();
+    formData.append('spotId', spotId);
+    formData.append('position', position);
+    formData.append("image", imgFile);
+
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData
+    });
+    const image = await response.json();
+    dispatch({ type: CREATE_SPOT_IMAGE, image });
+    return image;
+}
+
+export const deleteSpotImage = (imageId, position) => async dispatch => {
+    await csrfFetch(`/api/spot-images/${imageId}`, {
+        method: 'DELETE'
+    });
+    dispatch({ type: DELETE_SPOT_IMAGE, position });
+}
+
 const initialState = {
     allSpots: null,
     hostingSpots: null,
@@ -130,6 +139,21 @@ const spotReducer = (state = initialState, action) => {
             return newState;
         case DELETE_SPOT:
             delete newState.hostingSpots[action.spotId];
+            return newState;
+        case CREATE_SPOT_IMAGE:
+            newState.singleSpot.SpotImages = { ...newState.singleSpot.SpotImages };
+            newState.singleSpot.SpotImages[action.image.position] = action.image;
+            return newState;
+        case DELETE_SPOT_IMAGE:
+            newState.singleSpot = { ...newState.singleSpot };
+            newState.singleSpot.SpotImages = { ...newState.singleSpot.SpotImages };
+            delete newState.singleSpot.SpotImages[action.position];
+            for (let i = action.position; i < Object.keys(newState.singleSpot.SpotImages).length; i++) {
+                if (newState.singleSpot.SpotImages[i + 1]) {
+                    newState.singleSpot.SpotImages[i + 1].position = i;
+                    newState.singleSpot.SpotImages[i] = newState.singleSpot.SpotImages[i + 1];
+                }
+            }
             return newState;
         default:
             return state;
