@@ -2,7 +2,7 @@ import styles from './EditSpotPage.module.css';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSpotDetail } from '../../store/spot';
+import { clearSingleSpot, getSpotDetail } from '../../store/spot';
 import EditSpotForm from '../EditSpotForm/EditSpotForm';
 import EditSpotMenu from './EditSpotMenu/EditSpotMenu';
 import { Route, Routes } from 'react-router-dom';
@@ -16,6 +16,7 @@ export default function EditSpotPage({ }) {
 
     useEffect(() => {
         dispatch(getSpotDetail(spotId));
+        return () => dispatch(clearSingleSpot());
     }, [dispatch, spotId]);
 
     if (!spot) return null;
