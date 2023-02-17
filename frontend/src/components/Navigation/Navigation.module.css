@@ -7,7 +7,7 @@ i {
     margin: 0 0.5rem;
 }
 
-.navbar-outer {
+.navbarOuter {
     border-bottom: 0.08rem rgba(0, 0, 0, 0.1) solid;
     margin-bottom: 1rem;
     background-color: white;
@@ -18,7 +18,7 @@ i {
     z-index: 100;
 }
 
-.navbar-inner {
+.navbarInner {
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -36,14 +36,12 @@ i {
     max-height: 3rem;
 }
 
-.navbar-right {
+.navbarRight {
     display: flex;
     align-items: flex-end;
 }
 
-
-
-.navbar-left button {
+.navbarLeft button {
     min-width: fit-content;
     margin-right: 1rem;
     background-color: white;
@@ -53,7 +51,7 @@ i {
     font-size: 1.3rem;
 }
 
-.navbar-right button {
+.navbarRight button {
     min-width: fit-content;
     padding: 0.8rem 1rem;
     background-color: transparent;
@@ -62,7 +60,26 @@ i {
 
 }
 
-.switch-to-hosting:hover {
+.socialLink i {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+}
+
+.socialLink i:hover {
+    color: #FF385C;
+}
+
+.socialLink img {
+    height: 1.5rem;
+    margin: 0 0.5rem;
+}
+
+.socialLink img:hover {
+    filter: invert(35%) sepia(52%) saturate(4171%) hue-rotate(329deg) brightness(101%) contrast(101%);
+}
+
+
+.switchToHostingButton:hover {
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 1.5rem;
 }

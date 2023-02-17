@@ -5,7 +5,7 @@ import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginForm/LoginForm';
 import SignupForm from '../SignupForm/SignupForm';
 import SpotForm from '../SpotForm/SpotForm';
-import './Navigation.css';
+import styles from './Navigation.module.css';
 import ProfileButton from './ProfileButton/ProfileButton';
 
 export default function Navigation({ isLoaded }) {
@@ -19,11 +19,11 @@ export default function Navigation({ isLoaded }) {
     const [createSpot, setCreateSpot] = useState(false);
 
     return (
-        <div className='navbar-outer'>
-            <nav className='navbar-inner' style={navbarStyle.header}>
-                <div className='navbar-left'>
+        <div className={styles.navbarOuter}>
+            <nav className={styles.navbarInner} style={navbarStyle.header}>
+                <div className={styles.navbarLeft}>
                     <NavLink to="/">
-                        <div className='logo'>
+                        <div className={styles.logo}>
                             <img src='/eeveeNvee-logo.png' alt='logo'>
                             </img>
                             {!location.includes('spots') && <div>
@@ -34,11 +34,25 @@ export default function Navigation({ isLoaded }) {
                         </div>
                     </NavLink>
                 </div>
-                <div className='navbar-right'>
+                <div>
+                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="https://huishi329.github.io/my-portfolio/">
+                        <img src='/logo2.png' alt='huishi logo'></img>
+                    </a>
+                    <a className={styles.socialLink} rel="nofollow noreferrer" href="https://www.linkedin.com/in/huishi-an-8397311b1/">
+                        <i className="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="https://github.com/huishi329">
+                        <i className="fa-brands fa-github"></i>
+                    </a>
+                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="mailto:anhuishi95@gmail.com">
+                        <i className="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+                <div className={styles.navbarRight}>
                     {isLoaded &&
                         <>
                             {sessionUser &&
-                                <div className='switch-to-hosting'>
+                                <div className={styles.switchToHostingButton}>
                                     <button onClick={() => {
                                         navigate('/listings')
                                     }}>Switch to hosting</button>
@@ -53,14 +67,15 @@ export default function Navigation({ isLoaded }) {
                         </>
                     }
                 </div>
-                {showModal &&
+                {
+                    showModal &&
                     <Modal onClose={() => setShowModal(false)}>
                         {login && <LoginForm setShowModal={setShowModal} />}
                         {signup && <SignupForm setShowModal={setShowModal} />}
                         {createSpot && <SpotForm setShowModal={setShowModal} />}
                     </Modal>
                 }
-            </nav>
-        </div>
+            </nav >
+        </div >
     );
 }
