@@ -116,6 +116,22 @@ export const deleteSpotImage = (imageId, position) => async dispatch => {
     dispatch({ type: DELETE_SPOT_IMAGE, position });
 }
 
+export const shuffleSpotImages = (image1, image2) => async dispatch => {
+    const response1 = await csrfFetch(`/api/spot-images/${image1.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ position: image2.position })
+    });
+    const response2 = await csrfFetch(`/api/spot-images/${image2.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ position: image1.position })
+    });
+    const image1Updated = await response1.json();
+    const image2Updated = await response2.json();
+    dispatch({ type: CREATE_SPOT_IMAGE, image: image1Updated });
+    dispatch({ type: CREATE_SPOT_IMAGE, image: image2Updated });
+}
+
+
 const initialState = {
     allSpots: null,
     hostingSpots: null,
@@ -142,7 +158,10 @@ const spotReducer = (state = initialState, action) => {
             delete newState.hostingSpots[action.spotId];
             return newState;
         case CREATE_SPOT_IMAGE:
+            newState.singleSpot = { ...newState.singleSpot };
             newState.singleSpot.SpotImages = { ...newState.singleSpot.SpotImages };
+            if (newState.singleSpot.SpotImages[action.image.position])
+                newState.singleSpot.SpotImages[action.image.position] = { ...newState.singleSpot.SpotImages[action.image.position] };
             newState.singleSpot.SpotImages[action.image.position] = action.image;
             return newState;
         case DELETE_SPOT_IMAGE:
@@ -153,6 +172,7 @@ const spotReducer = (state = initialState, action) => {
                 if (newState.singleSpot.SpotImages[i + 1]) {
                     newState.singleSpot.SpotImages[i + 1].position = i;
                     newState.singleSpot.SpotImages[i] = newState.singleSpot.SpotImages[i + 1];
+                    delete newState.singleSpot.SpotImages[i + 1];
                 }
             }
             return newState;
