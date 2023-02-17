@@ -19,7 +19,7 @@ export default function HostingItem({ spot }) {
             <div className={styles.listing}>
                 <div className={styles.identifier}>
                     <div className={styles.previeImage}>
-                        <img src={previewImage} alt={title}></img></div>
+                        <img src={previewImage || '/eeveeNvee-logo.png'} alt={title}></img></div>
                     <div className={styles.title}>
                         <div>{title}</div>
                     </div>
