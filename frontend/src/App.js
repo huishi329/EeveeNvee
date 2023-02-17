@@ -7,6 +7,7 @@ import SpotView from "./components/SpotView";
 import SpotPage from "./components/SpotPage/SpotPage";
 import EditSpotPage from "./components/EditSpotPage/EditSpotPage";
 import HostingPage from "./components/HostingPage/HostingPage";
+import CreateSpotPage from "./components/CreateSpotPage/CreateSpotPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       <Routes>
         <Route path='/spots/:spotId/edit/*' element={<EditSpotPage />} />
+
+        <Route path='/spots/create-listing' element={<CreateSpotPage />} />
 
         <Route path='/spots/:spotId' element={<SpotPage />} />
 
