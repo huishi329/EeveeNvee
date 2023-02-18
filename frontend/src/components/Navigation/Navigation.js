@@ -11,7 +11,6 @@ import ProfileButton from './ProfileButton/ProfileButton';
 export default function Navigation({ isLoaded }) {
     const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
-    const navbarStyle = useSelector(state => state.style.navbar);
     const location = useLocation().pathname;
     const [showModal, setShowModal] = useState(false);
     const [login, setLogin] = useState(false);
@@ -20,7 +19,7 @@ export default function Navigation({ isLoaded }) {
 
     return (
         <div className={styles.navbarOuter}>
-            <nav className={styles.navbarInner} style={navbarStyle.header}>
+            <nav className={styles.navbarInner} style={location.includes('spots') ? { width: '70rem', maxWidth: '90vw' } : {}}>
                 <div className={styles.navbarLeft}>
                     <NavLink to="/">
                         <div className={styles.logo}>

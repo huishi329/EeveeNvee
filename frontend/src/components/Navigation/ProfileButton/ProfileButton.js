@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const navbarStyle = useSelector(state => state.style.navbar);
   const [showMenu, setShowMenu] = useState(false);
 
   const demoUserLogin = () => {
@@ -54,7 +53,7 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
 
       </div>
       {showMenu && (user ?
-        (<div className={styles.profileDropdown} style={navbarStyle.menu}>
+        (<div className={styles.profileDropdown} >
           <div className={styles.profileInfo}>{user.username}</div>
           <div className={styles.profileInfo}>{user.email}</div>
           <div className={styles.buttonDiv}
@@ -66,7 +65,7 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
             <button>Log Out</button>
           </div>
         </div>) :
-        <div className={styles.profileDropdown} style={navbarStyle.menu}>
+        <div className={styles.profileDropdown} >
           <div className={styles.buttonDiv}
             onClick={() => {
               setShowModal(true)
