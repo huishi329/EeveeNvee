@@ -103,8 +103,7 @@ router.get('/current', requireAuth, async (req, res) => {
         delete booking.Spot.SpotImages;
         return booking;
     });
-
-    res.json({ Bookings: results });
+    res.json(results);
 });
 
 module.exports = router;
