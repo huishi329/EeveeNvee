@@ -3,10 +3,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentBookings } from '../../store/bookings';
 import SingleTrip from './SingleTrip/SingleTrip';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function TripPage() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
     const trips = useSelector(state => state.bookings.trips);
 
     useEffect(() => {
@@ -17,12 +20,34 @@ export default function TripPage() {
 
     return (
         <div className={styles.wrapper}>
-            <h1 className={styles.header}>Trips</h1>
-            <div className={styles.tripsWrapper}>
-                {trips.map(booking => (
-                    <SingleTrip key={booking.id} booking={booking} />
-                ))}
+            <div className={styles.header}>
+                <h1>Trips</h1>
+                <div className={styles.categories}>
+                    <div className={`${styles.category} ${!location.pathname.includes('past') && styles.selected}`}
+                        onClick={() => navigate('/trips/upcoming')}
+                    >Upcoming</div>
+                    <div className={`${styles.category} ${location.pathname.includes('past') && styles.selected}`}
+                        onClick={() => navigate('/trips/past')}
+                    >Past</div>
+                </div>
             </div>
+            <Routes>
+                <Route path='/past' element={
+                    <div className={styles.tripsWrapper}>
+                        {trips.pastTrips.map(booking => (
+                            <SingleTrip key={booking.id} booking={booking} />
+                        ))}
+                    </div>
+                } />
+                <Route path='*' element={
+                    <div className={styles.tripsWrapper}>
+                        {trips.upcomingTrips.map(booking => (
+                            <SingleTrip key={booking.id} booking={booking} />
+                        ))}
+                    </div>
+                } />
+            </Routes>
+
         </div>
     )
 
