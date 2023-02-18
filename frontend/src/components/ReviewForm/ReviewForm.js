@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createReview, updateReview } from '../../store/review';
+import { createReview, updateReview } from '../../store/reviews';
 import styles from './ReviewForm.module.css';
 
 export default function ReviewForm({ setShowModal, spot, originalReview }) {

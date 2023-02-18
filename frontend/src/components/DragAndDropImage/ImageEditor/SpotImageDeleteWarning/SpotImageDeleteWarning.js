@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteSpotImage } from "../../../../store/spot";
+import { deleteSpotImage } from "../../../../store/spots";
 import styles from "./SpotImageDeleteWarning.module.css";
 
 export default function SpotImageDeleteWarning({ image, setShowSpotImageDeleteWarning }) {

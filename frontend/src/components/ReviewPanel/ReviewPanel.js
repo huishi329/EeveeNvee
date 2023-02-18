@@ -4,7 +4,7 @@ import { Modal } from '../../context/Modal';
 import './ReviewPanel.css';
 import ReviewForm from "../ReviewForm/ReviewForm";
 import ReviewCard from "../ReviewCard/ReviewCard";
-import { getSpotReviews, clearSpotReviews } from "../../store/review";
+import { getSpotReviews, clearSpotReviews } from "../../store/reviews";
 
 
 function ReviewPanel({ spot, reviewRef }) {

@@ -1,6 +1,6 @@
 import './ReviewCard.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteReview } from '../../store/review';
+import { deleteReview } from '../../store/reviews';
 import { useEffect, useState } from 'react';
 import ReviewForm from '../ReviewForm/ReviewForm';
 import { Modal } from '../../context/Modal';

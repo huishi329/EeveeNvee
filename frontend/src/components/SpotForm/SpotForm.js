@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createSpot, createSpotImage } from '../../store/spot';
+import { createSpot, createSpotImage } from '../../store/spots';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './SpotForm.module.css';

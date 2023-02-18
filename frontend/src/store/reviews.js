@@ -1,5 +1,5 @@
 import { csrfFetch } from "./crsf";
-import { getSpotDetail } from "./spot";
+import { getSpotDetail } from "./spots";
 
 const LOAD_SPOT_REVIEWS = 'review/LOAD_SPOT_REVIEWS';
 const CLEAR_SPOT_REVIEWS = 'review/CLEAR_SPOT_REVIEWS';

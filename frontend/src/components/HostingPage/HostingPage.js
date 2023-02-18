@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getHostingSpots } from '../../store/spot';
+import { getHostingSpots } from '../../store/spots';
 import HostingList from './HostingList/HostingList';
 import styles from './HostingPage.module.css';
 

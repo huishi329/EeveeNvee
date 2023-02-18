@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteSpot } from "../../../../../store/spot";
+import { deleteSpot } from "../../../../../store/spots";
 import styles from "./SpotDeleteWarning.module.css";
 
 

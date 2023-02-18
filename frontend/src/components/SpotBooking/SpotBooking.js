@@ -45,7 +45,6 @@ export default function SpotBooking({ spot, reviewRef }) {
                 startDate={startDate} // momentPropTypes.momentObj or null,
                 startDateId="start_date_id" // PropTypes.string.isRequired,
                 startDatePlaceholderText="CHECK-IN" // PropTypes.string,
-                startDateTitleText="CHECK-IN" // PropTypes.string,
                 endDate={endDate} // momentPropTypes.momentObj or null,
                 endDatePlaceholderText="CHECKOUT" // PropTypes.string,
                 endDateId="end_date_id" // PropTypes.string.isRequired,
