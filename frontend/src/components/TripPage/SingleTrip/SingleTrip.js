@@ -1,7 +1,9 @@
+import { useLocation } from 'react-router-dom';
 import styles from './SingleTrip.module.css';
 
 export default function SingleTrip({ booking }) {
     let { startDate, endDate } = booking;
+    const location = useLocation();
     const { title, street, city, state, country } = booking.Spot;
     startDate = new Date(startDate);
     endDate = new Date(endDate);
@@ -35,6 +37,11 @@ export default function SingleTrip({ booking }) {
                             {country}
                         </div>
                     </div>
+                </div>
+                <div className={styles.buttonDiv}>
+                    {location.pathname.includes('past') ?
+                        <button>Rate my stay</button> :
+                        <button>Cancel trip</button>}
                 </div>
             </div>
             <div className={styles.imageWrapper}>
