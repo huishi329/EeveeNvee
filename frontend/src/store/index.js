@@ -4,12 +4,14 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import spotReducer from "./spots";
 import reviewReducer from "./reviews";
+import bookingReducer from "./bookings";
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
   spots: spotReducer,
   reviews: reviewReducer,
+  bookings: bookingReducer
 });
 
 let enhancer;
