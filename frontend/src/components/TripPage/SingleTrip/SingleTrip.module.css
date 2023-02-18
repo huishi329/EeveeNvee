@@ -1,0 +1,24 @@
+.wrapper {
+    max-width: 50rem;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". .";
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 15rem;
+    margin-bottom: 2rem;
+}
+
+.imageWrapper img {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 15rem;
+    max-height: 15rem;
+    object-fit: cover;
+}
