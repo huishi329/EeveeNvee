@@ -1,0 +1,11 @@
+.wrapper {
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.header {
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+    padding: 2rem 0;
+    font-size: 32px;
+
+}
