@@ -33,7 +33,7 @@ function App() {
 
         <Route path='/listings' element={<HostingPage />} />
 
-        <Route path='/trips' element={<TripPage />} />
+        <Route path='/trips/*' element={<TripPage />} />
 
         <Route path='/' element={<SpotView />} />
 
