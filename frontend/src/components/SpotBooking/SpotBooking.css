@@ -27,7 +27,7 @@
 .spot-info {
     display: flex;
     justify-content: space-between;
-    padding-top: 1rem;
+    padding: 1rem;
 }
 
 .spot-info-left {
