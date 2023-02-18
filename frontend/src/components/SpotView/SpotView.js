@@ -11,7 +11,7 @@ function SpotView() {
         dispatch(getAllSpots());
     }, [dispatch]);
 
-    if (!spots) return;
+    if (!spots) return null;
 
     const spotsArr = Object.values(spots);
 
