@@ -12,15 +12,15 @@
     border: 0.1rem solid rgba(0, 0, 0, 0.1);
     border-radius: 1.5rem;
     overflow: hidden;
-    height: 12rem;
+    height: 15rem;
     margin-bottom: 2rem;
 }
 
 .imageWrapper img {
     min-width: 25rem;
     max-width: 25rem;
-    min-height: 12rem;
-    max-height: 12rem;
+    min-height: 15rem;
+    max-height: 15rem;
     object-fit: cover;
 }
 
@@ -44,7 +44,9 @@
     gap: 0px 0px;
     grid-template-areas:
         ". .";
-    height: 8rem;
+    height: 7rem;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+
 }
 
 .date {
@@ -72,4 +74,22 @@
     align-items: flex-start;
     justify-content: center;
     padding: 0.5rem;
+}
+
+.buttonDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+.buttonDiv button {
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
 }
