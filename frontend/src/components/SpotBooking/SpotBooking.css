@@ -62,3 +62,15 @@
     margin-top: 1rem;
     color: white;
 }
+
+.booking-button {
+    background-color: #FF385C;
+    border-radius: 0.5rem;
+    border: none;
+    height: 3rem;
+    width: 100%;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}

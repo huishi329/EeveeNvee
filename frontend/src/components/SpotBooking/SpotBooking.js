@@ -10,22 +10,22 @@ export default function SpotBooking({ spot, reviewRef }) {
     const [focusedInput, setFocusedInput] = useState(null);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [calendarPosition, setCalendarPosition] = useState(0);
-    const cardRef = useRef(null);
+    const wrapperRef = useRef(null);
 
     useEffect(() => {
-        if (cardRef.current) {
-            setCalendarPosition(windowWidth - cardRef.current.getBoundingClientRect().right);
+        if (wrapperRef.current) {
+            setCalendarPosition(windowWidth - wrapperRef.current.getBoundingClientRect().right);
         }
         const updateSize = () => {
             setWindowWidth(window.innerWidth);
         }
         window.addEventListener('resize', updateSize);
         return () => window.removeEventListener('resize', updateSize)
-    }, [cardRef, windowWidth])
+    }, [wrapperRef, windowWidth])
 
     return (
 
-        <div className="edit-spot" ref={cardRef}>
+        <div className="edit-spot" ref={wrapperRef}>
             <div className="spot-info">
                 <div className="spot-info-left">
                     <div className="price-bold">{`$${spot.price} CAD`}</div>
@@ -60,6 +60,12 @@ export default function SpotBooking({ spot, reviewRef }) {
                 // withPortal={true} // PropTypes.bool,
                 horizontalMargin={calendarPosition} //PropTypes.number,
             />
+            <div>
+                {(!startDate || !endDate) ?
+                    <button className="booking-button">Check Availability</button>
+                    :
+                    <button className="booking-button">Reservation</button>}
+            </div>
         </div>
 
     )
