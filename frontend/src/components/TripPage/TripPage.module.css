@@ -8,6 +8,11 @@
     font-size: 32px;
 }
 
+.header h1 {
+    padding: 0.5rem 0;
+    font-size: 2rem;
+}
+
 .tripsWrapper {
     display: flex;
     flex-direction: column;

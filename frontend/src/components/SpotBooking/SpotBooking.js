@@ -66,6 +66,9 @@ export default function SpotBooking({ spot, reviewRef }) {
                     :
                     <button className="booking-button">Reservation</button>}
             </div>
+            <div className='price-info'>
+
+            </div>
         </div>
 
     )
