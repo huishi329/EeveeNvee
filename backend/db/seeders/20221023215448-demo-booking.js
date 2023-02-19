@@ -17,31 +17,46 @@ module.exports = {
         spotId: 9,
         userId: 2,
         startDate: new Date('2021-1-21'),
-        endDate: new Date('2021-1-30')
+        endDate: new Date('2021-1-30'),
+        cleaningFee: 100,
+        serviceFee: 100,
+        total: 1000
       },
       {
         spotId: 8,
         userId: 1,
         startDate: new Date('2023-2-21'),
-        endDate: new Date('2023-2-25')
+        endDate: new Date('2023-2-25'),
+        cleaningFee: 100,
+        serviceFee: 100,
+        total: 1000
       },
       {
         spotId: 5,
         userId: 1,
         startDate: new Date('2023-12-21'),
-        endDate: new Date('2023-12-26')
+        endDate: new Date('2023-12-26'),
+        cleaningFee: 100,
+        serviceFee: 100,
+        total: 1000
       },
       {
         spotId: 6,
         userId: 1,
         startDate: new Date('2022-12-21'),
-        endDate: new Date('2022-12-26')
+        endDate: new Date('2022-12-26'),
+        cleaningFee: 100,
+        serviceFee: 100,
+        total: 1000
       },
       {
         spotId: 6,
         userId: 1,
         startDate: new Date('2022-12-21'),
-        endDate: new Date('2022-12-26')
+        endDate: new Date('2022-12-26'),
+        cleaningFee: 100,
+        serviceFee: 100,
+        total: 1000
       },
     ], {});
   },
