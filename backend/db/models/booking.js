@@ -52,6 +52,18 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    cleaningFee: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    serviceFee: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    total: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Booking',
