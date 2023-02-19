@@ -19,7 +19,7 @@ export default function Navigation({ isLoaded }) {
 
     return (
         <div className={styles.navbarOuter}>
-            <nav className={styles.navbarInner} style={location.includes('spots') ? { width: '70rem', maxWidth: '90vw' } : {}}>
+            <nav className={styles.navbarInner} style={location.includes('spots') ? { width: '90rem', maxWidth: '90vw' } : {}}>
                 <div className={styles.navbarLeft}>
                     <NavLink to="/">
                         <div className={styles.logo}>
