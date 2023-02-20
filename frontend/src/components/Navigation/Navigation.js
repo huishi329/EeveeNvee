@@ -4,23 +4,20 @@ import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import LoginForm from '../LoginForm/LoginForm';
 import SignupForm from '../SignupForm/SignupForm';
-import SpotForm from '../SpotForm/SpotForm';
 import styles from './Navigation.module.css';
 import ProfileButton from './ProfileButton/ProfileButton';
 
 export default function Navigation({ isLoaded }) {
     const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
-    const navbarStyle = useSelector(state => state.style.navbar);
     const location = useLocation().pathname;
     const [showModal, setShowModal] = useState(false);
     const [login, setLogin] = useState(false);
     const [signup, setSignup] = useState(false);
-    const [createSpot, setCreateSpot] = useState(false);
 
     return (
         <div className={styles.navbarOuter}>
-            <nav className={styles.navbarInner} style={navbarStyle.header}>
+            <nav className={styles.navbarInner} style={location.includes('spots') ? { width: '90rem', maxWidth: '90vw' } : {}}>
                 <div className={styles.navbarLeft}>
                     <NavLink to="/">
                         <div className={styles.logo}>
@@ -51,15 +48,16 @@ export default function Navigation({ isLoaded }) {
                 <div className={styles.navbarRight}>
                     {isLoaded &&
                         <>
-                            {sessionUser &&
+                            {sessionUser && !location.includes('listings') &&
                                 <div className={styles.switchToHostingButton}>
-                                    <button onClick={() => {
-                                        navigate('/listings')
-                                    }}>Switch to hosting</button>
+                                    <button onClick={() => { navigate('/listings') }}>
+                                        {location.includes('listing') || location.includes('edit') ?
+                                            'Back to listings'
+                                            :
+                                            'Switch to hosting'}</button>
                                 </div>}
                             <ProfileButton
                                 user={sessionUser}
-                                setCreateSpot={setCreateSpot}
                                 setLogin={setLogin}
                                 setSignup={setSignup}
                                 setShowModal={setShowModal}
@@ -72,7 +70,6 @@ export default function Navigation({ isLoaded }) {
                     <Modal onClose={() => setShowModal(false)}>
                         {login && <LoginForm setShowModal={setShowModal} />}
                         {signup && <SignupForm setShowModal={setShowModal} />}
-                        {createSpot && <SpotForm setShowModal={setShowModal} />}
                     </Modal>
                 }
             </nav >

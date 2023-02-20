@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../../store/session';
 import styles from './ProfileButton.module.css'
 import { loginUser } from "../../../store/session";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal }) {
   const dispatch = useDispatch();
-  const navbarStyle = useSelector(state => state.style.navbar);
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
   const demoUserLogin = () => {
@@ -52,23 +53,26 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
 
       </div>
       {showMenu && (user ?
-        (<div className={styles.profileDropdown} style={navbarStyle.menu}>
+        (<div className={styles.profileDropdown} >
           <div className={styles.profileInfo}>{user.username}</div>
           <div className={styles.profileInfo}>{user.email}</div>
           <div className={styles.buttonDiv}
+            onClick={() => navigate('/trips/upcoming')}>
+            <button className={styles.buttonBold}>Trips</button>
+          </div>
+          <div className={styles.buttonDiv}
             onClick={logout}>
-            <button className={styles.transparentButton}>Log Out</button>
+            <button>Log Out</button>
           </div>
         </div>) :
-        <div className={styles.profileDropdown} style={navbarStyle.menu}>
+        <div className={styles.profileDropdown} >
           <div className={styles.buttonDiv}
             onClick={() => {
               setShowModal(true)
               setLogin(true)
               setSignup(false)
-              setCreateSpot(false)
             }}>
-            <button className={styles.transparentButton}>Log in</button>
+            <button>Log in</button>
           </div>
           <div className={styles.buttonDiv} onClick={() => {
             setShowModal(true)

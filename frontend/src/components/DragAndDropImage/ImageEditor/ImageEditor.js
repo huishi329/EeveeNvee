@@ -4,7 +4,7 @@ import ImageDropdownMenu from './ImageDropdownMenu/ImageDropdownMenu';
 import { Modal } from '../../../context/Modal';
 import SpotImageDeleteWarning from './SpotImageDeleteWarning/SpotImageDeleteWarning';
 import { useDispatch } from 'react-redux';
-import { shuffleSpotImages } from '../../../store/spot';
+import { shuffleSpotImages } from '../../../store/spots';
 
 export default function ImageEditor({ image, dragStartImage, setDragStartImage }) {
     const dispatch = useDispatch();

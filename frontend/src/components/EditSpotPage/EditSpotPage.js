@@ -2,7 +2,7 @@ import styles from './EditSpotPage.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearSingleSpot, getSpotDetail } from '../../store/spot';
+import { clearSingleSpot, getSpotDetail } from '../../store/spots';
 import EditSpotForm from '../EditSpotForm/EditSpotForm';
 import EditSpotMenu from './EditSpotMenu/EditSpotMenu';
 import { Route, Routes } from 'react-router-dom';

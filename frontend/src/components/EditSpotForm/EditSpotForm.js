@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createSpot, getSpotDetail, updateSpot } from '../../store/spot';
+import { createSpot, getSpotDetail, updateSpot } from '../../store/spots';
 import { useDispatch } from 'react-redux';
 import styles from './EditSpotForm.module.css';
 import { useNavigate } from 'react-router-dom';

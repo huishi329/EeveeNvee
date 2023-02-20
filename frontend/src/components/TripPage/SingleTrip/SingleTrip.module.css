@@ -1,0 +1,114 @@
+.wrapper {
+    max-width: 50rem;
+    min-width: 50rem;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". .";
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 15rem;
+    margin-bottom: 2rem;
+}
+
+.imageWrapper {
+    cursor: pointer;
+}
+
+.imageWrapper img {
+    min-width: 25rem;
+    max-width: 25rem;
+    min-height: 15rem;
+    max-height: 15rem;
+    object-fit: cover;
+}
+
+
+.title {
+    margin: 0;
+    /* max-width: 25rem; */
+    padding: 1rem 1.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.details {
+    margin: 0;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". .";
+    height: 7rem;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 4px;
+    border-right: 0.1rem solid rgba(0, 0, 0, 0.1);
+    justify-content: center;
+}
+
+.day {
+    display: flex;
+    align-items: center;
+}
+
+.largeText {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.location {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.buttonDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+.hasReview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 0 1rem;
+    min-width: 100%;
+}
+
+.buttonDiv button {
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.delete {
+    background-color: transparent;
+    color: black;
+}

@@ -8,6 +8,7 @@ import SpotPage from "./components/SpotPage/SpotPage";
 import EditSpotPage from "./components/EditSpotPage/EditSpotPage";
 import HostingPage from "./components/HostingPage/HostingPage";
 import CreateSpotPage from "./components/CreateSpotPage/CreateSpotPage";
+import TripPage from "./components/TripPage/TripPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ function App() {
       .catch(() => setIsLoaded(true));
   }, [dispatch]);
 
+  if (!isLoaded) return null;
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
@@ -31,6 +34,8 @@ function App() {
         <Route path='/spots/:spotId' element={<SpotPage />} />
 
         <Route path='/listings' element={<HostingPage />} />
+
+        <Route path='/trips/*' element={<TripPage />} />
 
         <Route path='/' element={<SpotView />} />
 

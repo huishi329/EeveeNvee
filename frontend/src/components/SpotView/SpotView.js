@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SpotTile from "../SpotTile";
-import { getAllSpots } from "../../store/spot";
+import { getAllSpots } from "../../store/spots";
 import './SpotView.css'
 
 function SpotView() {
@@ -11,7 +11,7 @@ function SpotView() {
         dispatch(getAllSpots());
     }, [dispatch]);
 
-    if (!spots) return;
+    if (!spots) return null;
 
     const spotsArr = Object.values(spots);
 

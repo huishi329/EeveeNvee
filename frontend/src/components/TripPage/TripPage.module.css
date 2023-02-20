@@ -1,0 +1,36 @@
+.wrapper {
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.header {
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+    font-size: 32px;
+}
+
+.header h1 {
+    padding: 0.5rem 0;
+    font-size: 2rem;
+}
+
+.tripsWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.categories {
+    display: flex;
+}
+
+.category {
+    font-size: 1.2rem;
+    padding: 0.5rem 2rem 0.5rem 0;
+    cursor: pointer;
+}
+
+.selected {
+    font-weight: 600;
+    color: #FF385C;
+}

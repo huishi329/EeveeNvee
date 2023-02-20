@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { createSpotImage } from '../../store/spot';
+import { createSpotImage } from '../../store/spots';
 import styles from './DragAndDropImage.module.css'
 import ImageEditor from './ImageEditor/ImageEditor';
 

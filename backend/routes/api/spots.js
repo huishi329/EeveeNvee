@@ -302,18 +302,21 @@ router.get('/:spotId/bookings', requireAuth, isSpotExisting,
             });
         }
 
-        res.json({ Bookings: bookings });
+        res.json(bookings);
     });
 
 router.post('/:spotId/bookings', requireAuth, isSpotExisting, isNotSpotOwner, validateBooking, validateDate,
     async (req, res) => {
         const { spot, user } = req;
-        const { startDate, endDate } = req.body;
+        const { startDate, endDate, cleaningFee, serviceFee, total } = req.body;
         const booking = await spot.createBooking({
             userId: user.id,
             startDate,
-            endDate
-        })
+            endDate,
+            cleaningFee,
+            serviceFee,
+            total
+        });
         res.json(booking);
     });
 

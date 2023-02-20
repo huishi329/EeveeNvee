@@ -1,0 +1,76 @@
+.wrapper {
+    background-color: white;
+    border-radius: 8px;
+    max-width: 30rem;
+}
+
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0.5rem;
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+}
+
+.titleText {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.title i {
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.2rem;
+}
+
+.title i:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.placeholder {
+    min-width: 2.2rem;
+}
+
+.message span {
+    font-weight: 600;
+}
+
+.message {
+    padding: 1.5rem;
+    color: #222222;
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+
+}
+
+.buttons {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 1rem;
+}
+
+
+.cancel {
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cancel:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+
+.delete {
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+}

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const { Spot, SpotImage, Booking, } = require('../../db/models');
+const { Spot, SpotImage, Booking, User } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { validateBooking, validateDate } = require('../../utils/reqValidation');
 
@@ -80,12 +80,18 @@ router.get('/current', requireAuth, async (req, res) => {
             attributes: {
                 exclude: ['description', 'createdAt', 'updatedAt']
             },
-            include: {
-                model: SpotImage,
-                attributes: ['url'],
-                where: { position: 0 },
-                required: false
-            },
+            include: [
+                {
+                    model: SpotImage,
+                    attributes: ['url'],
+                    where: { position: 0 },
+                    required: false
+                },
+                {
+                    model: User,
+                    attributes: ['firstName', 'lastName']
+                }
+            ],
         },
         where: {
             userId: user.id
@@ -101,10 +107,13 @@ router.get('/current', requireAuth, async (req, res) => {
             booking.Spot.previewImage = null;
         }
         delete booking.Spot.SpotImages;
+
+        booking.Spot.Owner = booking.Spot.User;
+        delete booking.Spot.User;
+
         return booking;
     });
-
-    res.json({ Bookings: results });
+    res.json(results);
 });
 
 module.exports = router;
