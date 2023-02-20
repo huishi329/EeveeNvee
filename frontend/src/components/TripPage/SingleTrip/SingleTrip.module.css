@@ -16,6 +16,10 @@
     margin-bottom: 2rem;
 }
 
+.imageWrapper {
+    cursor: pointer;
+}
+
 .imageWrapper img {
     min-width: 25rem;
     max-width: 25rem;
@@ -33,6 +37,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .details {
@@ -46,7 +51,7 @@
         ". .";
     height: 7rem;
     border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
-
+    cursor: pointer;
 }
 
 .date {
