@@ -10,11 +10,16 @@ export default function TripPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+    const user = useSelector(state => state.session.user);
     const trips = useSelector(state => state.bookings.trips);
 
     useEffect(() => {
         dispatch(getCurrentBookings());
     }, [dispatch]);
+
+    useEffect(() => {
+        if (!user) navigate('/');
+    }, [trips, user, navigate]);
 
     if (!trips) return null;
 
