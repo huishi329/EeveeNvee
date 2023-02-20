@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../../store/session';
 import styles from './ProfileButton.module.css'
 import { loginUser } from "../../../store/session";
@@ -57,7 +57,7 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
           <div className={styles.profileInfo}>{user.username}</div>
           <div className={styles.profileInfo}>{user.email}</div>
           <div className={styles.buttonDiv}
-            onClick={() => navigate('/trips')}>
+            onClick={() => navigate('/trips/upcoming')}>
             <button className={styles.buttonBold}>Trips</button>
           </div>
           <div className={styles.buttonDiv}
@@ -71,7 +71,6 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
               setShowModal(true)
               setLogin(true)
               setSignup(false)
-              setCreateSpot(false)
             }}>
             <button>Log in</button>
           </div>
