@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createReview, updateReview } from '../../store/reviews';
 import styles from './ReviewForm.module.css';
 
-export default function ReviewForm({ setShowModal, spot, originalReview }) {
+export default function ReviewForm({ setShowModal, setShowReviewForm, spot, originalReview }) {
     const dispatch = useDispatch();
     const [review, setReview] = useState(originalReview?.review || '');
     const [stars, setStars] = useState(originalReview?.stars || 0);
@@ -13,26 +13,36 @@ export default function ReviewForm({ setShowModal, spot, originalReview }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        try {
-            if (originalReview) {
-                dispatch(updateReview(originalReview.id, {
-                    review,
-                    stars
-                }))
-            } else {
-                dispatch(createReview(spot.id, {
-                    review,
-                    stars
-                }))
-            };
-        } catch (res) {
-            const errors = [];
-            const data = await res.json();
-            if (data.statusCode === 403) errors.push('You already has a review for this spot.')
-            if (data && data.errors) errors.push(...Object.values(data.errors));
-            setErrors(errors);
-        };
-        setShowModal(false);
+
+        if (originalReview) {
+            dispatch(updateReview(originalReview.id, { review, stars }))
+                .then(() => {
+                    console.log("review updated");
+                    setShowReviewForm(false);
+                    setShowModal(false);
+                })
+                .catch(async (res) => {
+                    const errors = [];
+                    const data = await res.json();
+                    if (data.statusCode === 403) errors.push('You already has a review for this spot.')
+                    if (data && data.errors) errors.push(...Object.values(data.errors));
+                    setErrors(errors);
+                });
+        } else {
+            dispatch(createReview(spot.id, { review, stars }))
+                .then(() => {
+                    setShowReviewForm(false);
+                    setShowModal(false);
+                })
+                .catch(async (res) => {
+                    const errors = [];
+                    const data = await res.json();
+                    if (data.statusCode === 403) errors.push('You already has a review for this spot.')
+                    if (data && data.errors) errors.push(...Object.values(data.errors));
+                    setErrors(errors);
+                });
+        }
+
     }
 
     return (
