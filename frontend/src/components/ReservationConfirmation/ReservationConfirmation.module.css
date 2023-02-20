@@ -1,0 +1,67 @@
+.wrapper {
+    overflow: hidden;
+    border-radius: 1rem;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    max-width: 30rem;
+    max-width: 90vw;
+    max-height: 95vh;
+    padding: 2rem;
+    overflow-y: scroll;
+}
+
+.container i {
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 2rem;
+    margin-right: 1rem;
+    margin-left: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.spotImage {
+    margin-top: 1rem;
+}
+
+.spotImage img {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 25rem;
+    max-height: 25rem;
+    object-fit: cover;
+}
+
+.spotInfo {
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+    padding-bottom: 1rem;
+}
+
+.dates {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+}
+
+.largeText {
+    font-size: 20px;
+}
+
+.amount {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+}
+
+.address {
+    padding: 1rem 0;
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+}
