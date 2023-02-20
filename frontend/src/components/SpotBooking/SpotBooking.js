@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../../store/bookings';
 import { getSpotBookings } from '../../store/bookings';
+import { Modal } from '../../context/Modal';
+import ReservationConfirmation from '../ReservationConfirmation/ReservationConfirmation';
 
 export default function SpotBooking({ spot, reviewRef }) {
     const dispatch = useDispatch();
@@ -21,13 +23,21 @@ export default function SpotBooking({ spot, reviewRef }) {
     const [days, setDays] = useState(0);
     const [total, setTotal] = useState(0);
     const [errors, setErrors] = useState([]);
+    const [showReservation, setShowReservation] = useState(false);
+    const [reservation, setReservation] = useState(null);
     const wrapperRef = useRef(null);
+    console.log(reservation);
 
     const handleReservation = () => {
         dispatch(createBooking(spot.id, { startDate, endDate, serviceFee, cleaningFee, total }))
+            .then((res) => {
+                setReservation(res);
+                setShowReservation(true);
+            })
             .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(Object.values(data.errors));
+                console.log(res);
+                // const data = await res.json();
+                // if (data && data.errors) setErrors(Object.values(data.errors));
             });
 
     }
@@ -36,7 +46,9 @@ export default function SpotBooking({ spot, reviewRef }) {
         if (!spotBookings) return false;
         for (const booking of Object.values(spotBookings)) {
             const start = new Date(booking.startDate);
+            start.setHours(0, 0, 0, 0);
             const end = new Date(booking.endDate);
+            end.setHours(0, 0, 0, 0);
             if (start <= day && day < end) return true;
         };
         return false;
@@ -46,7 +58,7 @@ export default function SpotBooking({ spot, reviewRef }) {
     useEffect(() => {
         dispatch(getSpotBookings(spot.id));
         if (startDate && endDate) {
-            const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
+            const days = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
             setDays(days);
             const basePrice = days * spot.price;
             setServiceFee(Math.round(basePrice * 0.15));
@@ -63,6 +75,8 @@ export default function SpotBooking({ spot, reviewRef }) {
         window.addEventListener('resize', updateSize);
         return () => window.removeEventListener('resize', updateSize)
     }, [wrapperRef, windowWidth, startDate, endDate, serviceFee, cleaningFee, total, spot.price])
+
+    if (!user || !spotBookings) return null;
 
     return (
 
@@ -138,7 +152,14 @@ export default function SpotBooking({ spot, reviewRef }) {
                         <div>${total} CAD</div>
                     </div>
                 </div>}
+            {showReservation &&
+                <Modal onClose={() => setShowReservation(false)}>
+                    <ReservationConfirmation
+                        spot={spot}
+                        reservation={reservation}
+                        setShowReservation={setShowReservation} />
+                </Modal>
+            }
         </div>
-
     )
 }
