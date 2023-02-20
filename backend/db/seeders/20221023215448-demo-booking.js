@@ -50,10 +50,10 @@ module.exports = {
         total: 1000
       },
       {
-        spotId: 6,
+        spotId: 4,
         userId: 1,
-        startDate: new Date('2022-12-21'),
-        endDate: new Date('2022-12-26'),
+        startDate: new Date('2022-11-21'),
+        endDate: new Date('2022-11-23'),
         cleaningFee: 100,
         serviceFee: 100,
         total: 1000
@@ -70,7 +70,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete('Bookings', {
       id: {
-        [Op.in]: [1, 2, 3, 4]
+        [Op.in]: [1, 2, 3, 4, 5]
       }
     });
   }
