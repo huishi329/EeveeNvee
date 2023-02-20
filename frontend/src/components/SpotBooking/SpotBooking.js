@@ -5,11 +5,12 @@ import { DateRangePicker } from 'react-dates';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../../store/bookings';
-
+import { getSpotBookings } from '../../store/bookings';
 
 export default function SpotBooking({ spot, reviewRef }) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
+    const spotBookings = useSelector(state => state.bookings.spot);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [focusedInput, setFocusedInput] = useState(null);
@@ -31,8 +32,19 @@ export default function SpotBooking({ spot, reviewRef }) {
 
     }
 
+    const isDayBlocked = (day) => {
+        if (!spotBookings) return false;
+        for (const booking of Object.values(spotBookings)) {
+            const start = new Date(booking.startDate);
+            const end = new Date(booking.endDate);
+            if (start <= day && day < end) return true;
+        };
+        return false;
+    }
+
 
     useEffect(() => {
+        dispatch(getSpotBookings(spot.id));
         if (startDate && endDate) {
             const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
             setDays(days);
@@ -89,6 +101,7 @@ export default function SpotBooking({ spot, reviewRef }) {
                     hideKeyboardShortcutsPanel={true} //PropTypes.bool,
                     // withPortal={true} // PropTypes.bool,
                     horizontalMargin={calendarPosition} //PropTypes.number,
+                    isDayBlocked={isDayBlocked} //PropTypes.func,
                 />
             </div>
             {errors.length > 0 &&
