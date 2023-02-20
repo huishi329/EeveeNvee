@@ -35,9 +35,8 @@ export default function SpotBooking({ spot, reviewRef }) {
                 setShowReservation(true);
             })
             .catch(async (res) => {
-                console.log(res);
-                // const data = await res.json();
-                // if (data && data.errors) setErrors(Object.values(data.errors));
+                const data = await res.json();
+                if (data && data.errors) setErrors(Object.values(data.errors));
             });
 
     }
@@ -74,7 +73,7 @@ export default function SpotBooking({ spot, reviewRef }) {
         }
         window.addEventListener('resize', updateSize);
         return () => window.removeEventListener('resize', updateSize)
-    }, [wrapperRef, windowWidth, startDate, endDate, serviceFee, cleaningFee, total, spot.price])
+    }, [wrapperRef, windowWidth, startDate, endDate, serviceFee, cleaningFee, total, spot, dispatch])
 
     if (!user || !spotBookings) return null;
 
