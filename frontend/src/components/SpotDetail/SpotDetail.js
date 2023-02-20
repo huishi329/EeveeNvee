@@ -9,7 +9,7 @@ export default function SpotDetail({ spot, reviewRef }) {
     const dispatch = useDispatch();
     useEffect(() => {
         return () => dispatch(clearSingleSpot());
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className={styles.spotDetail}>
