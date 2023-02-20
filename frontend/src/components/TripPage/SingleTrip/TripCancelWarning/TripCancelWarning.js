@@ -2,17 +2,22 @@ import { useDispatch } from "react-redux";
 import { deleteBooking } from "../../../../store/bookings";
 import styles from "./TripCancelWarning.module.css";
 
-export default function TripCancelWarning({ bookingId, setShowTripCancelWarning }) {
+export default function TripCancelWarning({ bookingId, setShowModal, setShowTripCancelWarning }) {
     const dispatch = useDispatch();
     const cancelTrip = () => {
         dispatch(deleteBooking(bookingId));
     }
 
+    const closeModal = () => {
+        setShowTripCancelWarning(false);
+        setShowModal(false);
+    };
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.warning}>
                 <div className={styles.title}>
-                    <i className="fa-solid fa-xmark" onClick={() => setShowTripCancelWarning(false)}></i>
+                    <i className="fa-solid fa-xmark" onClick={closeModal}></i>
                     <div className={styles.titleText}>Cancel this trip?</div>
                     <div className={styles.placeholder}></div>
                 </div>
