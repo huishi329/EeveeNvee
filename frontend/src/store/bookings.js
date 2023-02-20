@@ -1,7 +1,6 @@
 import { csrfFetch } from "./crsf";
 
 const GET_CURRENT_BOOKINGS = 'bookings/GET_CURRENT_BOOKINGS';
-const CREATE_BOOKING = 'bookings/CREATE_BOOKING';
 const DELETE_BOOKING = 'bookings/DELETE_BOOKING';
 const GET_SPOT_BOOKINGS = 'bookings/GET_SPOT_BOOKINGS';
 
@@ -34,7 +33,7 @@ export const createBooking = (spotId, booking) => async dispatch => {
     });
 
     const newBooking = await response.json();
-    dispatch({ type: CREATE_BOOKING, newBooking });
+    return newBooking;
 };
 
 export const deleteBooking = (bookingId) => async dispatch => {
@@ -62,15 +61,10 @@ const bookingReducer = (state = initialState, action) => {
         case GET_SPOT_BOOKINGS:
             newState.spot = { ...action.bookings };
             return newState;
-        case CREATE_BOOKING:
-            newState.trips = { ...newState.trips };
-            newState.trips.upcomingTrips = [...newState.trips.upcomingTrips, action.newBooking];
-            newState.trips.upcomingTrips.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-            return newState;
         case DELETE_BOOKING:
             newState.trips = { ...newState.trips };
-            newState.trips.upcomingTrips = { ...newState.trips.upcomingTrips };
-            delete newState.trips.upcomingTrips[action.bookingId];
+            newState.trips.upcomingTrips = [...newState.trips.upcomingTrips];
+            newState.trips.upcomingTrips = newState.trips.upcomingTrips.filter(booking => booking.id !== action.bookingId);
             return newState;
         default:
             return state;
