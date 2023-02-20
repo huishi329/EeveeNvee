@@ -48,11 +48,13 @@ export default function Navigation({ isLoaded }) {
                 <div className={styles.navbarRight}>
                     {isLoaded &&
                         <>
-                            {sessionUser &&
+                            {sessionUser && !location.includes('listings') &&
                                 <div className={styles.switchToHostingButton}>
-                                    <button onClick={() => {
-                                        navigate('/listings')
-                                    }}>Switch to hosting</button>
+                                    <button onClick={() => { navigate('/listings') }}>
+                                        {location.includes('listing') || location.includes('edit') ?
+                                            'Back to listings'
+                                            :
+                                            'Switch to hosting'}</button>
                                 </div>}
                             <ProfileButton
                                 user={sessionUser}
