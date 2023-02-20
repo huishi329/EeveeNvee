@@ -21,6 +21,8 @@ function App() {
       .catch(() => setIsLoaded(true));
   }, [dispatch]);
 
+  if (!isLoaded) return null;
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
