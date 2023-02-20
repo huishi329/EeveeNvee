@@ -1,6 +1,7 @@
 import { csrfFetch } from "./crsf";
 
 const GET_CURRENT_BOOKINGS = 'bookings/GET_CURRENT_BOOKINGS';
+const CREATE_BOOKING = 'bookings/CREATE_BOOKING';
 
 export const getCurrentBookings = (bookings) => async dispatch => {
     const response = await csrfFetch('/api/bookings/current', {
@@ -16,6 +17,16 @@ export const getCurrentBookings = (bookings) => async dispatch => {
     dispatch({ type: GET_CURRENT_BOOKINGS, upcomingTrips, pastTrips });
 };
 
+export const createBooking = (spotId, booking) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
+        method: 'POST',
+        body: JSON.stringify(booking)
+    });
+
+    const newBooking = await response.json();
+    dispatch({ type: CREATE_BOOKING, newBooking });
+};
+
 
 const initialState = {
     trips: null,
@@ -28,6 +39,11 @@ const bookingReducer = (state = initialState, action) => {
         case GET_CURRENT_BOOKINGS:
             const { upcomingTrips, pastTrips } = action;
             newState.trips = { upcomingTrips, pastTrips };
+            return newState;
+        case CREATE_BOOKING:
+            newState.trips = { ...newState.trips };
+            newState.trips.upcomingTrips = [...newState.trips.upcomingTrips, action.newBooking];
+            newState.trips.upcomingTrips.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
             return newState;
         default:
             return state;
