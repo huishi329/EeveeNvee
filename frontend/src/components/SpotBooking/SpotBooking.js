@@ -3,12 +3,13 @@ import 'react-dates/lib/css/_datepicker.css';
 import './SpotBooking.css';
 import { DateRangePicker } from 'react-dates';
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBooking } from '../../store/bookings';
 
 
 export default function SpotBooking({ spot, reviewRef }) {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [focusedInput, setFocusedInput] = useState(null);
@@ -70,7 +71,6 @@ export default function SpotBooking({ spot, reviewRef }) {
                 </div>
             </div>
             <div className='date_picker'>
-
                 <DateRangePicker
                     startDate={startDate} // momentPropTypes.momentObj or null,
                     startDateId="start_date_id" // PropTypes.string.isRequired,
@@ -96,10 +96,13 @@ export default function SpotBooking({ spot, reviewRef }) {
                     {errors.map((error, idx) => <div key={idx}>{error}</div>)}
                 </div>}
             <div>
-                {(!startDate || !endDate) ?
-                    <button className="booking_button">Check Availability</button>
+                {user.id === spot.ownerId ?
+                    <button className="booking_button" onClick={() => alert('You cannot book your own spot!')}>Check Availability</button>
                     :
-                    <button className="booking_button" onClick={handleReservation}>Reservation</button>}
+                    (!startDate || !endDate) ?
+                        <button className="booking_button">Check Availability</button>
+                        :
+                        <button className="booking_button" onClick={handleReservation}>Reservation</button>}
             </div>
             {days > 0 &&
                 <div className='price_info'>
