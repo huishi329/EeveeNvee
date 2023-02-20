@@ -10,17 +10,18 @@ export default function ReviewForm({ setShowModal, setShowReviewForm, spot, orig
     const [hover, setHover] = useState(stars);
     const [errors, setErrors] = useState([]);
 
+    const closeModal = () => {
+        setShowReviewForm(false);
+        setShowModal(false);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
 
         if (originalReview) {
             dispatch(updateReview(originalReview.id, { review, stars }))
-                .then(() => {
-                    console.log("review updated");
-                    setShowReviewForm(false);
-                    setShowModal(false);
-                })
+                .then(() => closeModal())
                 .catch(async (res) => {
                     const errors = [];
                     const data = await res.json();
@@ -30,10 +31,7 @@ export default function ReviewForm({ setShowModal, setShowReviewForm, spot, orig
                 });
         } else {
             dispatch(createReview(spot.id, { review, stars }))
-                .then(() => {
-                    setShowReviewForm(false);
-                    setShowModal(false);
-                })
+                .then(() => closeModal())
                 .catch(async (res) => {
                     const errors = [];
                     const data = await res.json();
@@ -47,7 +45,10 @@ export default function ReviewForm({ setShowModal, setShowReviewForm, spot, orig
 
     return (
         <form className={styles.wrapper} onSubmit={handleSubmit}>
-            <h2>Rate your stay</h2>
+            <div className={styles.title}>
+                <i className="fa-solid fa-xmark" onClick={closeModal}></i>
+                <h2>Rate your stay</h2>
+            </div>
             {errors.length > 0 && <div className='errors-div'>
                 {errors.map((error, idx) => <div key={idx}>{error}</div>)}
             </div>}
