@@ -4,6 +4,8 @@
     min-width: fit-content;
     max-width: 90vw;
     margin: 0 auto;
+    width: 90rem;
+    max-width: 90vw;
 }
 
 .container {
