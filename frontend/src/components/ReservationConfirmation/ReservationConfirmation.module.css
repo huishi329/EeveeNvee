@@ -65,3 +65,20 @@
     padding: 1rem 0;
     border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
 }
+
+.buttonDiv {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.buttonDiv button {
+    width: 100%;
+    background-color: transparent;
+    font-size: 16px;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 3rem;
+    font-size: 1rem;
+    font-weight: 600;
+}

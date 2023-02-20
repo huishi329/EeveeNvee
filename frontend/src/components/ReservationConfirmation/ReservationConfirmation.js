@@ -1,11 +1,22 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { clearSingleSpot, getSpotDetail } from '../../store/spots';
 import styles from './ReservationConfirmation.module.css';
 
-export default function ReservationConfirmation({ reservation, spot, setShowReservation }) {
+export default function ReservationConfirmation({ reservation, setShowReservation }) {
     const { startDate, endDate, total } = reservation;
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const spot = useSelector(state => state.spots.singleSpot);
     const start = new Date(startDate);
     const end = new Date(endDate);
+
+    useEffect(() => {
+        dispatch(getSpotDetail(reservation.spotId));
+        return () => dispatch(clearSingleSpot());
+    }, [dispatch, reservation.spotId]);
+
+    if (!spot) return null;
 
     return (
         <div className={styles.wrapper}>
@@ -41,7 +52,7 @@ export default function ReservationConfirmation({ reservation, spot, setShowRese
                     <div className={styles.largeText}>Amount</div>
                     <div>${total}</div>
                 </div>
-                <div>
+                <div className={styles.buttonDiv}>
                     <button onClick={() => setShowReservation(false)}>Close</button>
                 </div>
             </div>
