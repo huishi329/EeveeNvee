@@ -4,24 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentBookings } from '../../store/bookings';
 import SingleTrip from './SingleTrip/SingleTrip';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { getCurrentReviews } from '../../store/reviews';
 
 
 export default function TripPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+    const reviews = useSelector(state => state.reviews.user);
     const user = useSelector(state => state.session.user);
     const trips = useSelector(state => state.bookings.trips);
 
     useEffect(() => {
-        dispatch(getCurrentBookings());
-    }, [dispatch]);
-
-    useEffect(() => {
         if (!user) navigate('/');
-    }, [trips, user, navigate]);
+        dispatch(getCurrentBookings());
+        dispatch(getCurrentReviews());
+    }, [dispatch, user, navigate]);
 
-    if (!trips) return null;
+    if (!trips || !reviews) return null;
 
     return (
         <div className={styles.wrapper}>
@@ -40,14 +40,14 @@ export default function TripPage() {
                 <Route path='/past' element={
                     <div className={styles.tripsWrapper}>
                         {trips.pastTrips.map(booking => (
-                            <SingleTrip key={booking.id} booking={booking} />
+                            <SingleTrip key={booking.id} booking={booking} review={reviews[booking.spotId]} />
                         ))}
                     </div>
                 } />
-                <Route path='*' element={
+                <Route path='/upcoming' element={
                     <div className={styles.tripsWrapper}>
                         {trips.upcomingTrips.map(booking => (
-                            <SingleTrip key={booking.id} booking={booking} />
+                            <SingleTrip key={booking.id} booking={booking} review={reviews[booking.spotId]} />
                         ))}
                     </div>
                 } />
