@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { clearSingleSpot, getSpotDetail } from '../../store/spots';
 import styles from './ReservationConfirmation.module.css';
 
 export default function ReservationConfirmation({ reservation, setShowReservation }) {
     const { startDate, endDate, total } = reservation;
     const dispatch = useDispatch();
+    const location = useLocation();
     const spot = useSelector(state => state.spots.singleSpot);
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -21,8 +22,16 @@ export default function ReservationConfirmation({ reservation, setShowReservatio
     return (
         <div className={styles.wrapper}>
             <div className={styles.container}>
-                <h1><span><i className="fa-solid fa-xmark"></i></span>Your reservation is confirmed</h1>
-                <div>You're going to {spot.city}.</div>
+                <h1>
+                    <span>
+                        <i className="fa-solid fa-xmark"
+                            onClick={() => setShowReservation(false)}></i>
+                    </span>
+                    {location.pathname.includes('past') ? "You trip was completed!" : "Your reservation is confirmed"}
+                </h1>
+                {location.pathname.includes('past') ?
+                    <div>You went to {spot.city}.</div> :
+                    <div>You're going to {spot.city}.</div>}
                 <div className={styles.spotImage}>
                     <img src={spot.SpotImages[0].url} alt={spot.title} />
                 </div>
