@@ -316,8 +316,7 @@ router.post('/:spotId/bookings', requireAuth, isSpotExisting, isNotSpotOwner, va
             cleaningFee,
             serviceFee,
             total
-        })
-        booking.Spot = spot;
+        });
         res.json(booking);
     });
 
