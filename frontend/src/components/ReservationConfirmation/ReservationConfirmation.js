@@ -57,7 +57,7 @@ export default function ReservationConfirmation({ reservation, spot, setShowModa
                     <div>${total}</div>
                 </div>
                 <div className={styles.buttonDiv}>
-                    <button onClick={() => setShowReservation(false)}>Close</button>
+                    <button onClick={closeModal}>Close</button>
                 </div>
             </div>
         </div>
