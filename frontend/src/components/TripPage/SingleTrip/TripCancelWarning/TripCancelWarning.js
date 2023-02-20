@@ -23,11 +23,7 @@ export default function TripCancelWarning({ bookingId, setShowModal, setShowTrip
                 </div>
                 <div className={styles.message}>Once you cancel it, this action cannot be undone.</div>
                 <div className={styles.buttons}>
-                    <div className={styles.cancel}
-                        onClick={() => setShowTripCancelWarning(false)}
-                    >
-                        No, keep it
-                    </div>
+                    <div className={styles.cancel} onClick={closeModal}>No, keep it</div>
                     <div className={styles.delete}
                         onClick={cancelTrip}>
                         Yes, cancel
