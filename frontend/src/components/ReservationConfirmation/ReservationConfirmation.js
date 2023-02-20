@@ -1,23 +1,18 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { clearSingleSpot, getSpotDetail } from '../../store/spots';
 import styles from './ReservationConfirmation.module.css';
 
-export default function ReservationConfirmation({ reservation, setShowReservation }) {
+export default function ReservationConfirmation({ reservation, spot, setShowModal, setShowReservation }) {
     const { startDate, endDate, total } = reservation;
-    const dispatch = useDispatch();
     const location = useLocation();
-    const spot = useSelector(state => state.spots.singleSpot);
     const start = new Date(startDate);
     const end = new Date(endDate);
+    console.log(spot, reservation);
 
-    useEffect(() => {
-        dispatch(getSpotDetail(reservation.spotId));
-        return () => dispatch(clearSingleSpot());
-    }, [dispatch, reservation.spotId]);
+    const closeModal = () => {
+        setShowReservation(false);
+        setShowModal(false);
+    };
 
-    if (!spot) return null;
 
     return (
         <div className={styles.wrapper}>
@@ -25,7 +20,7 @@ export default function ReservationConfirmation({ reservation, setShowReservatio
                 <h1>
                     <span>
                         <i className="fa-solid fa-xmark"
-                            onClick={() => setShowReservation(false)}></i>
+                            onClick={closeModal}></i>
                     </span>
                     {location.pathname.includes('past') ? "You trip was completed!" : "Your reservation is confirmed"}
                 </h1>
@@ -33,7 +28,7 @@ export default function ReservationConfirmation({ reservation, setShowReservatio
                     <div>You went to {spot.city}.</div> :
                     <div>You're going to {spot.city}.</div>}
                 <div className={styles.spotImage}>
-                    <img src={spot.SpotImages[0].url} alt={spot.title} />
+                    <img src={spot.previewImage} alt={spot.title} />
                 </div>
                 <div className={styles.spotInfo}>
                     <h2>{spot.title}</h2>
