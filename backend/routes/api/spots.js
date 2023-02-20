@@ -302,7 +302,7 @@ router.get('/:spotId/bookings', requireAuth, isSpotExisting,
             });
         }
 
-        res.json({ bookings });
+        res.json(bookings);
     });
 
 router.post('/:spotId/bookings', requireAuth, isSpotExisting, isNotSpotOwner, validateBooking, validateDate,
