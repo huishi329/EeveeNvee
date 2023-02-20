@@ -4,24 +4,51 @@ import { Modal } from '../../../context/Modal';
 import ReservationConfirmation from '../../ReservationConfirmation/ReservationConfirmation';
 import styles from './SingleTrip.module.css';
 import TripCancelWarning from './TripCancelWarning/TripCancelWarning';
+import ReviewForm from '../../ReviewForm/ReviewForm';
+import ReviewDeleteWarning from './ReviewDeleteWarning/ReviewDeleteWarning';
 
-export default function SingleTrip({ booking }) {
+export default function SingleTrip({ booking, review }) {
     let { startDate, endDate } = booking;
     const location = useLocation();
+    const [showModal, setShowModal] = useState(false);
     const [showReservation, setShowReservation] = useState(false);
+    const [showReviewForm, setShowReviewForm] = useState(false);
+    const [showDeleteWarning, setShowDeleteWarning] = useState(false);
     const [showTripCancelWarning, setShowTripCancelWarning] = useState(false);
     const { title, street, city, state, country } = booking.Spot;
     startDate = new Date(startDate);
     endDate = new Date(endDate);
 
-    const showReservationModal = (e) => {
+    const showReservationModal = () => {
+        setShowModal(true);
         setShowTripCancelWarning(false);
+        setShowDeleteWarning(false);
+        setShowReviewForm(false);
         setShowReservation(true);
     }
 
-    const showTripCancelWarningModal = (e) => {
+    const showTripCancelWarningModal = () => {
+        setShowModal(true);
         setShowReservation(false);
+        setShowReviewForm(false);
+        setShowDeleteWarning(false);
         setShowTripCancelWarning(true);
+    }
+
+    const showReviewFormModal = () => {
+        setShowModal(true);
+        setShowReservation(false);
+        setShowDeleteWarning(false);
+        setShowTripCancelWarning(false);
+        setShowReviewForm(true);
+    }
+
+    const showReviewDeleteModal = () => {
+        setShowModal(true);
+        setShowReservation(false);
+        setShowReviewForm(false);
+        setShowTripCancelWarning(false);
+        setShowDeleteWarning(true);
     }
 
     return (
@@ -58,26 +85,27 @@ export default function SingleTrip({ booking }) {
                 </div>
                 <div className={styles.buttonDiv}>
                     {location.pathname.includes('past') ?
-                        <button>Rate my stay</button> :
+                        review ?
+                            <div className={styles.hasReview}>
+                                <button className={styles.delete} onClick={showReviewDeleteModal}>Delete my review</button>
+                                <button onClick={showReviewFormModal}>Edit my review</button>
+                            </div>
+                            :
+                            <button onClick={showReviewFormModal}>Rate my stay</button>
+                        :
                         <button onClick={showTripCancelWarningModal}>Cancel trip</button>}
                 </div>
             </div>
             <div className={styles.imageWrapper}
-                onClick={() => setShowReservation(true)}>
+                onClick={showReservationModal}>
                 <img src={booking.Spot.previewImage} alt='spot' className={styles.image} />
             </div>
-            {
-                showReservation &&
-                <Modal onClose={() => setShowReservation(false)}>
-                    <ReservationConfirmation reservation={booking} spot={booking.Spot} setShowReservation={setShowReservation} />
-                </Modal>
-            }
-            {
-                showTripCancelWarning &&
-                <Modal onClose={() => setShowTripCancelWarning(false)}>
-                    <TripCancelWarning bookingId={booking.id} setShowTripCancelWarning={setShowTripCancelWarning} />
-                </Modal>
-            }
+            {showModal && <Modal onClose={() => { setShowModal(false); }}>
+                {showReservation && <ReservationConfirmation reservation={booking} spot={booking.Spot} setShowModal={setShowModal} setShowReservation={setShowReservation} />}
+                {showTripCancelWarning && <TripCancelWarning bookingId={booking.id} setShowModal={setShowModal} setShowTripCancelWarning={setShowTripCancelWarning} />}
+                {showReviewForm && <ReviewForm spot={booking.Spot} setShowModal={setShowModal} setShowReviewForm={setShowReviewForm} originalReview={review} />}
+                {showDeleteWarning && <ReviewDeleteWarning review={review} setShowModal={setShowModal} setShowDeleteWarning={setShowDeleteWarning} />}
+            </Modal>}
         </div >
     )
 }
