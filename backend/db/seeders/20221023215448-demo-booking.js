@@ -16,8 +16,8 @@ module.exports = {
       {
         spotId: 9,
         userId: 2,
-        startDate: new Date('2021-1-21'),
-        endDate: new Date('2021-1-30'),
+        startDate: new Date('2021-1-21T15:00:00'),
+        endDate: new Date('2021-1-30T11:00:00'),
         cleaningFee: 100,
         serviceFee: 100,
         total: 1000
@@ -25,8 +25,8 @@ module.exports = {
       {
         spotId: 8,
         userId: 1,
-        startDate: new Date('2023-2-21'),
-        endDate: new Date('2023-2-25'),
+        startDate: new Date('2023-2-21T15:00:00'),
+        endDate: new Date('2023-2-25T11:00:00'),
         cleaningFee: 100,
         serviceFee: 100,
         total: 1000
@@ -34,8 +34,8 @@ module.exports = {
       {
         spotId: 5,
         userId: 1,
-        startDate: new Date('2023-12-21'),
-        endDate: new Date('2023-12-26'),
+        startDate: new Date('2023-12-21T15:00:00'),
+        endDate: new Date('2023-12-26T11:00:00'),
         cleaningFee: 100,
         serviceFee: 100,
         total: 1000
@@ -43,8 +43,8 @@ module.exports = {
       {
         spotId: 6,
         userId: 1,
-        startDate: new Date('2022-12-21'),
-        endDate: new Date('2022-12-26'),
+        startDate: new Date('2022-12-21T15:00:00'),
+        endDate: new Date('2022-12-26T11:00:00'),
         cleaningFee: 100,
         serviceFee: 100,
         total: 1000
@@ -52,8 +52,8 @@ module.exports = {
       {
         spotId: 4,
         userId: 1,
-        startDate: new Date('2022-11-21'),
-        endDate: new Date('2022-11-23'),
+        startDate: new Date('2022-11-21T15:00:00'),
+        endDate: new Date('2022-11-23T11:00:00'),
         cleaningFee: 100,
         serviceFee: 100,
         total: 1000
