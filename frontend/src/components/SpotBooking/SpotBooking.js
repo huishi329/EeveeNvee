@@ -26,7 +26,6 @@ export default function SpotBooking({ spot, reviewRef }) {
     const [showReservation, setShowReservation] = useState(false);
     const [reservation, setReservation] = useState(null);
     const wrapperRef = useRef(null);
-    console.log(reservation);
 
     const handleReservation = () => {
         dispatch(createBooking(spot.id, { startDate, endDate, serviceFee, cleaningFee, total }))
@@ -45,14 +44,15 @@ export default function SpotBooking({ spot, reviewRef }) {
         if (!spotBookings) return false;
         for (const booking of Object.values(spotBookings)) {
             const start = new Date(booking.startDate);
-            start.setHours(0, 0, 0, 0);
             const end = new Date(booking.endDate);
-            end.setHours(0, 0, 0, 0);
             if (start <= day && day < end) return true;
         };
         return false;
     }
 
+    const handleClick = () => {
+        setFocusedInput('startDate');
+    }
 
     useEffect(() => {
         dispatch(getSpotBookings(spot.id));
@@ -126,7 +126,7 @@ export default function SpotBooking({ spot, reviewRef }) {
                     <button className="booking_button" onClick={() => alert('You cannot book your own spot!')}>Check Availability</button>
                     :
                     (!startDate || !endDate) ?
-                        <button className="booking_button">Check Availability</button>
+                        <button className="booking_button" onClick={handleClick}>Check Availability</button>
                         :
                         <button className="booking_button" onClick={handleReservation}>Reservation</button>}
             </div>
