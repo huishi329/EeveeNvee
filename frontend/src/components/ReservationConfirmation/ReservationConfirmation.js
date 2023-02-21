@@ -6,13 +6,11 @@ export default function ReservationConfirmation({ reservation, spot, setShowModa
     const location = useLocation();
     const start = new Date(startDate);
     const end = new Date(endDate);
-    console.log(spot, reservation);
 
     const closeModal = () => {
         setShowReservation(false);
         setShowModal(false);
     };
-
 
     return (
         <div className={styles.wrapper}>
