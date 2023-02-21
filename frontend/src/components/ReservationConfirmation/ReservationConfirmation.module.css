@@ -8,8 +8,8 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    max-width: 30rem;
-    max-width: 90vw;
+    max-width: 40rem;
+    min-width: 40rem;
     max-height: 95vh;
     padding: 2rem;
     overflow-y: scroll;
