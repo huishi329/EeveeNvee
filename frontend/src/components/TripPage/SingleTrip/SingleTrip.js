@@ -18,8 +18,8 @@ export default function SingleTrip({ booking, review }) {
     const [showTripCancelWarning, setShowTripCancelWarning] = useState(false);
     const [showChangeReservation, setShowChangeReservation] = useState(false);
     const { title, street, city, state, country } = booking.Spot;
-    const start = new Date(startDate + 'T15:00:00');
-    const end = new Date(endDate + 'T11:00:00');
+    const start = new Date(startDate);
+    const end = new Date(endDate);
 
     const showReservationModal = () => {
         setShowModal(true);
