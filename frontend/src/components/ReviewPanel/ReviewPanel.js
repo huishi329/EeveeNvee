@@ -1,8 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Modal } from '../../context/Modal';
 import './ReviewPanel.css';
-import ReviewForm from "../ReviewForm/ReviewForm";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import { getSpotReviews, clearSpotReviews } from "../../store/reviews";
 
@@ -10,11 +8,7 @@ import { getSpotReviews, clearSpotReviews } from "../../store/reviews";
 function ReviewPanel({ spot, reviewRef }) {
 
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-    const [showModal, setShowModal] = useState(false);
     const reviews = useSelector(state => state.reviews.spot);
-    const hasReview = sessionUser && reviews && Object.values(reviews).find(review => review.User.id === sessionUser.id);
-    const isNotHost = sessionUser && sessionUser.id !== spot.ownerId;
 
     useEffect(() => {
         dispatch(getSpotReviews(spot.id))
@@ -43,12 +37,6 @@ function ReviewPanel({ spot, reviewRef }) {
                         </span>
 
                     </div>
-                    {isNotHost && !hasReview &&
-                        <div>
-                            <button
-                                onClick={() => setShowModal(true)}
-                            >Rate my stay</button>
-                        </div>}
                 </div>
                 <div className="reviews-container">
                     {Object.values(reviews).map(review => <ReviewCard
@@ -57,11 +45,6 @@ function ReviewPanel({ spot, reviewRef }) {
                         review={review}
                     />)}
                 </div>
-                {showModal &&
-                    <Modal onClose={() => setShowModal(false)}>
-                        <ReviewForm setShowModal={setShowModal} spot={spot} />
-                    </Modal>
-                }
             </div>
         </>
     )

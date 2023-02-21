@@ -41,19 +41,6 @@ function ReviewCard({ spot, review }) {
                         </div>
                     </div>
                 </div>
-                <div>
-                    {isReviewWriter &&
-                        <div>
-                            <button
-                                onClick={() => setShowEditFormModal(true)}
-                            >Edit</button>
-                            <button
-                                onClick={() => deleteHandler()}
-                            >Delete</button>
-                        </div>
-                    }
-                </div>
-
             </div>
             <div className='review-content'>
                 <p>
