@@ -18,12 +18,11 @@ export default function ChangeReservation({ booking, setShowModal, setShowChange
     const [calendarPosition, setCalendarPosition] = useState(0);
     const [serviceFee, setServiceFee] = useState(booking.serviceFee);
     const [cleaningFee, setCleaningFee] = useState(booking.cleaningFee);
-    const [days, setDays] = useState(Math.round(new Date(booking.endDate) - new Date(booking.startDate)) / (1000 * 60 * 60 * 24));
+    const [days, setDays] = useState(Math.round((new Date(booking.endDate) - new Date(booking.startDate)) / (1000 * 60 * 60 * 24)));
     const [total, setTotal] = useState(booking.total);
     const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
     const wrapperRef = useRef(null);
-    console.log(startDate, endDate);
 
 
     const closeModal = () => {
@@ -33,7 +32,8 @@ export default function ChangeReservation({ booking, setShowModal, setShowChange
 
     const handleSubmit = async (e) => {
         setErrors([]);
-        dispatch(updateBooking(booking.id, booking.Spot, { startDate, endDate, serviceFee, cleaningFee, total }))
+        dispatch(updateBooking(booking.id, booking.Spot,
+            { startDate: new Date(startDate._d), endDate: new Date(endDate._d), serviceFee, cleaningFee, total }))
             .then(() => closeModal())
             .catch(async (res) => {
                 const data = await res.json();
