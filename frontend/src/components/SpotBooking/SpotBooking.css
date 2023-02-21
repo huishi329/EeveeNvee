@@ -83,3 +83,24 @@
     font-size: 16px;
     font-weight: 600;
 }
+
+.CalendarDay__selected_span {
+    background: rgba(0, 0, 0, 0.2);
+    border: none
+}
+
+.CalendarDay__selected {
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+}
+
+.CalendarDay__selected:hover {
+    background-color: black;
+
+}
+
+.CalendarDay__hovered_span:hover,
+.CalendarDay__hovered_span {
+    background: rgba(0, 0, 0, 0.2);
+}

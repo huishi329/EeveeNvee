@@ -6,13 +6,11 @@ export default function ReservationConfirmation({ reservation, spot, setShowModa
     const location = useLocation();
     const start = new Date(startDate);
     const end = new Date(endDate);
-    console.log(spot, reservation);
 
     const closeModal = () => {
         setShowReservation(false);
         setShowModal(false);
     };
-
 
     return (
         <div className={styles.wrapper}>
@@ -28,7 +26,7 @@ export default function ReservationConfirmation({ reservation, spot, setShowModa
                     <div>You went to {spot.city}.</div> :
                     <div>You're going to {spot.city}.</div>}
                 <div className={styles.spotImage}>
-                    <img src={spot.previewImage} alt={spot.title} />
+                    <img src={reservation.Spot?.previewImage || spot.SpotImages[0].url} alt={spot.title} />
                 </div>
                 <div className={styles.spotInfo}>
                     <h2>{spot.title}</h2>

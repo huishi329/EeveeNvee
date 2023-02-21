@@ -89,7 +89,7 @@
     padding: 0 1rem;
 }
 
-.hasReview {
+.buttonGroup {
     display: flex;
     align-items: center;
     justify-content: space-between;
