@@ -298,7 +298,7 @@ router.get('/:spotId/bookings', requireAuth, isSpotExisting,
             });
         } else {
             bookings = await spot.getBookings({
-                attributes: ['spotId', 'startDate', 'endDate']
+                attributes: ['id', 'spotId', 'startDate', 'endDate']
             });
         }
 
