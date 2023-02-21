@@ -1,0 +1,135 @@
+.wrapper {
+    background-color: white;
+    border-radius: 8px;
+    min-width: 40rem;
+}
+
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 0.5rem;
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+}
+
+.titleText {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.title i {
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.title i:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+
+.placeholder {
+    min-width: 2.2rem;
+}
+
+.message span {
+    font-weight: 600;
+}
+
+.message {
+    padding: 2rem;
+    color: #222222;
+    font-size: 16px;
+}
+
+.datePicker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+.buttons {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 1rem;
+}
+
+.bookingButton {
+    background-color: transparent;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 3rem;
+    width: 50%;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.bookingButton:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.priceInfo {
+    padding: 0 2rem;
+    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+    margin-top: 1rem;
+}
+
+.priceTitle {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 8px 0;
+}
+
+.priceDetail {
+    border-bottom: 0.08rem rgba(0, 0, 0, 0.1) solid;
+}
+
+.priceItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.priceItem div {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.priceTotal {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.priceTotal div {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cancel {
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cancel:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+
+.delete {
+    font-weight: 600;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-align: center;
+}
