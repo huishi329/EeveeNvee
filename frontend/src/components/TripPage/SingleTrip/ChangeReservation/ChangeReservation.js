@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './ChangeReservation.module.css';
 import 'react-dates/initialize';
@@ -11,8 +12,8 @@ import { getSpotBookings, updateBooking } from '../../../../store/bookings';
 export default function ChangeReservation({ booking, setShowModal, setShowChangeReservation }) {
     const spotBookings = useSelector(state => state.bookings.spot);
     const spot = useSelector(state => state.spots.singleSpot);
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+    const [startDate, setStartDate] = useState(moment(booking.startDate));
+    const [endDate, setEndDate] = useState(moment(booking.endDate));
     const [focusedInput, setFocusedInput] = useState(null);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [calendarPosition, setCalendarPosition] = useState(0);
@@ -24,7 +25,6 @@ export default function ChangeReservation({ booking, setShowModal, setShowChange
     const dispatch = useDispatch();
     const wrapperRef = useRef(null);
 
-
     const closeModal = () => {
         setShowChangeReservation(false);
         setShowModal(false);
@@ -32,8 +32,7 @@ export default function ChangeReservation({ booking, setShowModal, setShowChange
 
     const handleSubmit = async (e) => {
         setErrors([]);
-        dispatch(updateBooking(booking.id, booking.Spot,
-            { startDate: new Date(startDate._d), endDate: new Date(endDate._d), serviceFee, cleaningFee, total }))
+        dispatch(updateBooking(booking.id, booking.Spot, { startDate, endDate, serviceFee, cleaningFee, total }))
             .then(() => closeModal())
             .catch(async (res) => {
                 const data = await res.json();
