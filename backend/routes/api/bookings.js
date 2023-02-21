@@ -33,19 +33,16 @@ const isBookingOwner = (req, res, next) => {
 router.put('/:bookingId', requireAuth, isBookingExisting, isBookingOwner, validateBooking, validateDate,
     async (req, res) => {
         const { booking } = req;
-        const { startDate, endDate } = req.body;
+        const { startDate, endDate, serviceFee, cleaningFee, total } = req.body;
 
         if (new Date(booking.endDate) <= new Date()) {
             return res.status(403).json({
                 message: "Past bookings can't be modified",
                 statusCode: 403
             })
-        }
+        };
 
-        booking.set({
-            startDate,
-            endDate
-        })
+        booking.set({ startDate, endDate, serviceFee, cleaningFee, total });
         await booking.save();
 
         res.json(booking);
