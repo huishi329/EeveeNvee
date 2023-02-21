@@ -6,24 +6,27 @@ import styles from './SingleTrip.module.css';
 import TripCancelWarning from './TripCancelWarning/TripCancelWarning';
 import ReviewForm from '../../ReviewForm/ReviewForm';
 import ReviewDeleteWarning from './ReviewDeleteWarning/ReviewDeleteWarning';
+import ChangeReservation from './ChangeReservation/ChangeReservation';
 
 export default function SingleTrip({ booking, review }) {
-    let { startDate, endDate } = booking;
+    const { startDate, endDate } = booking;
     const location = useLocation();
     const [showModal, setShowModal] = useState(false);
     const [showReservation, setShowReservation] = useState(false);
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [showDeleteWarning, setShowDeleteWarning] = useState(false);
     const [showTripCancelWarning, setShowTripCancelWarning] = useState(false);
+    const [showChangeReservation, setShowChangeReservation] = useState(false);
     const { title, street, city, state, country } = booking.Spot;
-    startDate = new Date(startDate);
-    endDate = new Date(endDate);
+    const start = new Date(startDate + 'T15:00:00');
+    const end = new Date(endDate + 'T11:00:00');
 
     const showReservationModal = () => {
         setShowModal(true);
         setShowTripCancelWarning(false);
         setShowDeleteWarning(false);
         setShowReviewForm(false);
+        setShowChangeReservation(false);
         setShowReservation(true);
     }
 
@@ -32,6 +35,7 @@ export default function SingleTrip({ booking, review }) {
         setShowReservation(false);
         setShowReviewForm(false);
         setShowDeleteWarning(false);
+        setShowChangeReservation(false);
         setShowTripCancelWarning(true);
     }
 
@@ -40,6 +44,7 @@ export default function SingleTrip({ booking, review }) {
         setShowReservation(false);
         setShowDeleteWarning(false);
         setShowTripCancelWarning(false);
+        setShowChangeReservation(false);
         setShowReviewForm(true);
     }
 
@@ -48,7 +53,17 @@ export default function SingleTrip({ booking, review }) {
         setShowReservation(false);
         setShowReviewForm(false);
         setShowTripCancelWarning(false);
+        setShowChangeReservation(false);
         setShowDeleteWarning(true);
+    }
+
+    const showChangeReservationModal = () => {
+        setShowModal(true);
+        setShowReservation(false);
+        setShowReviewForm(false);
+        setShowTripCancelWarning(false);
+        setShowDeleteWarning(false);
+        setShowChangeReservation(true);
     }
 
     return (
@@ -62,16 +77,16 @@ export default function SingleTrip({ booking, review }) {
                         <div className={styles.day}>
                             <div>
                                 <div className={styles.largeText}>
-                                    {startDate.toLocaleDateString('default', { month: 'short', day: 'numeric' })}
+                                    {start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                                 </div>
                                 <div className={styles.largeText}>
-                                    {endDate.toLocaleDateString('default', { month: 'short', day: 'numeric' })}
+                                    {end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                                 </div>
                             </div>
                             <div> {'-'}</div>
                         </div>
                         <div>
-                            {startDate.getFullYear()}
+                            {start.getFullYear()}
                         </div>
                     </div>
                     <div className={styles.location}>
@@ -86,14 +101,17 @@ export default function SingleTrip({ booking, review }) {
                 <div className={styles.buttonDiv}>
                     {location.pathname.includes('past') ?
                         review ?
-                            <div className={styles.hasReview}>
+                            <div className={styles.buttonGroup}>
                                 <button className={styles.delete} onClick={showReviewDeleteModal}>Delete my review</button>
                                 <button onClick={showReviewFormModal}>Edit my review</button>
                             </div>
                             :
                             <button onClick={showReviewFormModal}>Rate my stay</button>
                         :
-                        <button onClick={showTripCancelWarningModal}>Cancel trip</button>}
+                        <div className={styles.buttonGroup}>
+                            <button onClick={showTripCancelWarningModal}>Cancel trip</button>
+                            <button onClick={showChangeReservationModal}>Change reservation</button>
+                        </div>}
                 </div>
             </div>
             <div className={styles.imageWrapper}
@@ -105,6 +123,7 @@ export default function SingleTrip({ booking, review }) {
                 {showTripCancelWarning && <TripCancelWarning bookingId={booking.id} setShowModal={setShowModal} setShowTripCancelWarning={setShowTripCancelWarning} />}
                 {showReviewForm && <ReviewForm spot={booking.Spot} setShowModal={setShowModal} setShowReviewForm={setShowReviewForm} originalReview={review} />}
                 {showDeleteWarning && <ReviewDeleteWarning review={review} setShowModal={setShowModal} setShowDeleteWarning={setShowDeleteWarning} />}
+                {showChangeReservation && <ChangeReservation booking={booking} setShowModal={setShowModal} setShowChangeReservation={setShowChangeReservation} />}
             </Modal>}
         </div >
     )
