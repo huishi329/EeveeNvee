@@ -45,7 +45,10 @@ export default function SpotBooking({ spot, reviewRef }) {
     }
 
     const handleReservation = () => {
-        if (!user) showLoginModal();
+        if (!user) {
+            showLoginModal();
+            return;
+        }
 
         dispatch(createBooking(spot.id, { startDate, endDate, serviceFee, cleaningFee, total }))
             .then((res) => {
