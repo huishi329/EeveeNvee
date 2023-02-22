@@ -3,7 +3,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import styles from './LoginForm.module.css'
 
-export default function LoginForm({ setShowModal, setShowLogin }) {
+export default function LoginForm({ setShowModal, showSignupModal }) {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
@@ -13,10 +13,7 @@ export default function LoginForm({ setShowModal, setShowLogin }) {
         e.preventDefault();
         setErrors([]);
         return dispatch(sessionActions.loginUser({ credential, password }))
-            .then(() => {
-                if (setShowLogin) setShowLogin(false);
-                setShowModal(false);
-            })
+            .then(() => setShowModal(false))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
@@ -45,8 +42,10 @@ export default function LoginForm({ setShowModal, setShowLogin }) {
                 required
                 style={{ borderRadius: '0 0 0.5rem 0.5rem' }}
             />
-
-            <button className={styles.button} type="submit">Log In</button>
+            <div className={styles.buttonDiv}>
+                <button className={styles.createAccount} type="button" onClick={showSignupModal}>Create account</button>
+                <button className={styles.login} type="submit">Log In</button>
+            </div>
         </form>
     );
 }

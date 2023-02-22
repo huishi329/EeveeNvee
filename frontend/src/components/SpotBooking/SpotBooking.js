@@ -9,6 +9,7 @@ import { getSpotBookings } from '../../store/bookings';
 import { Modal } from '../../context/Modal';
 import ReservationConfirmation from '../ReservationConfirmation/ReservationConfirmation';
 import LoginForm from '../LoginForm/LoginForm';
+import SignupForm from '../SignupForm/SignupForm';
 
 export default function SpotBooking({ spot, reviewRef }) {
     const dispatch = useDispatch();
@@ -27,15 +28,24 @@ export default function SpotBooking({ spot, reviewRef }) {
     const [showModal, setShowModal] = useState(false);
     const [showReservation, setShowReservation] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
+    const [showSignup, setShowSignup] = useState(false);
     const [reservation, setReservation] = useState(null);
     const wrapperRef = useRef(null);
 
+    const showLoginModal = () => {
+        setShowModal(true);
+        setShowSignup(false);
+        setShowLogin(true);
+    }
+
+    const showSignupModal = () => {
+        setShowModal(true);
+        setShowLogin(false);
+        setShowSignup(true);
+    }
+
     const handleReservation = () => {
-        if (!user) {
-            setShowModal(true);
-            setShowLogin(true);
-            return;
-        };
+        if (!user) showLoginModal();
 
         dispatch(createBooking(spot.id, { startDate, endDate, serviceFee, cleaningFee, total }))
             .then((res) => {
@@ -46,7 +56,6 @@ export default function SpotBooking({ spot, reviewRef }) {
                 const data = await res.json();
                 if (data && data.errors) setErrors(Object.values(data.errors));
             });
-
     }
 
     const isDayBlocked = (day) => {
@@ -167,7 +176,8 @@ export default function SpotBooking({ spot, reviewRef }) {
                     reservation={reservation}
                     setShowModal={setShowModal}
                     setShowReservation={setShowReservation} />}
-                {showLogin && <LoginForm setShowModal={setShowModal} setShowLogin={setShowLogin} />}
+                {showLogin && <LoginForm setShowModal={setShowModal} showSignupModal={showSignupModal} />}
+                {showSignup && <SignupForm setShowModal={setShowModal} />}
             </Modal>
             }
         </div>

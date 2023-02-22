@@ -15,6 +15,12 @@ export default function Navigation({ isLoaded }) {
     const [showLogin, setShowLogin] = useState(false);
     const [showSignup, setShowSignup] = useState(false);
 
+    const showSignupModal = () => {
+        setShowModal(true);
+        setShowLogin(false);
+        setShowSignup(true);
+    }
+
     return (
         <div className={styles.navbarOuter}>
             <nav className={styles.navbarInner} style={location.includes('spots') ? { width: '90rem', maxWidth: '90vw' } : {}}>
@@ -68,7 +74,7 @@ export default function Navigation({ isLoaded }) {
                 {
                     showModal &&
                     <Modal onClose={() => setShowModal(false)}>
-                        {showLogin && <LoginForm setShowModal={setShowModal} />}
+                        {showLogin && <LoginForm setShowModal={setShowModal} showSignupModal={showSignupModal} />}
                         {showSignup && <SignupForm setShowModal={setShowModal} />}
                     </Modal>
                 }
