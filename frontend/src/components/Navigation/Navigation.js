@@ -32,10 +32,10 @@ export default function Navigation({ isLoaded }) {
                     </NavLink>
                 </div>
                 <div>
-                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="https://huishi329.github.io/my-portfolio/">
+                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="https://huishi329.github.io/">
                         <img src='/logo2.png' alt='huishi logo'></img>
                     </a>
-                    <a className={styles.socialLink} rel="nofollow noreferrer" href="https://www.linkedin.com/in/huishi-an-8397311b1/">
+                    <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="https://www.linkedin.com/in/huishi-an-8397311b1/">
                         <i className="fa-brands fa-linkedin"></i>
                     </a>
                     <a className={styles.socialLink} target="_blank" rel="nofollow noreferrer" href="https://github.com/huishi329">
