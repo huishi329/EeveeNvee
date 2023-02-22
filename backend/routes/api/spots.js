@@ -7,6 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { validateBooking, validateDate, validateReview } = require('../../utils/reqValidation');
 const { singleMulterUpload, singlePublicFileUpload, uploadImageFromUrl } = require('../../aws')
 const { Op } = require('sequelize');
+const { CONSTRAINT } = require('sqlite3');
 
 const validateSpot = [
     check('street')
@@ -284,23 +285,13 @@ router.get('/:spotId/reviews', isSpotExisting, async (req, res) => {
     res.json({ Reviews: reviews });
 });
 
-router.get('/:spotId/bookings', requireAuth, isSpotExisting,
+router.get('/:spotId/bookings', isSpotExisting,
     async (req, res) => {
-        const { user, spot } = req;
+        const { spot } = req;
 
-        let bookings;
-        if (spot.ownerId === user.id) {
-            bookings = await spot.getBookings({
-                include: {
-                    model: User,
-                    attributes: ['id', 'firstName', 'lastName']
-                }
-            });
-        } else {
-            bookings = await spot.getBookings({
-                attributes: ['id', 'spotId', 'startDate', 'endDate']
-            });
-        }
+        const bookings = await spot.getBookings({
+            attributes: ['id', 'spotId', 'startDate', 'endDate']
+        });
 
         res.json(bookings);
     });
