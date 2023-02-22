@@ -12,8 +12,8 @@ export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const location = useLocation().pathname;
     const [showModal, setShowModal] = useState(false);
-    const [login, setLogin] = useState(false);
-    const [signup, setSignup] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [showSignup, setShowSignup] = useState(false);
 
     return (
         <div className={styles.navbarOuter}>
@@ -58,8 +58,8 @@ export default function Navigation({ isLoaded }) {
                                 </div>}
                             <ProfileButton
                                 user={sessionUser}
-                                setLogin={setLogin}
-                                setSignup={setSignup}
+                                setShowLogin={setShowLogin}
+                                setShowSignup={setShowSignup}
                                 setShowModal={setShowModal}
                             />
                         </>
@@ -68,8 +68,8 @@ export default function Navigation({ isLoaded }) {
                 {
                     showModal &&
                     <Modal onClose={() => setShowModal(false)}>
-                        {login && <LoginForm setShowModal={setShowModal} />}
-                        {signup && <SignupForm setShowModal={setShowModal} />}
+                        {showLogin && <LoginForm setShowModal={setShowModal} />}
+                        {showSignup && <SignupForm setShowModal={setShowModal} />}
                     </Modal>
                 }
             </nav >
