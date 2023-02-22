@@ -5,7 +5,7 @@ import styles from './ProfileButton.module.css'
 import { loginUser } from "../../../store/session";
 import { useNavigate } from "react-router-dom";
 
-export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot, setShowModal }) {
+export default function ProfileButton({ user, setShowLogin, setShowSignup, setShowModal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
@@ -69,16 +69,15 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
           <div className={styles.buttonDiv}
             onClick={() => {
               setShowModal(true)
-              setLogin(true)
-              setSignup(false)
+              setShowLogin(true)
+              setShowSignup(false)
             }}>
             <button>Log in</button>
           </div>
           <div className={styles.buttonDiv} onClick={() => {
             setShowModal(true)
-            setSignup(true)
-            setLogin(false)
-            setCreateSpot(false)
+            setShowSignup(true)
+            setShowLogin(false)
           }}>
             <button className={styles.transparentButton}>Sign up</button>
           </div>

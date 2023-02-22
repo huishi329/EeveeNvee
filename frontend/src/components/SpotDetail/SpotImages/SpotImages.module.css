@@ -8,7 +8,8 @@
         "img1 img2 img3"
         "img1 img4 img5";
     margin: 2rem 0;
-    max-height: 60vh;
+    min-height: 40vh;
+    max-height: 80vh;
 }
 
 

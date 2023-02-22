@@ -9,7 +9,6 @@ export default function TripCancelWarning({ bookingId, setShowModal, setShowTrip
     }
 
     const closeModal = () => {
-        setShowTripCancelWarning(false);
         setShowModal(false);
     };
 

@@ -8,6 +8,8 @@ import { createBooking } from '../../store/bookings';
 import { getSpotBookings } from '../../store/bookings';
 import { Modal } from '../../context/Modal';
 import ReservationConfirmation from '../ReservationConfirmation/ReservationConfirmation';
+import LoginForm from '../LoginForm/LoginForm';
+import SignupForm from '../SignupForm/SignupForm';
 
 export default function SpotBooking({ spot, reviewRef }) {
     const dispatch = useDispatch();
@@ -23,11 +25,31 @@ export default function SpotBooking({ spot, reviewRef }) {
     const [days, setDays] = useState(0);
     const [total, setTotal] = useState(0);
     const [errors, setErrors] = useState([]);
+    const [showModal, setShowModal] = useState(false);
     const [showReservation, setShowReservation] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [showSignup, setShowSignup] = useState(false);
     const [reservation, setReservation] = useState(null);
     const wrapperRef = useRef(null);
 
+    const showLoginModal = () => {
+        setShowModal(true);
+        setShowSignup(false);
+        setShowLogin(true);
+    }
+
+    const showSignupModal = () => {
+        setShowModal(true);
+        setShowLogin(false);
+        setShowSignup(true);
+    }
+
     const handleReservation = () => {
+        if (!user) {
+            showLoginModal();
+            return;
+        }
+
         dispatch(createBooking(spot.id, { startDate, endDate, serviceFee, cleaningFee, total }))
             .then((res) => {
                 setReservation(res);
@@ -37,7 +59,6 @@ export default function SpotBooking({ spot, reviewRef }) {
                 const data = await res.json();
                 if (data && data.errors) setErrors(Object.values(data.errors));
             });
-
     }
 
     const isDayBlocked = (day) => {
@@ -75,7 +96,7 @@ export default function SpotBooking({ spot, reviewRef }) {
         return () => window.removeEventListener('resize', updateSize)
     }, [wrapperRef, windowWidth, startDate, endDate, serviceFee, cleaningFee, total, spot, dispatch])
 
-    if (!user || !spotBookings) return null;
+    if (!spotBookings) return null;
 
     return (
 
@@ -122,7 +143,7 @@ export default function SpotBooking({ spot, reviewRef }) {
                     {errors.map((error, idx) => <div key={idx}>{error}</div>)}
                 </div>}
             <div>
-                {user.id === spot.ownerId ?
+                {user?.id === spot.ownerId ?
                     <button className="booking_button" onClick={() => alert('You cannot book your own spot!')}>Check Availability</button>
                     :
                     (!startDate || !endDate) ?
@@ -151,13 +172,16 @@ export default function SpotBooking({ spot, reviewRef }) {
                         <div>${total} CAD</div>
                     </div>
                 </div>}
-            {showReservation &&
-                <Modal onClose={() => setShowReservation(false)}>
-                    <ReservationConfirmation
-                        spot={spot}
-                        reservation={reservation}
-                        setShowReservation={setShowReservation} />
-                </Modal>
+
+            {showModal && <Modal onClose={() => setShowModal(false)}>
+                {showReservation && <ReservationConfirmation
+                    spot={spot}
+                    reservation={reservation}
+                    setShowModal={setShowModal}
+                    setShowReservation={setShowReservation} />}
+                {showLogin && <LoginForm setShowModal={setShowModal} showSignupModal={showSignupModal} />}
+                {showSignup && <SignupForm setShowModal={setShowModal} />}
+            </Modal>
             }
         </div>
     )

@@ -12,12 +12,18 @@ export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const location = useLocation().pathname;
     const [showModal, setShowModal] = useState(false);
-    const [login, setLogin] = useState(false);
-    const [signup, setSignup] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [showSignup, setShowSignup] = useState(false);
+
+    const showSignupModal = () => {
+        setShowModal(true);
+        setShowLogin(false);
+        setShowSignup(true);
+    }
 
     return (
         <div className={styles.navbarOuter}>
-            <nav className={styles.navbarInner} style={location.includes('spots') ? { width: '90rem', maxWidth: '90vw' } : {}}>
+            <nav className={styles.navbarInner} style={location.includes('spots') ? { width: '80rem', maxWidth: '90vw' } : {}}>
                 <div className={styles.navbarLeft}>
                     <NavLink to="/">
                         <div className={styles.logo}>
@@ -58,8 +64,8 @@ export default function Navigation({ isLoaded }) {
                                 </div>}
                             <ProfileButton
                                 user={sessionUser}
-                                setLogin={setLogin}
-                                setSignup={setSignup}
+                                setShowLogin={setShowLogin}
+                                setShowSignup={setShowSignup}
                                 setShowModal={setShowModal}
                             />
                         </>
@@ -68,8 +74,8 @@ export default function Navigation({ isLoaded }) {
                 {
                     showModal &&
                     <Modal onClose={() => setShowModal(false)}>
-                        {login && <LoginForm setShowModal={setShowModal} />}
-                        {signup && <SignupForm setShowModal={setShowModal} />}
+                        {showLogin && <LoginForm setShowModal={setShowModal} showSignupModal={showSignupModal} />}
+                        {showSignup && <SignupForm setShowModal={setShowModal} />}
                     </Modal>
                 }
             </nav >

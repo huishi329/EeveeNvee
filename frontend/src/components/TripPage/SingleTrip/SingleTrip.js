@@ -119,11 +119,11 @@ export default function SingleTrip({ booking, review }) {
                 <img src={booking.Spot.previewImage} alt='spot' className={styles.image} />
             </div>
             {showModal && <Modal onClose={() => { setShowModal(false); }}>
-                {showReservation && <ReservationConfirmation reservation={booking} spot={booking.Spot} setShowModal={setShowModal} setShowReservation={setShowReservation} />}
-                {showTripCancelWarning && <TripCancelWarning bookingId={booking.id} setShowModal={setShowModal} setShowTripCancelWarning={setShowTripCancelWarning} />}
-                {showReviewForm && <ReviewForm spot={booking.Spot} setShowModal={setShowModal} setShowReviewForm={setShowReviewForm} originalReview={review} />}
-                {showDeleteWarning && <ReviewDeleteWarning review={review} setShowModal={setShowModal} setShowDeleteWarning={setShowDeleteWarning} />}
-                {showChangeReservation && <ChangeReservation booking={booking} setShowModal={setShowModal} setShowChangeReservation={setShowChangeReservation} />}
+                {showReservation && <ReservationConfirmation reservation={booking} spot={booking.Spot} setShowModal={setShowModal} />}
+                {showTripCancelWarning && <TripCancelWarning bookingId={booking.id} setShowModal={setShowModal} />}
+                {showReviewForm && <ReviewForm spot={booking.Spot} setShowModal={setShowModal} originalReview={review} />}
+                {showDeleteWarning && <ReviewDeleteWarning review={review} setShowModal={setShowModal} />}
+                {showChangeReservation && <ChangeReservation booking={booking} setShowModal={setShowModal} />}
             </Modal>}
         </div >
     )
