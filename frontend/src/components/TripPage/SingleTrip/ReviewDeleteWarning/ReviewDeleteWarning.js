@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteReview } from "../../../../store/reviews";
 import styles from "./ReviewDeleteWarning.module.css";
 
-export default function ReviewDeleteWarning({ review, setShowModal, setShowDeleteWarning }) {
+export default function ReviewDeleteWarning({ review, setShowModal }) {
     const dispatch = useDispatch();
     const handleDelete = () => {
         dispatch(deleteReview(review))
@@ -10,7 +10,6 @@ export default function ReviewDeleteWarning({ review, setShowModal, setShowDelet
     }
 
     const closeModal = () => {
-        setShowDeleteWarning(false);
         setShowModal(false);
     };
 

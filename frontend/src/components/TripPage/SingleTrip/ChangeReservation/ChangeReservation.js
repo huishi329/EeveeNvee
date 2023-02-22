@@ -9,7 +9,7 @@ import { DateRangePicker } from 'react-dates';
 import { getSpotDetail } from '../../../../store/spots';
 import { getSpotBookings, updateBooking } from '../../../../store/bookings';
 
-export default function ChangeReservation({ booking, setShowModal, setShowChangeReservation }) {
+export default function ChangeReservation({ booking, setShowModal }) {
     const spotBookings = useSelector(state => state.bookings.spot);
     const spot = useSelector(state => state.spots.singleSpot);
     const [startDate, setStartDate] = useState(moment(booking.startDate));
@@ -26,7 +26,6 @@ export default function ChangeReservation({ booking, setShowModal, setShowChange
     const wrapperRef = useRef(null);
 
     const closeModal = () => {
-        setShowChangeReservation(false);
         setShowModal(false);
     };
 
