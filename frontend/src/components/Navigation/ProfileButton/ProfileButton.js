@@ -78,7 +78,6 @@ export default function ProfileButton({ user, setLogin, setSignup, setCreateSpot
             setShowModal(true)
             setSignup(true)
             setLogin(false)
-            setCreateSpot(false)
           }}>
             <button className={styles.transparentButton}>Sign up</button>
           </div>
