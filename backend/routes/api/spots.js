@@ -7,7 +7,6 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { validateBooking, validateDate, validateReview } = require('../../utils/reqValidation');
 const { singleMulterUpload, singlePublicFileUpload, uploadImageFromUrl } = require('../../aws')
 const { Op } = require('sequelize');
-const { CONSTRAINT } = require('sqlite3');
 
 const validateSpot = [
     check('street')
